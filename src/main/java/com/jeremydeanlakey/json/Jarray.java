@@ -32,4 +32,7 @@ public class Jarray extends Json {
 
     @Override
     public boolean isEmpty() { return values.isEmpty(); }
+
+    @Override
+    public int length() { return values.size(); }
 }

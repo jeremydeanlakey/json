@@ -26,50 +26,149 @@ public class JsonTest extends AndroidTestCase {
                     +    "\"nonEmptyObject\": {\"contents\":true}"
                     +"}";
 
-    protected Json testJson;
+    protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
-
-    protected void setUp() {
-        testJson = Json.fromString(TEST_CASE_STRING);
-    }
 
     public void testNull() throws Throwable {
-        setUp();
         Assert.assertFalse(testJson.isNull());
-        Json nullJson = testJson.get("null");
-        Assert.assertFalse(nullJson.isNull());
+        Json target = testJson.get("null");
+        Assert.assertNotNull(target);
+        // TODO
+        // Assert.assertTrue(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
     }
 
     public void testBoolean() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("boolean");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertTrue(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
+        Assert.assertEquals(target.getBoolean(), false);
     }
 
     public void testInt() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("int");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertTrue(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
+        Assert.assertEquals(target.getInt(), 1);
     }
 
     public void testLong() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("long");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertTrue(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
+        Assert.assertEquals(target.getLong(), 10000000000L);
     }
 
     public void testFloat() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("float");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertTrue(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
     }
 
     public void testDouble() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("double");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertTrue(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
     }
 
     public void testString() throws Throwable {
-        // is true and false, get
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("string");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertTrue(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertFalse(target.isObject());
+        Assert.assertEquals(target.getString(), "I am a string");
     }
 
     public void testArray() throws Throwable {
         // is true and false, get, isEmpty, get index, hasNext, next, length
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("array");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertTrue(target.isArray());
+        Assert.assertFalse(target.isObject());
     }
 
     public void testObject() throws Throwable {
         // is true and false, get, isEmpty, get key, has, keys
+        Assert.assertFalse(testJson.isNull());
+        Json target = testJson.get("object");
+        Assert.assertNotNull(target);
+        Assert.assertFalse(target.isNull());
+        Assert.assertFalse(target.isBoolean());
+        Assert.assertFalse(target.isInt());
+        Assert.assertFalse(target.isLong());
+        Assert.assertFalse(target.isFloat());
+        Assert.assertFalse(target.isDouble());
+        Assert.assertFalse(target.isString());
+        Assert.assertFalse(target.isArray());
+        Assert.assertTrue(target.isObject());
     }
 
 }

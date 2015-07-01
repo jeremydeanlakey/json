@@ -29,6 +29,7 @@ public class Json implements Iterator<Json> {
     @Override public boolean hasNext() { throw new RuntimeException("Not an array"); }
     @Override public Json next() { throw new RuntimeException("Not an array"); }
     @Override public void remove() { throw new RuntimeException("Mutation of Json not permitted"); }
+    public int length() { throw new RuntimeException("Not an array"); }
 
     public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
 
