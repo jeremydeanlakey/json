@@ -61,6 +61,20 @@ public class Json implements Iterator<Json> {
         Iterator<String> iter = jsonObject.keys();
         while (iter.hasNext()){
             String key = iter.next();
+            if (jsonObject.isNull(key)){
+                output.put(key, new Jnull());
+                continue;
+            }
+            try {
+                Object object = jsonObject.get(key);
+                if (object instanceof JSONObject){
+                    output.put(key, Json.fromJsonObject((JSONObject) object));
+                    continue;
+                } else if (object instanceof JSONArray) {
+                    output.put(key, Json.fromJsonArray((JSONArray) object));
+                    continue;
+                }
+            } catch (Exception e) {}
             try {
                 Json value = new Jboolean(jsonObject.getBoolean(key));
                 output.put(key, value);
@@ -86,18 +100,6 @@ public class Json implements Iterator<Json> {
                 output.put(key, value);
                 continue;
             } catch(Exception e){}
-            if (jsonObject.isNull(key)){
-                output.put(key, new Jnull());
-                continue;
-            }
-            try {
-                Object object = jsonObject.get(key);
-                if (object instanceof JSONObject)
-                    output.put(key, Json.fromJsonObject((JSONObject) object));
-                if (object instanceof JSONArray) {
-                    output.put(key, Json.fromJsonArray((JSONArray) object));
-                }
-            } catch (Exception e) {}
         }
 
         return output;
@@ -107,6 +109,16 @@ public class Json implements Iterator<Json> {
         Json output = new Jarray();
 
         for(int i=0; i<array.length(); i++) {
+            try {
+                Object object = array.get(i);
+                if (object instanceof JSONObject){
+                    output.add(Json.fromJsonObject((JSONObject) object));
+                    continue;
+                } else if (object instanceof JSONArray) {
+                    output.add(Json.fromJsonArray((JSONArray) object));
+                    continue;
+                }
+            } catch (Exception e) {}
             try {
                 Json value = new Jboolean(array.getBoolean(i));
                 output.add(value);
