@@ -12,10 +12,8 @@ import java.util.Set;
  */
 public class Json implements Iterator<Json> {
     public boolean getBoolean(){throw new RuntimeException("Not a boolean value");}
-    public int getInt(){throw new RuntimeException("Not an integer value");}
-    public long getLong(){throw new RuntimeException("Not a long value");}
-    public float getFloat(){throw new RuntimeException("Not a float value");}
-    public double getDouble(){throw new RuntimeException("Not a double value");}
+    public long getLong(){throw new RuntimeException("Not a number");}
+    public double getDouble(){throw new RuntimeException("Not a number");}
     public String getString(){throw new RuntimeException("Not a String value");}
 
     public Json get(int index){throw new RuntimeException("Not an array");}
@@ -35,10 +33,7 @@ public class Json implements Iterator<Json> {
 
     public boolean isNull() {return false;}
     public boolean isBoolean() {return false;}
-    public boolean isInt() {return false;}
-    public boolean isLong() {return false;}
-    public boolean isFloat() {return false;}
-    public boolean isDouble() {return false;}
+    public boolean isNumber() {return false;}
     public boolean isString() {return false;}
     public boolean isArray() {return false;}
     public boolean isObject() {return false;}
@@ -65,33 +60,23 @@ public class Json implements Iterator<Json> {
                 output.put(key, new Jnull());
                 continue;
             }
-            try {
-                Object object = jsonObject.get(key);
-                if (object instanceof JSONObject){
-                    output.put(key, Json.fromJsonObject((JSONObject) object));
-                    continue;
-                } else if (object instanceof JSONArray) {
-                    output.put(key, Json.fromJsonArray((JSONArray) object));
-                    continue;
-                }
-            } catch (Exception e) {}
+            if (jsonObject.optJSONObject(key) != null) {
+                JSONObject value = jsonObject.optJSONObject(key);
+                Json convertedJsonObject = Json.fromJsonObject(value);
+                output.put(key, convertedJsonObject);
+            }
+            if (jsonObject.optJSONArray(key) != null) {
+                JSONArray value = jsonObject.optJSONArray(key);
+                Json convertedJsonObject = Json.fromJsonArray(value);
+                output.put(key, convertedJsonObject);
+            }
             try {
                 Json value = new Jboolean(jsonObject.getBoolean(key));
                 output.put(key, value);
                 continue;
             } catch(Exception e){}
             try {
-                Json value = new Jint(jsonObject.getInt(key));
-                output.put(key, value);
-                continue;
-            } catch(Exception e){}
-            try {
-                Json value = new Jlong(jsonObject.getLong(key));
-                output.put(key, value);
-                continue;
-            } catch(Exception e){}
-            try {
-                Json value = new Jdouble(jsonObject.getDouble(key));
+                Json value = new Jnumber(jsonObject.getDouble(key));
                 output.put(key, value);
                 continue;
             } catch(Exception e){}
@@ -101,64 +86,46 @@ public class Json implements Iterator<Json> {
                 continue;
             } catch(Exception e){}
         }
-
         return output;
     }
 
     public static Json fromJsonArray(JSONArray array){
+
         Json output = new Jarray();
 
         for(int i=0; i<array.length(); i++) {
-            try {
-                Object object = array.get(i);
-                if (object instanceof JSONObject){
-                    output.add(Json.fromJsonObject((JSONObject) object));
-                    continue;
-                } else if (object instanceof JSONArray) {
-                    output.add(Json.fromJsonArray((JSONArray) object));
-                    continue;
-                }
-            } catch (Exception e) {}
+            if (array.isNull(i)) {
+                output.add(new Jnull());
+                continue;
+            }
+            if (array.optJSONArray(i) != null) {
+                JSONArray value = array.optJSONArray(i);
+                Json convertedarray = Json.fromJsonArray(value);
+                output.add(convertedarray);
+            }
+            if (array.optJSONArray(i) != null) {
+                JSONArray value = array.optJSONArray(i);
+                Json convertedarray = Json.fromJsonArray(value);
+                output.add(convertedarray);
+            }
             try {
                 Json value = new Jboolean(array.getBoolean(i));
                 output.add(value);
                 continue;
-            } catch(Exception e){}
+            } catch (Exception e) {
+            }
             try {
-                Json value = new Jint(array.getInt(i));
+                Json value = new Jnumber(array.getDouble(i));
                 output.add(value);
                 continue;
-            } catch(Exception e){}
-            try {
-                Json value = new Jlong(array.getLong(i));
-                output.add(value);
-                continue;
-            } catch(Exception e){}
-            try {
-                Json value = new Jdouble(array.getDouble(i));
-                output.add(value);
-                continue;
-            } catch(Exception e){}
+            } catch (Exception e) {
+            }
             try {
                 Json value = new Jstring(array.getString(i));
                 output.add(value);
                 continue;
-            } catch(Exception e){}
-            if (array.isNull(i)){
-                output.add(new Jnull());
-                continue;
+            } catch (Exception e) {
             }
-            try {
-                Object object = array.get(i);
-                if (object instanceof JSONObject)
-                    output.add(Json.fromJsonObject((JSONObject) object));
-                else if (object instanceof JSONArray) {
-                    output.add(Json.fromJsonArray((JSONArray) object));
-                }
-                else {
-                    throw new RuntimeException("Can't convert to Json: " + object.toString());
-                }
-            } catch (Exception e) {}
         }
         return output;
     }
