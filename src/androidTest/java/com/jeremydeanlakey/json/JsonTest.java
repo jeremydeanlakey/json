@@ -20,9 +20,7 @@ public class JsonTest extends AndroidTestCase {
         +    "\"nonEmptyArray\":[{\"contents\": 1}],"
         +    "\"string\": \"I am a string\","
         +    "\"numbers\":[-2e1, -1.000, 0e10, 10e-1, 2],"
-        +    "\"long\": 10000000000000,"
-        +    "\"float\": 1.0101010101010101,"
-        +    "\"double\": 1.0101010101010101,"
+        +    "\"bigNumber\": " + Integer.MAX_VALUE + ","
         +    "\"null\": null,"
         +    "\"boolean\": false,"
         +    "\"emptyObject\": {},"
@@ -57,10 +55,9 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(target.getBoolean(), false);
     }
 
-    /*
     public void tesNumber() throws Throwable {
         Assert.assertFalse(testJson.isNull());
-        Json target = testJson.get("double");
+        Json target = testJson.get("bigNumber");
         Assert.assertNotNull(target);
         Assert.assertFalse(target.isNull());
         Assert.assertFalse(target.isBoolean());
@@ -68,8 +65,20 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isString());
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
+        Assert.assertEquals(target.getLong(), Integer.MAX_VALUE);
+
+        Json numbersArray = testJson.get("numbers");
+        Assert.assertNotNull(numbersArray);
+        Assert.assertFalse(numbersArray.isNull());
+        Assert.assertTrue(numbersArray.isArray());
+        Assert.assertEquals(numbersArray.length(), 5);
+        Assert.assertEquals(numbersArray.get(0), -2);
+        Assert.assertEquals(numbersArray.get(1), -1);
+        Assert.assertEquals(numbersArray.get(2), 0);
+        Assert.assertEquals(numbersArray.get(3), 1);
+        Assert.assertEquals(numbersArray.get(4), 2);
     }
-*/
+
     public void testString() throws Throwable {
         Assert.assertFalse(testJson.isNull());
         Json target = testJson.get("string");
@@ -84,7 +93,6 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testArray() throws Throwable {
-        // is true and false, get, isEmpty, get index, hasNext, next, length
         Assert.assertFalse(testJson.isNull());
         Json emptyArray = testJson.get("emptyArray");
         Assert.assertNotNull(emptyArray);
