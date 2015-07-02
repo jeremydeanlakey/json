@@ -1,13 +1,7 @@
 package com.jeremydeanlakey.json;
 
 import android.test.AndroidTestCase;
-//import com.jeremydeanlakey.json;
-
 import junit.framework.Assert;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Set;
 
 /**
@@ -19,7 +13,7 @@ public class JsonTest extends AndroidTestCase {
         +    "\"emptyArray\":[],"
         +    "\"nonEmptyArray\":[{\"contents\": 1}],"
         +    "\"string\": \"I am a string\","
-        +    "\"numbers\":[-2e1, -1.000, 0e10, 10e-1, 2],"
+        +    "\"numbers\":[-2e0, -1.000, 0e10, 10e-1, 2],"
         +    "\"bigNumber\": " + Integer.MAX_VALUE + ","
         +    "\"null\": null,"
         +    "\"boolean\": false,"
@@ -55,7 +49,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(target.getBoolean(), false);
     }
 
-    public void tesNumber() throws Throwable {
+    public void testNumber() throws Throwable {
         Assert.assertFalse(testJson.isNull());
         Json target = testJson.get("bigNumber");
         Assert.assertNotNull(target);
@@ -72,11 +66,11 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(numbersArray.isNull());
         Assert.assertTrue(numbersArray.isArray());
         Assert.assertEquals(numbersArray.length(), 5);
-        Assert.assertEquals(numbersArray.get(0), -2);
-        Assert.assertEquals(numbersArray.get(1), -1);
-        Assert.assertEquals(numbersArray.get(2), 0);
-        Assert.assertEquals(numbersArray.get(3), 1);
-        Assert.assertEquals(numbersArray.get(4), 2);
+        Assert.assertEquals(numbersArray.get(0).getLong(), -2);
+        Assert.assertEquals(numbersArray.get(1).getLong(), -1);
+        Assert.assertEquals(numbersArray.get(2).getLong(), 0);
+        Assert.assertEquals(numbersArray.get(3).getLong(), 1);
+        Assert.assertEquals(numbersArray.get(4).getLong(), 2);
     }
 
     public void testString() throws Throwable {
