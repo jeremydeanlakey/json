@@ -13,16 +13,16 @@ public class Jarray extends Json {
     protected Jarray(){values = new ArrayList<>();}
 
     @Override
-    public boolean isArray(){return true;}
+    public boolean isArray() { return true; }
 
     @Override
     public void remove() { throw new RuntimeException("Not an object"); }
 
     @Override
-    public Json get(int index){return values.get(index);}
+    public Json get(int index) { return values.get(index); }
 
     @Override
-    protected void add(Json value){values.add(value);}
+    protected void add(Json value){ values.add(value); }
 
     @Override
     public boolean hasNext() { return nextIndex < values.size();}

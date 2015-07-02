@@ -11,6 +11,9 @@ public class Jstring extends Json {
     }
 
     @Override
+    public boolean isString() { return true; }
+
+    @Override
     public String getString(){
         return value;
     }

@@ -64,11 +64,13 @@ public class Json implements Iterator<Json> {
                 JSONObject value = jsonObject.optJSONObject(key);
                 Json convertedJsonObject = Json.fromJsonObject(value);
                 output.put(key, convertedJsonObject);
+                continue;
             }
             if (jsonObject.optJSONArray(key) != null) {
                 JSONArray value = jsonObject.optJSONArray(key);
                 Json convertedJsonObject = Json.fromJsonArray(value);
                 output.put(key, convertedJsonObject);
+                continue;
             }
             try {
                 Json value = new Jboolean(jsonObject.getBoolean(key));
@@ -98,15 +100,17 @@ public class Json implements Iterator<Json> {
                 output.add(new Jnull());
                 continue;
             }
-            if (array.optJSONArray(i) != null) {
-                JSONArray value = array.optJSONArray(i);
-                Json convertedarray = Json.fromJsonArray(value);
+            if (array.optJSONObject(i) != null) {
+                JSONObject value = array.optJSONObject(i);
+                Json convertedarray = Json.fromJsonObject(value);
                 output.add(convertedarray);
+                continue;
             }
             if (array.optJSONArray(i) != null) {
                 JSONArray value = array.optJSONArray(i);
                 Json convertedarray = Json.fromJsonArray(value);
                 output.add(convertedarray);
+                continue;
             }
             try {
                 Json value = new Jboolean(array.getBoolean(i));
