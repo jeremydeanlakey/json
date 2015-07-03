@@ -34,6 +34,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isString());
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
+        Assert.assertTrue(testJson.isNull("null"));
     }
 
     public void testBoolean() throws Throwable {
@@ -47,6 +48,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getBoolean(), false);
+        Assert.assertEquals(testJson.getBoolean("boolean"), target.getBoolean());
     }
 
     public void testNumber() throws Throwable {
@@ -60,17 +62,18 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getLong(), Integer.MAX_VALUE);
+        Assert.assertEquals(testJson.getLong("bigNumber"), target.getLong());
 
         Json numbersArray = testJson.get("numbers");
         Assert.assertNotNull(numbersArray);
         Assert.assertFalse(numbersArray.isNull());
         Assert.assertTrue(numbersArray.isArray());
         Assert.assertEquals(numbersArray.length(), 5);
-        Assert.assertEquals(numbersArray.get(0).getLong(), -2);
-        Assert.assertEquals(numbersArray.get(1).getLong(), -1);
-        Assert.assertEquals(numbersArray.get(2).getLong(), 0);
-        Assert.assertEquals(numbersArray.get(3).getLong(), 1);
-        Assert.assertEquals(numbersArray.get(4).getLong(), 2);
+        Assert.assertEquals(numbersArray.getLong(0), -2);
+        Assert.assertEquals(numbersArray.getLong(1), -1);
+        Assert.assertEquals(numbersArray.getLong(2), 0);
+        Assert.assertEquals(numbersArray.getLong(3), 1);
+        Assert.assertEquals(numbersArray.getLong(4), 2);
     }
 
     public void testString() throws Throwable {
@@ -84,6 +87,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getString(), "I am a string");
+        Assert.assertEquals(target.getString(), testJson.getString("string"));
     }
 
     public void testArray() throws Throwable {

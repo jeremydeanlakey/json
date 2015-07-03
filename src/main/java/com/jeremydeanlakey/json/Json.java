@@ -15,6 +15,18 @@ public class Json implements Iterator<Json> {
     public double getDouble(){throw new RuntimeException("Not a number");}
     public String getString(){throw new RuntimeException("Not a String value");}
 
+    public boolean isNull(String key) {throw new RuntimeException("Not an object");}
+    public boolean getBoolean(String key){throw new RuntimeException("Not an object");}
+    public long getLong(String key){throw new RuntimeException("Not an object");}
+    public double getDouble(String key){throw new RuntimeException("Not an object");}
+    public String getString(String key){throw new RuntimeException("Not an object");}
+
+    public boolean isNull(int index) {throw new RuntimeException("Not an array");}
+    public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
+    public long getLong(int index){throw new RuntimeException("Not an array");}
+    public double getDouble(int index){throw new RuntimeException("Not an array");}
+    public String getString(int index){throw new RuntimeException("Not an array");}
+
     public Json get(int index){throw new RuntimeException("Not an array");}
     protected void add(Json value){throw new RuntimeException("Not an array");}
     public Set<String> keys() { throw new RuntimeException("Not an array or object"); }

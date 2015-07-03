@@ -31,4 +31,10 @@ public class Jobject extends Json {
 
     @Override
     public boolean isEmpty() {return map.isEmpty(); }
+
+    public boolean isNull(String key) { return map.get(key).isNull(); }
+    public boolean getBoolean(String key){ return map.get(key).getBoolean(); }
+    public long getLong(String key){ return map.get(key).getLong(); }
+    public double getDouble(String key){ return map.get(key).getDouble(); }
+    public String getString(String key){ return map.get(key).getString(); }
 }

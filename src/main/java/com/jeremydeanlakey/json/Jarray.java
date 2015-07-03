@@ -35,4 +35,11 @@ public class Jarray extends Json {
 
     @Override
     public int length() { return values.size(); }
+
+    public boolean isNull(int index) { return values.get(index).isNull(); }
+    public boolean getBoolean(int index){ return values.get(index).getBoolean(); }
+    public long getLong(int index){ return values.get(index).getLong(); }
+    public double getDouble(int index){ return values.get(index).getDouble(); }
+    public String getString(int index){ return values.get(index).getString(); }
+
 }
