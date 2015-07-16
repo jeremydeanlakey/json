@@ -42,4 +42,15 @@ public class Jarray extends Json {
     public double getDouble(int index){ return values.get(index).getDouble(); }
     public String getString(int index){ return values.get(index).getString(); }
 
+    // TODO make more efficient
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder("[");
+        for (Json item: values) {
+            output.append(item.toString());
+            output.append(","); // TODO should only apply to the last
+        }
+        output.append("]");
+        return output.toString();
+    }
 }

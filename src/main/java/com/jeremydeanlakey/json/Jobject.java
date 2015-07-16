@@ -10,6 +10,8 @@ import java.util.Set;
 public class Jobject extends Json {
     private Map<String, Json> map;
 
+    private static final String QUOTE = "\"";
+
     protected Jobject(){map = new HashMap();}
 
     @Override
@@ -37,4 +39,20 @@ public class Jobject extends Json {
     public long getLong(String key){ return map.get(key).getLong(); }
     public double getDouble(String key){ return map.get(key).getDouble(); }
     public String getString(String key){ return map.get(key).getString(); }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("{");
+        for (String key: keys()) {
+            output.append(QUOTE);
+            output.append(key);
+            output.append(QUOTE);
+            output.append(":");
+            output.append(map.get(key));
+            output.append(","); // TODO shouldn't apply to last item
+        }
+        output.append("}");
+        return output.toString();
+    }
 }

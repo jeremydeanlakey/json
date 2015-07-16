@@ -144,4 +144,7 @@ public class Json implements Iterator<Json> {
         }
         return output;
     }
+
+    // TODO toString().  It's important to do it here if we want it to be efficient.
+    // Right now, however, I don't care.
 }

@@ -16,4 +16,7 @@ public class Jnumber extends Json {
 
     @Override
     public double getDouble(){return value;}
+
+    @Override
+    public String toString() { return String.valueOf(value); }
 }

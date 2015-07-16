@@ -9,4 +9,7 @@ public class Jnull extends Json {
 
     @Override
     public boolean isNull() { return true;}
+
+    @Override
+    public String toString() { return "null"; }
 }
