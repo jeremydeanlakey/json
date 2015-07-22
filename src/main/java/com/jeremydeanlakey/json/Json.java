@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by jeremydeanlakey on 6/22/15.
  */
-public class Json implements Iterator<Json> {
+public class Json implements Iterable<Json> {
     public boolean getBoolean(){throw new RuntimeException("Not a boolean value");}
     public long getLong(){throw new RuntimeException("Not a number");}
     public double getDouble(){throw new RuntimeException("Not a number");}
@@ -35,9 +35,6 @@ public class Json implements Iterator<Json> {
     public Json get(String key){throw new RuntimeException("Not an object");}
     protected void put(String key, Json value){throw new RuntimeException("Not an object");}
 
-    @Override public boolean hasNext() { throw new RuntimeException("Not an array"); }
-    @Override public Json next() { throw new RuntimeException("Not an array"); }
-    @Override public void remove() { throw new RuntimeException("Mutation of Json not permitted"); }
     public int length() { throw new RuntimeException("Not an array"); }
 
     public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
@@ -145,6 +142,8 @@ public class Json implements Iterator<Json> {
         return output;
     }
 
+    @Override
+    public Iterator<Json> iterator() { throw new RuntimeException("Json.iterator() only supported for arrays or objects"); }
     // TODO toString().  It's important to do it here if we want it to be efficient.
     // Right now, however, I don't care.
 }

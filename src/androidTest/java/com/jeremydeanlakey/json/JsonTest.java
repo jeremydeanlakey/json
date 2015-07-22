@@ -100,7 +100,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyArray.isString());
         Assert.assertTrue(emptyArray.isArray());
         Assert.assertFalse(emptyArray.isObject());
-        Assert.assertFalse(emptyArray.hasNext());
+        Assert.assertFalse(emptyArray.iterator().hasNext());
 
         Json nonEmptyArray = testJson.get("nonEmptyArray");
         Assert.assertNotNull(nonEmptyArray);

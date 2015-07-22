@@ -1,6 +1,7 @@
 package com.jeremydeanlakey.json;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,13 +11,24 @@ public class Jarray extends Json {
     private List<Json> values;
     private int nextIndex = 0;
 
+    class JarrayIterator implements Iterator<Json> {
+        private int i = 0;
+
+        @Override
+        public boolean hasNext() { return i < values.size(); }
+
+        @Override
+        public Json next() { return values.get(i++); }
+
+        @Override
+        public void remove() { throw new RuntimeException("Remove is not permitted as Json is intended to be immutable."); }
+    }
+
+
     protected Jarray(){values = new ArrayList<>();}
 
     @Override
     public boolean isArray() { return true; }
-
-    @Override
-    public void remove() { throw new RuntimeException("Not an object"); }
 
     @Override
     public Json get(int index) { return values.get(index); }
@@ -25,10 +37,7 @@ public class Jarray extends Json {
     protected void add(Json value){ values.add(value); }
 
     @Override
-    public boolean hasNext() { return nextIndex < values.size();}
-
-    @Override
-    public Json next() { return values.get(nextIndex++);  }
+    public Iterator<Json> iterator() { return new JarrayIterator(); }
 
     @Override
     public boolean isEmpty() { return values.isEmpty(); }
