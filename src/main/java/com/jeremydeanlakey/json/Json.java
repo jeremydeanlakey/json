@@ -44,23 +44,13 @@ public class Json implements Iterable<Json> {
     public long getLong(int index){throw new RuntimeException("Not an array");}
     public double getDouble(int index){throw new RuntimeException("Not an array");}
     public String getString(int index){throw new RuntimeException("Not an array");}
-    // TODO implement these
-    /*
+
     public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
     public boolean hasBoolean(int index){throw new RuntimeException("Not an array");}
     public boolean hasLong(int index){throw new RuntimeException("Not an array");}
     public boolean hasDouble(int index){throw new RuntimeException("Not an array");}
     public boolean hasString(int index){throw new RuntimeException("Not an array");}
-    */
-    public Json get(int index){throw new RuntimeException("Not an array");}
-    protected void add(Json value){throw new RuntimeException("Not an array");}
-    public Set<String> keys() { throw new RuntimeException("Not an array or object"); }
 
-    protected void put(String key, Json value){throw new RuntimeException("Not an object");}
-
-    public int length() { throw new RuntimeException("Not an array"); }
-
-    public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
 
     public boolean isNull() {return false;}
     public boolean isBoolean() {return false;}
@@ -69,6 +59,14 @@ public class Json implements Iterable<Json> {
     public boolean isArray() {return false;}
     public boolean isObject() {return false;}
 
+    public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
+
+
+    public Json get(int index){throw new RuntimeException("Not an array");}
+    protected void add(Json value){throw new RuntimeException("Not an array");}
+    public Set<String> keys() { throw new RuntimeException("Not an array or object"); }
+    protected void put(String key, Json value){throw new RuntimeException("Not an object");}
+    public int length() { throw new RuntimeException("Not an array"); }
 
 
     protected Json(){} // Disallow instantiation from outside.

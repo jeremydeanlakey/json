@@ -14,42 +14,38 @@ public class Jarray extends Json {
     class JarrayIterator implements Iterator<Json> {
         private int i = 0;
 
-        @Override
-        public boolean hasNext() { return i < values.size(); }
+        @Override public boolean hasNext() { return i < values.size(); }
 
-        @Override
-        public Json next() { return values.get(i++); }
+        @Override public Json next() { return values.get(i++); }
 
-        @Override
-        public void remove() { throw new RuntimeException("Remove is not permitted as Json is intended to be immutable."); }
+        @Override public void remove() { throw new RuntimeException("Remove is not permitted as Json is intended to be immutable."); }
     }
 
 
     protected Jarray(){values = new ArrayList<>();}
 
-    @Override
-    public boolean isArray() { return true; }
+    @Override public boolean isArray() { return true; }
 
-    @Override
-    public Json get(int index) { return values.get(index); }
+    @Override public Json get(int index) { return values.get(index); }
 
-    @Override
-    protected void add(Json value){ values.add(value); }
+    @Override protected void add(Json value){ values.add(value); }
 
-    @Override
-    public Iterator<Json> iterator() { return new JarrayIterator(); }
+    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
 
-    @Override
-    public boolean isEmpty() { return values.isEmpty(); }
+    @Override public boolean isEmpty() { return values.isEmpty(); }
 
-    @Override
-    public int length() { return values.size(); }
+    @Override public int length() { return values.size(); }
 
-    public boolean hasNull(int index) { return values.get(index).isNull(); }
-    public boolean getBoolean(int index){ return values.get(index).getBoolean(); }
-    public long getLong(int index){ return values.get(index).getLong(); }
-    public double getDouble(int index){ return values.get(index).getDouble(); }
-    public String getString(int index){ return values.get(index).getString(); }
+    @Override public boolean hasNull(int index) { return values.get(index).isNull(); }
+    @Override public boolean hasBoolean(int index){ return values.get(index).isBoolean(); }
+    @Override public boolean hasLong(int index){ return values.get(index).isNumber(); }
+    @Override public boolean hasDouble(int index){ return values.get(index).isNumber(); }
+    @Override public boolean hasString(int index){ return values.get(index).isString(); }
+
+    @Override public boolean getBoolean(int index){ return values.get(index).getBoolean(); }
+    @Override public long getLong(int index){ return values.get(index).getLong(); }
+    @Override public double getDouble(int index){ return values.get(index).getDouble(); }
+    @Override public String getString(int index){ return values.get(index).getString(); }
 
     // TODO make more efficient
     @Override

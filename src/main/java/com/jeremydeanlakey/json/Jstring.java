@@ -6,18 +6,11 @@ package com.jeremydeanlakey.json;
 public class Jstring extends Json {
     private String value;
 
-    public Jstring(String value){
-        this.value = value;
-    }
+    protected Jstring(String value){ this.value = value; }
 
-    @Override
-    public boolean isString() { return true; }
+    @Override public boolean isString() { return true; }
 
-    @Override
-    public String getString(){
-        return value;
-    }
+    @Override public String getString(){ return value; }
 
-    @Override
-    public String toString() { return "\"" + value + "\""; }
+    @Override public String toString() { return "\"" + value + "\""; }
 }
