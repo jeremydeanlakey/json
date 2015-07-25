@@ -146,10 +146,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyObject.isString());
         Assert.assertFalse(emptyObject.isArray());
 
-        // TODO test isX(key) functions
         // TODO test getXxxxOrDefault functions
-        // TODO add opposing tests (eg an assertTrue for every assertFalse)
-
         Json testObject = testJson.get("testObject");
         Assert.assertTrue(testObject.isDouble("number"));
         Assert.assertTrue(testObject.hasDouble("number"));
