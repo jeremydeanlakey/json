@@ -148,19 +148,27 @@ public class JsonTest extends AndroidTestCase {
 
         // TODO test isX(key) functions
         // TODO test getXxxxOrDefault functions
+        // TODO add opposing tests (eg an assertTrue for every assertFalse)
 
         Json testObject = testJson.get("testObject");
+        Assert.assertTrue(testObject.isDouble("number"));
         Assert.assertTrue(testObject.hasDouble("number"));
         Assert.assertEquals(testObject.getDouble("number"),1.0);
+        Assert.assertTrue(testObject.isLong("number"));
         Assert.assertTrue(testObject.hasLong("number"));
         Assert.assertEquals(testObject.getLong("number"),1);
+        Assert.assertTrue(testObject.isString("string"));
         Assert.assertTrue(testObject.hasString("string"));
         Assert.assertEquals(testObject.getString("string"),"string");
+        Assert.assertTrue(testObject.isBoolean("bool"));
         Assert.assertTrue(testObject.hasBoolean("bool"));
         Assert.assertEquals(testObject.getBoolean("bool"),true);
+        Assert.assertTrue(testObject.isNull("null"));
         Assert.assertTrue(testObject.hasNull("null"));
         // TODO add these tests are the functions are created
+        // Assert.assertTrue(testObject.isArray("array"));
         // Assert.assertTrue(testObject.hasArray("array"));
+        // Assert.assertTrue(testObject.isObject("object"));
         // Assert.assertTrue(testObject.hasObject("object"));
 
         Set<String> keys = nonEmptyObject.keys();
