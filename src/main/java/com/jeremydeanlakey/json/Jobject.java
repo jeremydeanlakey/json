@@ -28,10 +28,10 @@ public class Jobject extends Json {
     // TODO add tests to new functions: hasX, getXorDefault and anything else not tested
     @Override public boolean has(String key){return map.containsKey(key);}
     @Override public boolean hasNull(String key) { return has(key) && isNull(key); }
-    @Override public boolean hasBoolean(String key){ return has(key) && isBoolean(key); }
-    @Override public boolean hasLong(String key){ return has(key) && isLong(key); }
-    @Override public boolean hasDouble(String key){ return has(key) && isDouble(key); }
-    @Override public boolean hasString(String key){ return has(key) && isString(key); }
+    @Override public boolean hasBoolean(String key){ return has(key) && map.get(key).isBoolean(); }
+    @Override public boolean hasLong(String key){ return has(key) && map.get(key).isNumber(); }
+    @Override public boolean hasDouble(String key){ return has(key) && map.get(key).isNumber(); }
+    @Override public boolean hasString(String key){ return has(key) && map.get(key).isString(); }
 
 
     @Override public Json get(String key){return map.get(key);}
