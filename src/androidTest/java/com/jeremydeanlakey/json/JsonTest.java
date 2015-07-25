@@ -154,17 +154,38 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(testObject.isDouble("number"));
         Assert.assertTrue(testObject.hasDouble("number"));
         Assert.assertEquals(testObject.getDouble("number"),1.0);
+        Assert.assertFalse(testObject.isDouble("string"));
+        Assert.assertFalse(testObject.hasDouble("string"));
+        Assert.assertFalse(testObject.hasDouble("nothing"));
+        Assert.assertTrue(testObject.getDouble("number") != 2.0);
+
         Assert.assertTrue(testObject.isLong("number"));
         Assert.assertTrue(testObject.hasLong("number"));
         Assert.assertEquals(testObject.getLong("number"),1);
+        Assert.assertFalse(testObject.isLong("string"));
+        Assert.assertFalse(testObject.hasLong("string"));
+        Assert.assertFalse(testObject.hasLong("nothing"));
+        Assert.assertTrue(testObject.getLong("number") != 2);
+
         Assert.assertTrue(testObject.isString("string"));
         Assert.assertTrue(testObject.hasString("string"));
         Assert.assertEquals(testObject.getString("string"),"string");
+        Assert.assertFalse(testObject.isString("number"));
+        Assert.assertFalse(testObject.hasString("number"));
+        Assert.assertFalse(testObject.hasString("nothing"));
+        Assert.assertFalse(testObject.getString("string").equals("blah"));
+
+
         Assert.assertTrue(testObject.isBoolean("bool"));
         Assert.assertTrue(testObject.hasBoolean("bool"));
         Assert.assertEquals(testObject.getBoolean("bool"),true);
+        Assert.assertFalse(testObject.isBoolean("number"));
+        Assert.assertFalse(testObject.hasBoolean("number"));
+
         Assert.assertTrue(testObject.isNull("null"));
         Assert.assertTrue(testObject.hasNull("null"));
+        Assert.assertFalse(testObject.isNull("string"));
+        Assert.assertFalse(testObject.hasNull("string"));
         // TODO add these tests are the functions are created
         // Assert.assertTrue(testObject.isArray("array"));
         // Assert.assertTrue(testObject.hasArray("array"));
