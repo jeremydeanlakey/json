@@ -18,7 +18,15 @@ public class JsonTest extends AndroidTestCase {
         +    "\"null\": null,"
         +    "\"boolean\": false,"
         +    "\"emptyObject\": {},"
-        +    "\"nonEmptyObject\": {\"contents\":1}"
+        +    "\"nonEmptyObject\": {\"contents\":1},"
+        +    "\"testObject\": {"
+        +        "\"number\":1,"
+        +        "\"string\":\"string\","
+        +        "\"bool\":\"true\","
+        +        "\"null\":null,"
+        +        "\"array\":[],"
+        +        "\"object\":{\"key\":1}"
+        +      "}"
         +    "}";
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
@@ -142,5 +150,23 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotNull(objectContents);
         Assert.assertTrue(objectContents.isNumber());
         Assert.assertEquals(objectContents.getLong(), 1);
+
+        Json testObject = testJson.get("testObject");
+        Assert.assertTrue(testObject.hasDouble("number"));
+        Assert.assertEquals(testObject.getDouble("number"),1.0);
+        Assert.assertTrue(testObject.hasLong("number"));
+        Assert.assertEquals(testObject.getLong("number"),1);
+        Assert.assertTrue(testObject.hasString("string"));
+        Assert.assertEquals(testObject.getString("string"),"string");
+        Assert.assertTrue(testObject.hasBoolean("bool"));
+        Assert.assertEquals(testObject.getBoolean("bool"),true);
+        Assert.assertTrue(testObject.hasNull("null"));
+        // Assert.assertTrue(testObject.hasArray("array"));
+        // Assert.assertTrue(testObject.hasObject("object"));
+
+
+        // TODO test isXxxx(key) functions
+        // TODO test getXxxxOrDefault functions
+        // TODO test string functions after they are improved on
     }
 }
