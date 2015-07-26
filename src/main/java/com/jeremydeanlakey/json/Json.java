@@ -72,15 +72,22 @@ public class Json implements Iterable<Json> {
     protected Json(){} // Disallow instantiation from outside.
 
     public static Json fromString (String string){
+        if (string == null)
+            return null;
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(string);
 
-        } catch (JSONException e) {e.printStackTrace();}
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
         return Json.fromJsonObject(jsonObject);
     }
 
     public static Json fromJsonObject(JSONObject jsonObject){
+        if (jsonObject == null)
+            return null;
         Json output = new Jobject();
         Iterator<String> iter = jsonObject.keys();
         while (iter.hasNext()){
@@ -121,6 +128,8 @@ public class Json implements Iterable<Json> {
     }
 
     public static Json fromJsonArray(JSONArray array){
+        if (array == null)
+            return null;
 
         Json output = new Jarray();
 
