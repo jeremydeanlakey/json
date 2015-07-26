@@ -28,6 +28,7 @@ public class Jarray extends Json {
 
     @Override public Json get(int index) { return values.get(index); }
 
+    // TODO should I remove this and Jobject.put to make json immutable?
     @Override protected void add(Json value){ values.add(value); }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
