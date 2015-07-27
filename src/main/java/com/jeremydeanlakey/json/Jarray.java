@@ -26,16 +26,9 @@ public class Jarray extends Json {
 
     @Override public boolean isArray() { return true; }
 
-    @Override public Json get(int index) { return values.get(index); }
-
-    // TODO should I remove this and Jobject.put to make json immutable?
-    @Override protected void add(Json value){ values.add(value); }
-
-    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
-
     @Override public boolean isEmpty() { return values.isEmpty(); }
 
-    @Override public int length() { return values.size(); }
+    @Override public Json get(int index) { return values.get(index); }
 
     @Override public boolean hasNull(int index) { return values.get(index).isNull(); }
     @Override public boolean hasBoolean(int index){ return values.get(index).isBoolean(); }
@@ -47,6 +40,13 @@ public class Jarray extends Json {
     @Override public long getLong(int index){ return values.get(index).getLong(); }
     @Override public double getDouble(int index){ return values.get(index).getDouble(); }
     @Override public String getString(int index){ return values.get(index).getString(); }
+
+    @Override public int length() { return values.size(); }
+
+    // TODO should I remove this and Jobject.put to make json immutable?
+    @Override protected void add(Json value){ values.add(value); }
+
+    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
 
     // TODO make more efficient
     @Override

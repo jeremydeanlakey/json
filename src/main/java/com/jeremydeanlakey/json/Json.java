@@ -10,6 +10,15 @@ import java.util.Set;
  * Created by jeremydeanlakey on 6/22/15.
  */
 public class Json implements Iterable<Json> {
+    public boolean isNull() {return false;}
+    public boolean isBoolean() {return false;}
+    public boolean isNumber() {return false;}
+    public boolean isString() {return false;}
+    public boolean isArray() {return false;}
+    public boolean isObject() {return false;}
+
+    public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
+
     public boolean getBoolean(){throw new RuntimeException("Not a boolean value");}
     public long getLong(){throw new RuntimeException("Not a number");}
     public double getDouble(){throw new RuntimeException("Not a number");}
@@ -21,29 +30,26 @@ public class Json implements Iterable<Json> {
     public boolean isDouble(String key) {throw new RuntimeException("Not an object");}
     public boolean isString(String key) {throw new RuntimeException("Not an object");}
 
+    public boolean has(String key){throw new RuntimeException("Not an object");}
+
     public boolean hasNull(String key) {throw new RuntimeException("Not an object");}
     public boolean hasBoolean(String key){throw new RuntimeException("Not an array");}
     public boolean hasLong(String key){throw new RuntimeException("Not an array");}
     public boolean hasDouble(String key){throw new RuntimeException("Not an array");}
     public boolean hasString(String key){throw new RuntimeException("Not an array");}
 
+    public Json get(String key){throw new RuntimeException("Not an object");}
+
     public boolean getBoolean(String key){throw new RuntimeException("Not an object");}
     public long getLong(String key){throw new RuntimeException("Not an object");}
     public double getDouble(String key){throw new RuntimeException("Not an object");}
     public String getString(String key){throw new RuntimeException("Not an object");}
 
-    public Json get(String key){throw new RuntimeException("Not an object");}
     public boolean getBooleanOrDefault(String key, boolean def){throw new RuntimeException("Not an object");}
     public long getLongOrDefault(String key, long def){throw new RuntimeException("Not an object");}
     public double getDoubleOrDefault(String key, double def){throw new RuntimeException("Not an object");}
     public String getStringOrDefault(String key, String def){throw new RuntimeException("Not an object");}
 
-    public boolean has(String key){throw new RuntimeException("Not an object");}
-
-    public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
-    public long getLong(int index){throw new RuntimeException("Not an array");}
-    public double getDouble(int index){throw new RuntimeException("Not an array");}
-    public String getString(int index){throw new RuntimeException("Not an array");}
 
     public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
     public boolean hasBoolean(int index){throw new RuntimeException("Not an array");}
@@ -51,20 +57,16 @@ public class Json implements Iterable<Json> {
     public boolean hasDouble(int index){throw new RuntimeException("Not an array");}
     public boolean hasString(int index){throw new RuntimeException("Not an array");}
 
-
-    public boolean isNull() {return false;}
-    public boolean isBoolean() {return false;}
-    public boolean isNumber() {return false;}
-    public boolean isString() {return false;}
-    public boolean isArray() {return false;}
-    public boolean isObject() {return false;}
-
-    public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
-
-
     public Json get(int index){throw new RuntimeException("Not an array");}
+
+    public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
+    public long getLong(int index){throw new RuntimeException("Not an array");}
+    public double getDouble(int index){throw new RuntimeException("Not an array");}
+    public String getString(int index){throw new RuntimeException("Not an array");}
+
+
+    public Set<String> keys() { throw new RuntimeException("Not an object"); }
     protected void add(Json value){throw new RuntimeException("Not an array");}
-    public Set<String> keys() { throw new RuntimeException("Not an array or object"); }
     protected void put(String key, Json value){throw new RuntimeException("Not an object");}
     public int length() { throw new RuntimeException("Not an array"); }
 
