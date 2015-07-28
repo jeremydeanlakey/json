@@ -11,7 +11,7 @@ public class JsonTest extends AndroidTestCase {
     public static String TEST_CASE_STRING =
             "{"
         +    "\"emptyArray\":[],"
-        +    "\"nonEmptyArray\":[{\"contents\": 1}],"
+        +    "\"nonEmptyArray\":[{\"contents\": 1}, 2, false, null, \"string\", []],"
         +    "\"string\": \"I am a string\","
         +    "\"numbers\":[-2e0, -1.000, 0e10, 10e-1, 2],"
         +    "\"bigNumber\": " + Integer.MAX_VALUE + ","
@@ -107,6 +107,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotNull(nonEmptyArray);
 
         Assert.assertFalse(emptyArray.iterator().hasNext());
+        Assert.assertTrue(nonEmptyArray.iterator().hasNext());
 
         Assert.assertFalse(emptyArray.isNull());
         Assert.assertFalse(emptyArray.isBoolean());
@@ -117,7 +118,28 @@ public class JsonTest extends AndroidTestCase {
 
         Assert.assertTrue(nonEmptyArray.isArray());
         Assert.assertFalse(nonEmptyArray.isEmpty());
-        Assert.assertEquals(nonEmptyArray.length(), 1);
+        Assert.assertEquals(nonEmptyArray.length(), 6);
+
+        // "\"nonEmptyArray\":[{\"contents\": 1}, 2, false, null, \"string\", []],"
+        // TODO uncomment this after it is implemented
+        //Assert.assertTrue(nonEmptyArray.hasObject(0));
+        //Assert.assertFalse(nonEmptyArray.hasObject(1));
+        Assert.assertTrue(nonEmptyArray.hasLong(1));
+        Assert.assertFalse(nonEmptyArray.hasLong(0));
+        Assert.assertTrue(nonEmptyArray.hasDouble(1));
+        Assert.assertFalse(nonEmptyArray.hasDouble(0));
+        Assert.assertTrue(nonEmptyArray.hasBoolean(2));
+        Assert.assertFalse(nonEmptyArray.hasBoolean(1));
+        Assert.assertTrue(nonEmptyArray.hasNull(3));
+        Assert.assertFalse(nonEmptyArray.hasNull(2));
+        Assert.assertTrue(nonEmptyArray.hasString(4));
+        Assert.assertFalse(nonEmptyArray.hasString(3));
+        //Assert.assertTrue(nonEmptyArray.hasArray(5));
+        //Assert.assertFalse(nonEmptyArray.hasArray(4));
+        // TODO uncomment this after it is implemented
+
+        // TODO getX(i) tests
+
 
         Json objectInArray = nonEmptyArray.get(0);
         Assert.assertNotNull(objectInArray);
