@@ -23,6 +23,8 @@ public class Jobject extends Json {
     @Override public boolean isLong(String key) { return map.get(key).isNumber(); }
     @Override public boolean isDouble(String key) { return map.get(key).isNumber(); }
     @Override public boolean isString(String key) { return map.get(key).isString(); }
+    @Override public boolean isObject(String key) { return map.get(key).isArray(); }
+    @Override public boolean isArray(String key) { return map.get(key).isObject(); }
 
 
     @Override public boolean has(String key){return map.containsKey(key);}
@@ -31,6 +33,8 @@ public class Jobject extends Json {
     @Override public boolean hasLong(String key){ return has(key) && isLong(key); }
     @Override public boolean hasDouble(String key){ return has(key) && isDouble(key); }
     @Override public boolean hasString(String key){ return has(key) && isString(key); }
+    @Override public boolean hasObject(String key){ return has(key) && isObject(key); }
+    @Override public boolean hasArray(String key){ return has(key) && isArray(key); }
 
 
     @Override public Json get(String key){return map.get(key);}

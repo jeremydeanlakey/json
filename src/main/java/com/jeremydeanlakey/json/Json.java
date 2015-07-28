@@ -29,6 +29,8 @@ public class Json implements Iterable<Json> {
     public boolean isLong(String key) {throw new RuntimeException("Not an object");}
     public boolean isDouble(String key) {throw new RuntimeException("Not an object");}
     public boolean isString(String key) {throw new RuntimeException("Not an object");}
+    public boolean isObject(String key) {throw new RuntimeException("Not an object");}
+    public boolean isArray(String key) {throw new RuntimeException("Not an object");}
 
     public boolean has(String key){throw new RuntimeException("Not an object");}
 
@@ -37,6 +39,8 @@ public class Json implements Iterable<Json> {
     public boolean hasLong(String key){throw new RuntimeException("Not an array");}
     public boolean hasDouble(String key){throw new RuntimeException("Not an array");}
     public boolean hasString(String key){throw new RuntimeException("Not an array");}
+    public boolean hasObject(String key){throw new RuntimeException("Not an array");}
+    public boolean hasArray(String key){throw new RuntimeException("Not an array");}
 
     public Json get(String key){throw new RuntimeException("Not an object");}
 
