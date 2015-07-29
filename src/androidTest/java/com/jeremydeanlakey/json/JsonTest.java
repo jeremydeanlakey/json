@@ -219,11 +219,10 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(testObject.hasNull("null"));
         Assert.assertFalse(testObject.isNull("string"));
         Assert.assertFalse(testObject.hasNull("string"));
-        // TODO add these tests are the functions are created
-        // Assert.assertTrue(testObject.isArray("array"));
-        // Assert.assertTrue(testObject.hasArray("array"));
-        // Assert.assertTrue(testObject.isObject("object"));
-        // Assert.assertTrue(testObject.hasObject("object"));
+        Assert.assertTrue(testObject.isArray("array"));
+        Assert.assertTrue(testObject.hasArray("array"));
+        Assert.assertTrue(testObject.isObject("object"));
+        Assert.assertTrue(testObject.hasObject("object"));
 
         Set<String> keys = nonEmptyObject.keys();
         Assert.assertEquals(keys.size(), 1);

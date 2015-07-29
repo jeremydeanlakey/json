@@ -23,8 +23,8 @@ public class Jobject extends Json {
     @Override public boolean isLong(String key) { return map.get(key).isNumber(); }
     @Override public boolean isDouble(String key) { return map.get(key).isNumber(); }
     @Override public boolean isString(String key) { return map.get(key).isString(); }
-    @Override public boolean isObject(String key) { return map.get(key).isArray(); }
-    @Override public boolean isArray(String key) { return map.get(key).isObject(); }
+    @Override public boolean isObject(String key) { return map.get(key).isObject(); }
+    @Override public boolean isArray(String key) { return map.get(key).isArray(); }
 
 
     @Override public boolean has(String key){return map.containsKey(key);}
