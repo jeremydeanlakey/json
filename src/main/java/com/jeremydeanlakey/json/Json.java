@@ -48,11 +48,19 @@ public class Json implements Iterable<Json> {
     public long getLong(String key){throw new RuntimeException("Not an object");}
     public double getDouble(String key){throw new RuntimeException("Not an object");}
     public String getString(String key){throw new RuntimeException("Not an object");}
+    // TODO implement these in Jobject
+    // TODO add tests for these two functions
+    //public String getArray(String key){throw new RuntimeException("Not an object");}
+    //public String getObject(String key){throw new RuntimeException("Not an object");}
 
     public boolean getBooleanOrDefault(String key, boolean def){throw new RuntimeException("Not an object");}
     public long getLongOrDefault(String key, long def){throw new RuntimeException("Not an object");}
     public double getDoubleOrDefault(String key, double def){throw new RuntimeException("Not an object");}
     public String getStringOrDefault(String key, String def){throw new RuntimeException("Not an object");}
+    // TODO implement these in Jobject
+    // TODO add tests for these two functions
+    //public Json getArrayOrDefault(String key, String def){throw new RuntimeException("Not an object");}
+    //public Json getObjectOrDefault(String key, String def){throw new RuntimeException("Not an object");}
 
 
     public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
@@ -60,6 +68,9 @@ public class Json implements Iterable<Json> {
     public boolean hasLong(int index){throw new RuntimeException("Not an array");}
     public boolean hasDouble(int index){throw new RuntimeException("Not an array");}
     public boolean hasString(int index){throw new RuntimeException("Not an array");}
+    // TODO add tests for these two functions
+    public boolean hasArray(int index){throw new RuntimeException("Not an array");}
+    public boolean hasObject(int index){throw new RuntimeException("Not an array");}
 
     public Json get(int index){throw new RuntimeException("Not an array");}
 
@@ -67,6 +78,9 @@ public class Json implements Iterable<Json> {
     public long getLong(int index){throw new RuntimeException("Not an array");}
     public double getDouble(int index){throw new RuntimeException("Not an array");}
     public String getString(int index){throw new RuntimeException("Not an array");}
+    // TODO add tests for these two functions
+    public Json getArray(int index){throw new RuntimeException("Not an array");}
+    public Json getObject(int index){throw new RuntimeException("Not an array");}
 
 
     public Set<String> keys() { throw new RuntimeException("Not an object"); }

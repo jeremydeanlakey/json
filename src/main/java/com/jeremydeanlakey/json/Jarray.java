@@ -30,16 +30,20 @@ public class Jarray extends Json {
 
     @Override public Json get(int index) { return values.get(index); }
 
-    @Override public boolean hasNull(int index) { return values.get(index).isNull(); }
-    @Override public boolean hasBoolean(int index){ return values.get(index).isBoolean(); }
-    @Override public boolean hasLong(int index){ return values.get(index).isNumber(); }
-    @Override public boolean hasDouble(int index){ return values.get(index).isNumber(); }
-    @Override public boolean hasString(int index){ return values.get(index).isString(); }
+    @Override public boolean hasNull(int index) { return values.size() > index && values.get(index).isNull(); }
+    @Override public boolean hasBoolean(int index){ return values.size() > index && values.get(index).isBoolean(); }
+    @Override public boolean hasLong(int index){ return values.size() > index && values.get(index).isNumber(); }
+    @Override public boolean hasDouble(int index){ return values.size() > index && values.get(index).isNumber(); }
+    @Override public boolean hasString(int index){ return values.size() > index && values.get(index).isString(); }
+    @Override public boolean hasArray(int index){ return values.size() > index && values.get(index).isArray(); }
+    @Override public boolean hasObject(int index){ return values.size() > index && values.get(index).isObject(); }
 
     @Override public boolean getBoolean(int index){ return values.get(index).getBoolean(); }
     @Override public long getLong(int index){ return values.get(index).getLong(); }
     @Override public double getDouble(int index){ return values.get(index).getDouble(); }
     @Override public String getString(int index){ return values.get(index).getString(); }
+    @Override public Json getArray(int index){ return values.get(index); }
+    @Override public Json getObject(int index){ return values.get(index); }
 
     @Override public int length() { return values.size(); }
 
