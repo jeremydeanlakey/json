@@ -96,7 +96,8 @@ public class Json implements Iterable<Json> {
         try {
             jsonObject = new JSONObject(string);
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
