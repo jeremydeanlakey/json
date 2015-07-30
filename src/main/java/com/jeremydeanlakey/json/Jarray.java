@@ -52,13 +52,15 @@ public class Jarray extends Json {
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
 
-    // TODO make more efficient
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("[");
+        boolean first = true;
         for (Json item: values) {
+            if (!first)
+                output.append(",");
+            first = false;
             output.append(item.toString());
-            output.append(","); // TODO should only apply to the last
         }
         output.append("]");
         return output.toString();

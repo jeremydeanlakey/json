@@ -192,6 +192,7 @@ public class Json implements Iterable<Json> {
 
     @Override
     public Iterator<Json> iterator() { throw new RuntimeException("Json.iterator() only supported for arrays or objects"); }
+
     // TODO toString().  It's important to do it here if we want it to be efficient.
     // Right now, however, I don't care.
 }

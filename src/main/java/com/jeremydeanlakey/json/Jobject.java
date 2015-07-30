@@ -64,13 +64,16 @@ public class Jobject extends Json {
     public String toString() {
         StringBuilder output = new StringBuilder();
         output.append("{");
+        boolean first = true;
         for (String key: keys()) {
+            if (!first)
+                output.append(",");
+            first = false;
             output.append(QUOTE);
             output.append(key);
             output.append(QUOTE);
             output.append(":");
             output.append(map.get(key));
-            output.append(","); // TODO shouldn't apply to last item
         }
         output.append("}");
         return output.toString();
