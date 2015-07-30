@@ -17,7 +17,6 @@ public class Jobject extends Json {
     @Override public boolean isEmpty() {return map.isEmpty(); }
     @Override public boolean isObject() { return true;}
 
-    // TODO isArray and isObject
     @Override public boolean isNull(String key) { return map.get(key).isNull(); }
     @Override public boolean isBoolean(String key) { return map.get(key).isBoolean(); }
     @Override public boolean isLong(String key) { return map.get(key).isNumber(); }
