@@ -50,8 +50,8 @@ public class Json implements Iterable<Json> {
     public String getString(String key){throw new RuntimeException("Not an object");}
     // TODO implement these in Jobject
     // TODO add tests for these two functions
-    //public String getArray(String key){throw new RuntimeException("Not an object");}
-    //public String getObject(String key){throw new RuntimeException("Not an object");}
+    public Json getArray(String key){throw new RuntimeException("Not an object");}
+    public Json getObject(String key){throw new RuntimeException("Not an object");}
 
     public boolean getBooleanOrDefault(String key, boolean def){throw new RuntimeException("Not an object");}
     public long getLongOrDefault(String key, long def){throw new RuntimeException("Not an object");}
@@ -59,8 +59,8 @@ public class Json implements Iterable<Json> {
     public String getStringOrDefault(String key, String def){throw new RuntimeException("Not an object");}
     // TODO implement these in Jobject
     // TODO add tests for these two functions
-    //public Json getArrayOrDefault(String key, String def){throw new RuntimeException("Not an object");}
-    //public Json getObjectOrDefault(String key, String def){throw new RuntimeException("Not an object");}
+    public Json getArrayOrDefault(String key, Jarray def){throw new RuntimeException("Not an object");}
+    public Json getObjectOrDefault(String key, Jobject def){throw new RuntimeException("Not an object");}
 
 
     public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
