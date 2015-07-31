@@ -8,49 +8,41 @@ import java.util.List;
  * Created by jeremydeanlakey on 6/23/15.
  */
 public class Jarray extends Json {
+    private static String REMOVE_ERROR = "Remove is not permitted as Json is intended to be immutable.";
     private List<Json> values;
-    private int nextIndex = 0;
 
     class JarrayIterator implements Iterator<Json> {
         private int i = 0;
-
         @Override public boolean hasNext() { return i < values.size(); }
-
         @Override public Json next() { return values.get(i++); }
-
-        @Override public void remove() { throw new RuntimeException("Remove is not permitted as Json is intended to be immutable."); }
+        @Override public void remove() { throw new RuntimeException(REMOVE_ERROR); }
     }
 
+    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
 
-    protected Jarray(){values = new ArrayList<>();}
+    protected Jarray() { values = new ArrayList<>(); }
 
+    @Override protected void add(Json value) { values.add(value); }
+    @Override public int length() { return values.size(); }
     @Override public boolean isArray() { return true; }
-
     @Override public boolean isEmpty() { return values.isEmpty(); }
 
+    private boolean has(int i) { return i < length();}
+    @Override public boolean hasNull(int i) { return has(i) && get(i).isNull(); }
+    @Override public boolean hasBoolean(int i){ return has(i) && get(i).isBoolean(); }
+    @Override public boolean hasLong(int i){ return has(i) && get(i).isNumber(); }
+    @Override public boolean hasDouble(int i){ return has(i) && get(i).isNumber(); }
+    @Override public boolean hasString(int i){ return has(i) && get(i).isString(); }
+    @Override public boolean hasArray(int i){ return has(i) && get(i).isArray(); }
+    @Override public boolean hasObject(int i){ return has(i) && get(i).isObject(); }
+
     @Override public Json get(int index) { return values.get(index); }
-
-    @Override public boolean hasNull(int index) { return values.size() > index && values.get(index).isNull(); }
-    @Override public boolean hasBoolean(int index){ return values.size() > index && values.get(index).isBoolean(); }
-    @Override public boolean hasLong(int index){ return values.size() > index && values.get(index).isNumber(); }
-    @Override public boolean hasDouble(int index){ return values.size() > index && values.get(index).isNumber(); }
-    @Override public boolean hasString(int index){ return values.size() > index && values.get(index).isString(); }
-    @Override public boolean hasArray(int index){ return values.size() > index && values.get(index).isArray(); }
-    @Override public boolean hasObject(int index){ return values.size() > index && values.get(index).isObject(); }
-
-    @Override public boolean getBoolean(int index){ return values.get(index).getBoolean(); }
-    @Override public long getLong(int index){ return values.get(index).getLong(); }
-    @Override public double getDouble(int index){ return values.get(index).getDouble(); }
-    @Override public String getString(int index){ return values.get(index).getString(); }
-    @Override public Json getArray(int index){ return values.get(index); }
-    @Override public Json getObject(int index){ return values.get(index); }
-
-    @Override public int length() { return values.size(); }
-
-    // TODO should I remove this and Jobject.put to make json immutable?
-    @Override protected void add(Json value){ values.add(value); }
-
-    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
+    @Override public boolean getBoolean(int i){ return get(i).getBoolean(); }
+    @Override public long getLong(int i){ return get(i).getLong(); }
+    @Override public double getDouble(int i){ return get(i).getDouble(); }
+    @Override public String getString(int i){ return get(i).getString(); }
+    @Override public Json getArray(int i){ return get(i); }
+    @Override public Json getObject(int i){ return get(i); }
 
     @Override
     public String toString() {
