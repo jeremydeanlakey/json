@@ -45,12 +45,12 @@ public class Jobject extends Json {
     @Override public Json getArray(String key){ return map.get(key); }
     @Override public Json getObject(String key){ return map.get(key); }
 
-    @Override public boolean getBooleanOrDefault(String key, boolean def){ if(hasBoolean(key)) return getBoolean(key); else return def; }
-    @Override public long getLongOrDefault(String key, long def){ if(hasLong(key)) return getLong(key); else return def; }
-    @Override public double getDoubleOrDefault(String key, double def){ if(hasDouble(key)) return getDouble(key); else return def; }
-    @Override public String getStringOrDefault(String key, String def){ if(hasString(key)) return getString(key); else return def; }
-    @Override public Json getArrayOrDefault(String key, Jarray def){ if(hasArray(key)) return get(key); else return def; }
-    @Override public Json getObjectOrDefault(String key, Jobject def){ if(hasObject(key)) return get(key); else return def; }
+    @Override public boolean getBoolean(String key, boolean def){ return hasBoolean(key) ? getBoolean(key) : def; }
+    @Override public long getLong(String key, long def){ return hasLong(key) ? getLong(key) : def; }
+    @Override public double getDouble(String key, double def){ return hasDouble(key) ? getDouble(key) : def; }
+    @Override public String getString(String key, String def){ return hasString(key) ? getString(key) : def; }
+    @Override public Json getArray(String key, Jarray def){ return hasArray(key) ? get(key) : def; }
+    @Override public Json getObject(String key, Jobject def){ return hasObject(key) ? get(key) : def; }
 
 
     @Override public Set<String> keys() {
