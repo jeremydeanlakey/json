@@ -53,10 +53,7 @@ public class Jobject extends Json {
     @Override public Json getObject(String key, Jobject def){ return hasObject(key) ? get(key) : def; }
 
 
-    @Override public Set<String> keys() {
-        return map.keySet();
-    }
-    // TODO delete this? Need to decide whether to go immutable or not.
+    @Override public Set<String> keys() { return map.keySet(); }
     @Override public void put(String key, Json value){map.put(key, value);}
 
 
