@@ -66,17 +66,16 @@ public class Json implements Iterable<Json> {
     public boolean hasLong(int index){throw new RuntimeException("Not an array");}
     public boolean hasDouble(int index){throw new RuntimeException("Not an array");}
     public boolean hasString(int index){throw new RuntimeException("Not an array");}
-    // TODO add tests for these two functions
     public boolean hasArray(int index){throw new RuntimeException("Not an array");}
     public boolean hasObject(int index){throw new RuntimeException("Not an array");}
 
     public Json get(int index){throw new RuntimeException("Not an array");}
 
+    // TODO add tests for these functions
     public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
     public long getLong(int index){throw new RuntimeException("Not an array");}
     public double getDouble(int index){throw new RuntimeException("Not an array");}
     public String getString(int index){throw new RuntimeException("Not an array");}
-    // TODO add tests for these two functions
     public Json getArray(int index){throw new RuntimeException("Not an array");}
     public Json getObject(int index){throw new RuntimeException("Not an array");}
 
@@ -196,4 +195,8 @@ public class Json implements Iterable<Json> {
 
     // TODO toString().  It's important to do it here if we want it to be efficient.
     // Right now, however, I don't care.
+
+    @Override public boolean equals(Object o) { return (o instanceof Json) ? equals((Json) o) : false; }
+    // TODO implement
+    private boolean equals(Json json) { return false; }
 }

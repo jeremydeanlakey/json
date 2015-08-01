@@ -120,10 +120,9 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(nonEmptyArray.isEmpty());
         Assert.assertEquals(nonEmptyArray.length(), 6);
 
-        // "\"nonEmptyArray\":[{\"contents\": 1}, 2, false, null, \"string\", []],"
-        // TODO uncomment this after it is implemented
-        //Assert.assertTrue(nonEmptyArray.hasObject(0));
-        //Assert.assertFalse(nonEmptyArray.hasObject(1));
+        // "nonEmptyArray":[{"contents": 1}, 2, false, null, "string", []]
+        Assert.assertTrue(nonEmptyArray.hasObject(0));
+        Assert.assertFalse(nonEmptyArray.hasObject(1));
         Assert.assertTrue(nonEmptyArray.hasLong(1));
         Assert.assertFalse(nonEmptyArray.hasLong(0));
         Assert.assertTrue(nonEmptyArray.hasDouble(1));
@@ -134,12 +133,10 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(nonEmptyArray.hasNull(2));
         Assert.assertTrue(nonEmptyArray.hasString(4));
         Assert.assertFalse(nonEmptyArray.hasString(3));
-        //Assert.assertTrue(nonEmptyArray.hasArray(5));
-        //Assert.assertFalse(nonEmptyArray.hasArray(4));
-        // TODO uncomment this after it is implemented
+        Assert.assertTrue(nonEmptyArray.hasArray(5));
+        Assert.assertFalse(nonEmptyArray.hasArray(4));
 
         // TODO getX(i) tests
-
 
         Json objectInArray = nonEmptyArray.get(0);
         Assert.assertNotNull(objectInArray);
@@ -170,7 +167,6 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyObject.isString());
         Assert.assertFalse(emptyObject.isArray());
 
-        // TODO test getXxxxOrDefault functions
         Json testObject = testJson.get("testObject");
         Assert.assertTrue(testObject.isDouble("number"));
         Assert.assertTrue(testObject.hasDouble("number"));
@@ -182,6 +178,8 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(testObject.getDouble("number") != 2.0);
         Assert.assertEquals(testObject.getDouble("string", 2.0), 2.0);
         Assert.assertEquals(testObject.getDouble("nothing", 2.0), 2.0);
+        // TODO test getObjectOrDefault, getArrayOrDefault functions
+
 
         Assert.assertTrue(testObject.isLong("number"));
         Assert.assertTrue(testObject.hasLong("number"));
