@@ -13,4 +13,6 @@ public class Jstring extends Json {
     @Override public String getString(){ return value; }
 
     @Override public String toString() { return "\"" + value + "\""; }
+
+    @Override public boolean equals(Object o) { return (o instanceof Json) && ((Jstring)o).getString().equals(value); }
 }
