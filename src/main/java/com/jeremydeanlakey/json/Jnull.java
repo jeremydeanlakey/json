@@ -10,4 +10,6 @@ public class Jnull extends Json {
     @Override public boolean isNull() { return true;}
 
     @Override public String toString() { return "null"; }
+
+    @Override public boolean equals(Object o) { return (o == null) || (o instanceof Jnull); }
 }
