@@ -13,4 +13,6 @@ public class Jboolean extends Json {
     @Override public boolean isBoolean() {return true;}
 
     @Override public String toString() { return String.valueOf(value); }
+
+    @Override public boolean equals(Object o) { return (o instanceof Jboolean) && ((Jboolean)o).getString().equals(value); }
 }
