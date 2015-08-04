@@ -75,4 +75,7 @@ public class Jobject extends Json {
         output.append("}");
         return output.toString();
     }
+
+    private boolean equals(Map<String, Json> values) { return values.equals(map); }
+    @Override public boolean equals(Object o) { return (o instanceof Jobject) && ((Jobject)o).equals(map); }
 }
