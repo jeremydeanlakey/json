@@ -3,6 +3,7 @@ package com.jeremydeanlakey.json;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jeremydeanlakey on 6/23/15.
@@ -57,4 +58,7 @@ public class Jarray extends Json {
         output.append("]");
         return output.toString();
     }
+
+    private boolean equals(List<Json> values) { return values.equals(this.values); }
+    @Override public boolean equals(Object o) { return (o instanceof Jarray) && ((Jarray)o).equals(values); }
 }
