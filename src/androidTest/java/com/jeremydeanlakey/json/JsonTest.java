@@ -108,6 +108,10 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(numbersArray.getLong(2), 0);
         Assert.assertEquals(numbersArray.getLong(3), 1);
         Assert.assertEquals(numbersArray.getLong(4), 2);
+        Json one = numbersArray.get(3);
+        Json two = numbersArray.get(4);
+        Assert.assertTrue(one.equals(ONE));
+        Assert.assertFalse(two.equals(ONE));
     }
 
     public void testString() throws Throwable {
