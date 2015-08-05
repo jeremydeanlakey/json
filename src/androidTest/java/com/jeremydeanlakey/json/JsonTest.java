@@ -36,7 +36,7 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -51,7 +51,8 @@ public class JsonTest extends AndroidTestCase {
         EMPTY_OBJECT = Json.fromJsonObject(jo);
         NULL = new Jnull();
         ONE = new Jnumber(1);
-        STRING = new Jstring("string");
+        STRING = new Jstring("I am a string");
+        DIFFERENT_STRING = new Jstring("different string");
         TRUE = new Jboolean(true);
         FALSE = new Jboolean(false);
     }
@@ -126,6 +127,14 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getString(), "I am a string");
         Assert.assertEquals(target.getString(), testJson.getString("string"));
+        Json string = testJson.get("string");
+        Assert.assertTrue(string.equals(STRING));
+        Assert.assertFalse(string.equals(DIFFERENT_STRING));
+        Assert.assertFalse(string.equals(ONE));
+        Assert.assertFalse(string.equals(EMPTY_ARRAY));
+        Assert.assertFalse(string.equals(EMPTY_OBJECT));
+        Assert.assertFalse(string.equals(NULL));
+        Assert.assertFalse(string.equals(FALSE));
     }
 
     public void testArray() throws Throwable {
