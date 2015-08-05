@@ -88,6 +88,7 @@ public class Json implements Iterable<Json> {
 
     protected Json(){} // Disallow instantiation from outside.
 
+    // TODO work with non-object JSON strings.
     public static Json fromString (String string){
         if (string == null)
             return null;

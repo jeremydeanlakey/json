@@ -36,16 +36,18 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE, NON_EMPTY_ARRAY;
 
     public void setUp() {
-        JSONArray ja = null;
+        JSONArray ja = null, jna = null;
         JSONObject jo = null;
         try {
             ja = new JSONArray("[]");
+            jna = new JSONArray("[{\"contents\": 1}, 2, false, null, \"string\", []]");
             jo = new JSONObject("{}");
         } catch (Exception e) {}
         EMPTY_ARRAY = Json.fromJsonArray(ja);
+        NON_EMPTY_ARRAY = Json.fromJsonArray(jna);
         EMPTY_OBJECT = Json.fromJsonObject(jo);
         NULL = new Jnull();
         ONE = new Jnumber(1);
@@ -129,7 +131,8 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotSame(emptyArray, nonEmptyArray);
         Assert.assertTrue(emptyArray.equals(EMPTY_ARRAY));
         Assert.assertFalse(nonEmptyArray.equals(EMPTY_ARRAY));
-        // TODO add tests for other equals
+        Assert.assertTrue(nonEmptyArray.equals(NON_EMPTY_ARRAY));
+        Assert.assertFalse(emptyArray.equals(NON_EMPTY_ARRAY));
 
         Assert.assertFalse(emptyArray.iterator().hasNext());
         Assert.assertTrue(nonEmptyArray.iterator().hasNext());
@@ -160,6 +163,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(nonEmptyArray.hasString(3));
         Assert.assertTrue(nonEmptyArray.hasArray(5));
         Assert.assertFalse(nonEmptyArray.hasArray(4));
+
 
         // TODO getX(i) tests
 
