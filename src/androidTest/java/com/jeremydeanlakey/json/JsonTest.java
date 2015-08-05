@@ -36,7 +36,7 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -53,6 +53,7 @@ public class JsonTest extends AndroidTestCase {
         ONE = new Jnumber(1);
         STRING = new Jstring("string");
         TRUE = new Jboolean(true);
+        FALSE = new Jboolean(false);
     }
 
     public void testNull() throws Throwable {
@@ -66,7 +67,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertTrue(testJson.isNull("null"));
-        Assert.assertTrue(target.equals(new Jnull()));
+        Assert.assertTrue(target.equals(NULL));
     }
 
     public void testBoolean() throws Throwable {
@@ -80,6 +81,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getBoolean(), false);
+        Assert.assertEquals(target, FALSE);
         Assert.assertEquals(testJson.getBoolean("boolean"), target.getBoolean());
     }
 
