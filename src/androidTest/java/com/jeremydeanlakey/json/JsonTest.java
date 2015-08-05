@@ -119,8 +119,9 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotNull(nonEmptyArray);
 
         Assert.assertNotSame(emptyArray, nonEmptyArray);
-        Assert.assertEquals(emptyArray, EMPTY_ARRAY);
-        Assert.assertNotSame(nonEmptyArray, EMPTY_ARRAY);
+        Assert.assertTrue(emptyArray.equals(EMPTY_ARRAY));
+        Assert.assertFalse(nonEmptyArray.equals(EMPTY_ARRAY));
+        // TODO add tests for other equals
 
         Assert.assertFalse(emptyArray.iterator().hasNext());
         Assert.assertTrue(nonEmptyArray.iterator().hasNext());
