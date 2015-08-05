@@ -2,6 +2,10 @@ package com.jeremydeanlakey.json;
 
 import android.test.AndroidTestCase;
 import junit.framework.Assert;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Set;
 
 /**
@@ -32,6 +36,14 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
+    private Json EMPTY_ARRAY;
+    public void setUp() {
+        JSONArray ja = null;
+        try {
+            ja = new JSONArray("[]");
+        } catch (Exception e) {}
+        EMPTY_ARRAY = Json.fromJsonArray(ja);
+    }
 
     public void testNull() throws Throwable {
         Assert.assertFalse(testJson.isNull());
@@ -105,6 +117,10 @@ public class JsonTest extends AndroidTestCase {
         Json nonEmptyArray = testJson.get("nonEmptyArray");
         Assert.assertNotNull(emptyArray);
         Assert.assertNotNull(nonEmptyArray);
+
+        Assert.assertNotSame(emptyArray, nonEmptyArray);
+        Assert.assertEquals(emptyArray, EMPTY_ARRAY);
+        Assert.assertNotSame(nonEmptyArray, EMPTY_ARRAY);
 
         Assert.assertFalse(emptyArray.iterator().hasNext());
         Assert.assertTrue(nonEmptyArray.iterator().hasNext());
