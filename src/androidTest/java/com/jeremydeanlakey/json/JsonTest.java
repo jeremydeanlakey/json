@@ -90,8 +90,14 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isArray());
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getBoolean(), false);
-        Assert.assertEquals(target, FALSE);
         Assert.assertEquals(testJson.getBoolean("boolean"), target.getBoolean());
+
+        Assert.assertTrue(target.equals(FALSE));
+        Assert.assertFalse(target.equals(NULL));
+        Assert.assertFalse(target.equals(STRING));
+        Assert.assertFalse(target.equals(ONE));
+        Assert.assertFalse(target.equals(EMPTY_ARRAY));
+        Assert.assertFalse(target.equals(EMPTY_OBJECT));
     }
 
     public void testNumber() throws Throwable {
