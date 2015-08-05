@@ -36,13 +36,21 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
-    private Json EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, TRUE;
+
     public void setUp() {
         JSONArray ja = null;
+        JSONObject jo = null;
         try {
             ja = new JSONArray("[]");
+            jo = new JSONObject("{}");
         } catch (Exception e) {}
         EMPTY_ARRAY = Json.fromJsonArray(ja);
+        EMPTY_OBJECT = Json.fromJsonObject(jo);
+        NULL = new Jnull();
+        ONE = new Jnumber(1);
+        STRING = new Jstring("string");
+        TRUE = new Jboolean(true);
     }
 
     public void testNull() throws Throwable {
