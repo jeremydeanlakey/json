@@ -30,7 +30,7 @@ public class JsonTest extends AndroidTestCase {
         +        "\"bool\":\"true\","
         +        "\"null\":null,"
         +        "\"array\":[],"
-        +        "\"object\":{\"key\":1}"
+        +        "\"object\":{}"
         +      "}"
         +    "}";
 
@@ -243,7 +243,10 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(testObject.getDouble("number") != 2.0);
         Assert.assertEquals(testObject.getDouble("string", 2.0), 2.0);
         Assert.assertEquals(testObject.getDouble("nothing", 2.0), 2.0);
-        // TODO test getObjectOrDefault, getArrayOrDefault functions
+        Assert.assertTrue(EMPTY_ARRAY.equals(testObject.getArray("array", null)));
+        Assert.assertFalse(EMPTY_ARRAY.equals(testObject.getArray("not valid key", null)));
+        Assert.assertTrue(EMPTY_OBJECT.equals(testObject.getObject("object", null)));
+        Assert.assertFalse(EMPTY_OBJECT.equals(testObject.getObject("not valid key", null)));
 
         Assert.assertTrue(testObject.isLong("number"));
         Assert.assertTrue(testObject.hasLong("number"));
