@@ -190,18 +190,21 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(nonEmptyArray.hasObject(1));
         Assert.assertTrue(nonEmptyArray.hasLong(1));
         Assert.assertFalse(nonEmptyArray.hasLong(0));
+        Assert.assertEquals(nonEmptyArray.getLong(1), 2);
         Assert.assertTrue(nonEmptyArray.hasDouble(1));
         Assert.assertFalse(nonEmptyArray.hasDouble(0));
+        Assert.assertEquals(nonEmptyArray.getDouble(1), 2.);
         Assert.assertTrue(nonEmptyArray.hasBoolean(2));
         Assert.assertFalse(nonEmptyArray.hasBoolean(1));
+        Assert.assertEquals(nonEmptyArray.getBoolean(2), false);
         Assert.assertTrue(nonEmptyArray.hasNull(3));
         Assert.assertFalse(nonEmptyArray.hasNull(2));
         Assert.assertTrue(nonEmptyArray.hasString(4));
         Assert.assertFalse(nonEmptyArray.hasString(3));
+        Assert.assertEquals(nonEmptyArray.getString(4), "string");
         Assert.assertTrue(nonEmptyArray.hasArray(5));
         Assert.assertFalse(nonEmptyArray.hasArray(4));
-
-        // TODO getX(i) tests
+        Assert.assertEquals(nonEmptyArray.getArray(5), EMPTY_ARRAY);
 
         Json objectInArray = nonEmptyArray.get(0);
         Assert.assertNotNull(objectInArray);
