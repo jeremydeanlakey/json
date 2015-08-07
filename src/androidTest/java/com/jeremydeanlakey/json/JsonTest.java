@@ -307,6 +307,14 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(objectContents.isNumber());
         Assert.assertEquals(objectContents.getLong(), 1);
 
-        // TODO test string functions after they are improved on
+        Assert.assertTrue(emptyObject.equals(EMPTY_OBJECT));
+        Assert.assertFalse(emptyObject.equals(STRING));
+        Assert.assertFalse(emptyObject.equals(DIFFERENT_STRING));
+        Assert.assertFalse(emptyObject.equals(ONE));
+        Assert.assertFalse(emptyObject.equals(EMPTY_ARRAY));
+        Assert.assertFalse(emptyObject.equals(NULL));
+        Assert.assertFalse(emptyObject.equals(FALSE));
     }
+
+    // TODO test string functions after they are improved on
 }
