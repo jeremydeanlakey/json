@@ -243,13 +243,13 @@ public class JsonTest extends AndroidTestCase {
 
         Json testObject = testJson.get("testObject");
         Assert.assertTrue(testObject.isDouble("number"));
-        Assert.assertTrue(testObject.hasDouble("number"));
-        Assert.assertEquals(testObject.getDouble("number"), 1.0);
-        Assert.assertEquals(testObject.getDouble("number", 2.0), 1.0);
         Assert.assertFalse(testObject.isDouble("string"));
-        Assert.assertFalse(testObject.hasDouble("string"));
+        Assert.assertTrue(testObject.hasDouble("number"));
         Assert.assertFalse(testObject.hasDouble("nothing"));
+        Assert.assertFalse(testObject.hasDouble("string"));
+        Assert.assertEquals(testObject.getDouble("number"), 1.0);
         Assert.assertTrue(testObject.getDouble("number") != 2.0);
+        Assert.assertEquals(testObject.getDouble("number", 2.0), 1.0);
         Assert.assertEquals(testObject.getDouble("string", 2.0), 2.0);
         Assert.assertEquals(testObject.getDouble("nothing", 2.0), 2.0);
         Assert.assertTrue(EMPTY_ARRAY.equals(testObject.getArray("array", null)));
@@ -258,40 +258,40 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(EMPTY_OBJECT.equals(testObject.getObject("not valid key", null)));
 
         Assert.assertTrue(testObject.isLong("number"));
-        Assert.assertTrue(testObject.hasLong("number"));
-        Assert.assertEquals(testObject.getLong("number"), 1);
-        Assert.assertEquals(testObject.getLong("number", 2), 1);
         Assert.assertFalse(testObject.isLong("string"));
+        Assert.assertTrue(testObject.hasLong("number"));
         Assert.assertFalse(testObject.hasLong("string"));
         Assert.assertFalse(testObject.hasLong("nothing"));
+        Assert.assertEquals(testObject.getLong("number"), 1);
         Assert.assertTrue(testObject.getLong("number") != 2);
+        Assert.assertEquals(testObject.getLong("number", 2), 1);
         Assert.assertEquals(testObject.getLong("string", 2), 2);
         Assert.assertEquals(testObject.getLong("nothing", 2), 2);
 
         Assert.assertTrue(testObject.isString("string"));
+        Assert.assertFalse(testObject.isString("number"));
         Assert.assertTrue(testObject.hasString("string"));
+        Assert.assertFalse(testObject.hasString("nothing"));
+        Assert.assertFalse(testObject.hasString("number"));
         Assert.assertEquals(testObject.getString("string"), "string");
         Assert.assertEquals(testObject.getString("string", "nothing"), "string");
-        Assert.assertFalse(testObject.isString("number"));
-        Assert.assertFalse(testObject.hasString("number"));
-        Assert.assertFalse(testObject.hasString("nothing"));
         Assert.assertFalse(testObject.getString("string").equals("blah"));
         Assert.assertEquals(testObject.getString("number", "nothing"), "nothing");
         Assert.assertEquals(testObject.getString("nothing", "nothing"), "nothing");
 
 
         Assert.assertTrue(testObject.isBoolean("bool"));
+        Assert.assertFalse(testObject.isBoolean("number"));
+        Assert.assertFalse(testObject.hasBoolean("number"));
         Assert.assertTrue(testObject.hasBoolean("bool"));
         Assert.assertEquals(testObject.getBoolean("bool"), true);
         Assert.assertEquals(testObject.getBoolean("bool", false), true);
-        Assert.assertFalse(testObject.isBoolean("number"));
-        Assert.assertFalse(testObject.hasBoolean("number"));
         Assert.assertEquals(testObject.getBoolean("number", false), false);
         Assert.assertEquals(testObject.getBoolean("nothing", false), false);
 
         Assert.assertTrue(testObject.isNull("null"));
-        Assert.assertTrue(testObject.hasNull("null"));
         Assert.assertFalse(testObject.isNull("string"));
+        Assert.assertTrue(testObject.hasNull("null"));
         Assert.assertFalse(testObject.hasNull("string"));
         Assert.assertTrue(testObject.isArray("array"));
         Assert.assertTrue(testObject.hasArray("array"));
