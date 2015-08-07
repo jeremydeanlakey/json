@@ -147,6 +147,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(target.isObject());
         Assert.assertEquals(target.getString(), "I am a string");
         Assert.assertEquals(target.getString(), testJson.getString("string"));
+
         Json string = testJson.get("string");
         Assert.assertTrue(string.equals(STRING));
         Assert.assertFalse(string.equals(DIFFERENT_STRING));
@@ -210,6 +211,14 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotNull(objectContents);
         Assert.assertTrue(objectContents.isNumber());
         Assert.assertEquals(objectContents.getLong(), 1);
+
+        Assert.assertTrue(emptyArray.equals(EMPTY_ARRAY));
+        Assert.assertFalse(emptyArray.equals(STRING));
+        Assert.assertFalse(emptyArray.equals(DIFFERENT_STRING));
+        Assert.assertFalse(emptyArray.equals(ONE));
+        Assert.assertFalse(emptyArray.equals(EMPTY_OBJECT));
+        Assert.assertFalse(emptyArray.equals(NULL));
+        Assert.assertFalse(emptyArray.equals(FALSE));
     }
 
     public void testObject() throws Throwable {
