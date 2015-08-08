@@ -36,6 +36,7 @@ public class JsonTest extends AndroidTestCase {
 
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
+
     private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
@@ -319,5 +320,9 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyObject.equals(FALSE));
     }
 
-    // TODO test string functions after they are improved on
+    public void testToString() throws Throwable {
+        String testJsonString = testJson.toString();
+        Json testJson2 = Json.fromString(testJsonString);
+        Assert.assertEquals(testJson, testJson2);
+    }
 }
