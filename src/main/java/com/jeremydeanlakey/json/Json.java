@@ -48,15 +48,12 @@ public class Json implements Iterable<Json> {
     public long getLong(String key){throw new RuntimeException("Not an object");}
     public double getDouble(String key){throw new RuntimeException("Not an object");}
     public String getString(String key){throw new RuntimeException("Not an object");}
-    // TODO add tests for these two functions
-    public Json getArray(String key){throw new RuntimeException("Not an object");}
-    public Json getObject(String key){throw new RuntimeException("Not an object");}
 
     public boolean getBoolean(String key, boolean def){throw new RuntimeException("Not an object");}
     public long getLong(String key, long def){throw new RuntimeException("Not an object");}
     public double getDouble(String key, double def){throw new RuntimeException("Not an object");}
     public String getString(String key, String def){throw new RuntimeException("Not an object");}
-    // TODO add tests for these two functions
+    // TODO evaluate if these functions make sense
     public Json getArray(String key, Jarray def){throw new RuntimeException("Not an object");}
     public Json getObject(String key, Jobject def){throw new RuntimeException("Not an object");}
 
@@ -71,11 +68,11 @@ public class Json implements Iterable<Json> {
 
     public Json get(int index){throw new RuntimeException("Not an array");}
 
-    // TODO add tests for these functions
     public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
     public long getLong(int index){throw new RuntimeException("Not an array");}
     public double getDouble(int index){throw new RuntimeException("Not an array");}
     public String getString(int index){throw new RuntimeException("Not an array");}
+    // TODO evaluate if these functions make sense
     public Json getArray(int index){throw new RuntimeException("Not an array");}
     public Json getObject(int index){throw new RuntimeException("Not an array");}
 

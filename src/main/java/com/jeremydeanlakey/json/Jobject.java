@@ -42,8 +42,6 @@ public class Jobject extends Json {
     @Override public long getLong(String key){ return map.get(key).getLong(); }
     @Override public double getDouble(String key){ return map.get(key).getDouble(); }
     @Override public String getString(String key){ return map.get(key).getString(); }
-    @Override public Json getArray(String key){ return map.get(key); }
-    @Override public Json getObject(String key){ return map.get(key); }
 
     @Override public boolean getBoolean(String key, boolean def){ return hasBoolean(key) ? getBoolean(key) : def; }
     @Override public long getLong(String key, long def){ return hasLong(key) ? getLong(key) : def; }
