@@ -26,3 +26,6 @@ if (myJson.hasDouble("key")) {
     doSomethingWithDouble(myJson.getDouble("key"));
 }
 ```
+
+2. For getOrDefault functions (which are called Opt in JSONObject), I just use python style get(key, default).  In my opinion, get(key, default) is easier to read than the Java-style getOrDefault(key, default) and much less confusing than the JSONObject Opt(key, default).
+
