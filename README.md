@@ -27,5 +27,7 @@ if (myJson.hasDouble("key")) {
 }
 ```
 
-2. For getOrDefault functions (which are called Opt in JSONObject), I just use python style get(key, default).  In my opinion, get(key, default) is easier to read than the Java-style getOrDefault(key, default) and much less confusing than the JSONObject Opt(key, default).
+2. I use get(key, default) for getOrDefault functions (which are called Opt in JSONObject).  In my opinion, the JSONObject Opt(key, default) is too confusing.  Arguably, "getOrDefault" is more clear than simply "get", but because I've used Python, the "get" makes sense to me and the getOrDefault gets too verbose when, for example, you need to getBooleanOrDefault.
+
+3. I find easier to handle JSON in a dynamically typed language.  So I made a main class (Json) and subclassed it with different types of values (Jnull, Jobject, Jstring, etc.).  This way, you can fetch a value from an object without knowing what type of value it is.  You can then test the object type with functions like isBoolean() and convert it to a regular value with functions like toBoolean().
 
