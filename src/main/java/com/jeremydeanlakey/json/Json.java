@@ -193,8 +193,4 @@ public class Json implements Iterable<Json> {
 
     // TODO toString().  It's important to do it here if we want it to be efficient.
     // Right now, however, I don't care.
-
-    @Override public boolean equals(Object o) { return (o instanceof Json) ? equals((Json) o) : false; }
-    // TODO implement
-    private boolean equals(Json json) { return false; }
 }
