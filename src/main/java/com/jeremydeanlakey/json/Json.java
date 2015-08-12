@@ -90,15 +90,14 @@ public class Json implements Iterable<Json> {
         if (string == null)
             return null;
         JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(string);
-
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return Json.fromJsonObject(jsonObject);
+        try { jsonObject = new JSONObject(string); } catch (JSONException e) {}
+        if (jsonObject != null)
+            return Json.fromJsonObject(jsonObject);
+        JSONArray jsonArray = null;
+        try { jsonArray = new JSONArray(string); } catch (JSONException e) {}
+        if (jsonArray != null)
+            return Json.fromJsonArray(jsonArray);
+        return null;
     }
 
     public static Json fromJsonObject(JSONObject jsonObject){
