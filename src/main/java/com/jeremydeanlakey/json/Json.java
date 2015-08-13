@@ -190,7 +190,7 @@ public abstract class Json implements Iterable<Json> {
     @Override
     public Iterator<Json> iterator() { throw new RuntimeException("Json.iterator() only supported for arrays or objects"); }
 
-    protected abstract void writeTo(StringBuilder sb);
+    protected abstract void writeTo(StringBuilder builder);
 
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 

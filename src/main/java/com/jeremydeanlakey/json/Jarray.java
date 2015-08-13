@@ -46,17 +46,16 @@ public class Jarray extends Json {
     @Override public Json getObject(int i){ return get(i); }
 
     @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder("[");
+    public void writeTo(StringBuilder builder) {
+        builder.append('[');
         boolean first = true;
         for (Json item: values) {
             if (!first)
-                output.append(",");
+                builder.append(',');
             first = false;
-            output.append(item.toString());
+            item.writeTo(builder);
         }
-        output.append("]");
-        return output.toString();
+        builder.append(']');
     }
 
     private boolean equals(List<Json> values) { return values.equals(this.values); }
