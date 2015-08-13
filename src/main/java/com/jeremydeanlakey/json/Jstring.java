@@ -13,6 +13,7 @@ public class Jstring extends Json {
     @Override public String getString(){ return value; }
 
     @Override public String toString() { return "\"" + value + "\""; }
+    @Override protected void writeTo(StringBuilder builder) { builder.append(value); }
 
     @Override public boolean equals(Object o) { return (o instanceof Jstring) && ((Jstring)o).getString().equals(value); }
 }
