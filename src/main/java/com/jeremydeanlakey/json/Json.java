@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by jeremydeanlakey on 6/22/15.
  */
-public class Json implements Iterable<Json> {
+public abstract class Json implements Iterable<Json> {
     public boolean isNull() {return false;}
     public boolean isBoolean() {return false;}
     public boolean isNumber() {return false;}
@@ -189,6 +189,10 @@ public class Json implements Iterable<Json> {
 
     @Override
     public Iterator<Json> iterator() { throw new RuntimeException("Json.iterator() only supported for arrays or objects"); }
+
+    protected abstract void writeTo(StringBuilder sb);
+
+    @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 
     // TODO toString().  It's important to do it here if we want it to be efficient.
     // Right now, however, I don't care.
