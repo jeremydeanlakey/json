@@ -56,22 +56,20 @@ public class Jobject extends Json {
 
 
     @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("{");
+    public void writeTo(StringBuilder builder) {
+        builder.append('{');
         boolean first = true;
         for (String key: keys()) {
             if (!first)
-                output.append(",");
+                builder.append(',');
             first = false;
-            output.append(QUOTE);
-            output.append(key);
-            output.append(QUOTE);
-            output.append(":");
-            output.append(map.get(key));
+            builder.append(QUOTE);
+            builder.append(key);
+            builder.append(QUOTE);
+            builder.append(':');
+            map.get(key).writeTo(builder);
         }
-        output.append("}");
-        return output.toString();
+        builder.append('}');
     }
 
     private boolean equals(Map<String, Json> values) { return values.equals(map); }
