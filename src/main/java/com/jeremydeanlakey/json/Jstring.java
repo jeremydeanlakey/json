@@ -4,6 +4,7 @@ package com.jeremydeanlakey.json;
  * Created by jeremydeanlakey on 6/22/15.
  */
 public class Jstring extends Json {
+    private static final String QUOTE = "\"";
     private String value;
 
     protected Jstring(String value){ this.value = value; }
@@ -13,7 +14,7 @@ public class Jstring extends Json {
     @Override public String getString(){ return value; }
 
     @Override public String toString() { return "\"" + value + "\""; }
-    @Override protected void writeTo(StringBuilder builder) { builder.append(value); }
+    @Override protected void writeTo(StringBuilder builder) { builder.append(QUOTE).append(value).append(QUOTE); }
 
     @Override public boolean equals(Object o) { return (o instanceof Jstring) && ((Jstring)o).getString().equals(value); }
 }
