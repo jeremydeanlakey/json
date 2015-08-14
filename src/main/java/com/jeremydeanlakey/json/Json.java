@@ -193,7 +193,4 @@ public abstract class Json implements Iterable<Json> {
     protected abstract void writeTo(StringBuilder builder);
 
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
-
-    // TODO toString().  It's important to do it here if we want it to be efficient.
-    // Right now, however, I don't care.
 }
