@@ -14,6 +14,8 @@ public class Jparser {
     private char peek() { return src.charAt(loc); }
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return peek() == ' '; } // TODO add other whitespace chars
+    private boolean sQuote() { return peek() == '\''; }
+
 
     private void skipWhite() { while (!done() && white()) loc++; }
     private Json getJson() {
