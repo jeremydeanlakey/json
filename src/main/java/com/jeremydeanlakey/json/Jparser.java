@@ -11,10 +11,14 @@ public class Jparser {
 
     public Jparser(String src) { this.src = src; }
 
+    private char peek() { return src.charAt(loc); }
     private boolean done() { return loc >= src.length(); }
-    private boolean white() { return src.charAt(loc) == ' '; } // TODO add other whitespace chars
+    private boolean white() { return peek() == ' '; } // TODO add other whitespace chars
+
     private void skipWhite() { while (!done() && white()) loc++; }
     private Json getJson() {
+        if (src == null) return null;
+        skipWhite();
         return null;
     } // TODO
 }
