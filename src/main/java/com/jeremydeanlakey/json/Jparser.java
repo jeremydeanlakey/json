@@ -12,6 +12,7 @@ public class Jparser {
     public Jparser(String src) { this.src = src; }
 
     private boolean done() { return loc >= src.length(); }
+    private boolean white() { return src.charAt(loc) == ' '; } // TODO add other whitespace chars
     private Json getJson() {
         return null;
     } // TODO
