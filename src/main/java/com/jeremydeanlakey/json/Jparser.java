@@ -16,7 +16,8 @@ public class Jparser {
     private boolean white() { return peek() == ' '; } // TODO add other whitespace chars
     private boolean sQuote() { return peek() == '\''; }
     private boolean dQuote() { return peek() == '\"'; }
-    private boolean comma() { return peek() == ':'; }
+    private boolean comma() { return peek() == ','; }
+    private boolean colon() { return peek() == ':'; }
 
     private void skipWhite() { while (!done() && white()) loc++; }
     private Json getJson() {
