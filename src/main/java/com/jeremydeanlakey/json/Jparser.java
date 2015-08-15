@@ -5,14 +5,13 @@ package com.jeremydeanlakey.json;
  */
 public class Jparser {
     String src;
-    int location = 0;
+    int loc = 0;
 
     public static Json stringToJson(String src) { return (new Jparser(src)).getJson(); }
 
     public Jparser(String src) { this.src = src; }
 
-    private boolean done() { return location >= src.length(); }
-
+    private boolean done() { return loc >= src.length(); }
     private Json getJson() {
         return null;
     } // TODO
