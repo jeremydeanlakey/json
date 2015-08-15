@@ -11,5 +11,9 @@ public class Jparser {
 
     public Jparser(String src) { this.src = src; }
 
-    public Json getJson() { return null; } // TODO
+    private boolean done() { return location >= src.length(); }
+
+    private Json getJson() {
+        return null;
+    } // TODO
 }
