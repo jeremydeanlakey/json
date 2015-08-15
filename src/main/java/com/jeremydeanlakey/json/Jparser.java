@@ -13,6 +13,7 @@ public class Jparser {
 
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return src.charAt(loc) == ' '; } // TODO add other whitespace chars
+    private void skipWhite() { while (!done() && white()) loc++; }
     private Json getJson() {
         return null;
     } // TODO
