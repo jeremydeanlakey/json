@@ -24,10 +24,18 @@ public class Jparser {
     private boolean objectClose() { return peek() == '}'; }
 
     private void skipWhite() { while (!done() && white()) loc++; }
+    private void skipColon() {  } // TODO
+    private void skipComma() {  } // TODO
+
+    private double getNumber() { return 0; } // TODO
+    private String getString() { return null; } // TODO
+    private Json getItem() { return null; } // TODO
 
     private Json getJson() {
         if (src == null) return null;
+        Json item = getItem();
         skipWhite();
-        return null;
+        if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc);
+        return item;
     } // TODO
 }
