@@ -18,8 +18,10 @@ public class Jparser {
     private boolean dQuote() { return peek() == '\"'; }
     private boolean comma() { return peek() == ','; }
     private boolean colon() { return peek() == ':'; }
-    private boolean braceOpen() { return peek() == '['; }
-    private boolean braceClose() { return peek() == ']'; }
+    private boolean arrayOpen() { return peek() == '['; }
+    private boolean arrayClose() { return peek() == ']'; }
+    private boolean objectOpen() { return peek() == '{'; }
+    private boolean objectClose() { return peek() == '}'; }
 
     private void skipWhite() { while (!done() && white()) loc++; }
 
