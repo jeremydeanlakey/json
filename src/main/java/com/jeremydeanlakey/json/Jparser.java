@@ -12,6 +12,7 @@ public class Jparser {
     public Jparser(String src) { this.src = src; }
 
     private char peek() { return src.charAt(loc); }
+    private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return peek() == ' '; } // TODO add other whitespace chars
     private boolean sQuote() { return peek() == '\''; }
