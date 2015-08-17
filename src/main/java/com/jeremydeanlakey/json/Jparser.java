@@ -1,5 +1,7 @@
 package com.jeremydeanlakey.json;
 
+import java.io.EOFException;
+
 /**
  * Created by jeremydeanlakey on 8/15/15.
  */
@@ -25,6 +27,8 @@ public class Jparser {
     private boolean objectOpen() { return peek() == '{'; }
     private boolean objectClose() { return peek() == '}'; }
 
+    private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
+    private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
     private void skipWhite() { while (!done() && white()) loc++; }
     private void skipColon() { skipWhite(); assert(!done() && next() == ':'); }
     private void skipComma() {  } // TODO
