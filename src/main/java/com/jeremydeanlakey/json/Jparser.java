@@ -26,7 +26,7 @@ public class Jparser {
     private boolean objectClose() { return peek() == '}'; }
 
     private void skipWhite() { while (!done() && white()) loc++; }
-    private void skipColon() {  } // TODO
+    private void skipColon() { skipWhite(); assert(!done() && next() == ':'); }
     private void skipComma() {  } // TODO
 
     private double getNumber() { return 0; } // TODO
