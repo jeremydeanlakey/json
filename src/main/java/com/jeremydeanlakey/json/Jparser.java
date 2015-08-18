@@ -41,12 +41,12 @@ public class Jparser {
     private Json getItem() {
         /*
         skipWhite();
-        if (peekObject()) return getObject();
-        if (peekArray()) return getArray();
-        if (peekString()) return getString();
-        if (peekNumber()) return getNumber();
-        if (peekBoolean()) return getBoolean();
-        if (peekNull()) return getNull();
+        if (peekObject()) return getJobject();
+        if (peekArray()) return getJarray();
+        if (peekString()) return getJstring();
+        if (peekNumber()) return getJnumber();
+        if (peekBoolean()) return getJbool();
+        if (peekNull()) return getJnull();
         */
         return null;
     }
