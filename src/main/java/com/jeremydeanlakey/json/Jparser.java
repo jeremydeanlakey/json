@@ -14,9 +14,11 @@ public class Jparser {
     public Jparser(String src) { this.src = src; }
 
     private char peek() { return src.charAt(loc); }
+    private boolean peek(char c) { return !done() && (peek() == c); }
     private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
-    private boolean white() { return peek() == ' '; } // TODO add other whitespace chars
+    private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
+    private boolean white() { return isWhiteSpaceChar(peek()); }
     private boolean sQuote() { return peek() == '\''; }
     private boolean dQuote() { return peek() == '\"'; }
     private boolean quote() { return dQuote() || sQuote(); }
