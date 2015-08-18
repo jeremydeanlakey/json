@@ -30,8 +30,8 @@ public class Jparser {
     private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
     private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
     private void skipWhite() { while (!done() && white()) loc++; }
-    private void skipColon() { skipWhite(); assert(!done() && next() == ':'); }
-    private void skipComma() {  } // TODO
+    private void skipColon() { skipWhite(); requireNotDone(':'); requireNext(':'); }
+    private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
     private double getNumber() { return 0; } // TODO
     private String getString() { return null; } // TODO
