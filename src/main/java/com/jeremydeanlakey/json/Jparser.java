@@ -52,10 +52,11 @@ public class Jparser {
     }
 
     private Json getJson() {
-        if (src == null) return null;
+        if (src == null)
+            return null;
         Json item = getItem();
         skipWhite();
         requireDone();
         return item;
-    } // TODO
+    }
 }
