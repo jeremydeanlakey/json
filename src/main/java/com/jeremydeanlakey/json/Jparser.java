@@ -38,7 +38,18 @@ public class Jparser {
 
     private double getNumber() { return 0; } // TODO
     private String getString() { return null; } // TODO
-    private Json getItem() { return null; } // TODO
+    private Json getItem() {
+        /*
+        skipWhite();
+        if (peekObject()) return getObject();
+        if (peekArray()) return getArray();
+        if (peekString()) return getString();
+        if (peekNumber()) return getNumber();
+        if (peekBoolean()) return getBoolean();
+        if (peekNull()) return getNull();
+        */
+        return null;
+    }
 
     private Json getJson() {
         if (src == null) return null;
