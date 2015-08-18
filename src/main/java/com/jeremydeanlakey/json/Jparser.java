@@ -1,5 +1,7 @@
 package com.jeremydeanlakey.json;
 
+import android.util.Pair;
+
 import java.io.EOFException;
 
 /**
@@ -37,11 +39,27 @@ public class Jparser {
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
     private double getNumber() { return 0; } // TODO
-    private String getString() { return null; } // TODO
+    private String getString() { skipWhite(); return null; } // TODO
+
+    private Pair<String, Json> getKeyValue() { return null; }
+    private Json getJobject() {
+        Jobject object = new Jobject();
+        skipWhite();
+        requireNext('{');
+        Pair<String, Json> keyValue = getKeyValue();
+        while (keyValue != null) {
+            object.put(keyValue.first, keyValue.second);
+            keyValue = getKeyValue();
+        }
+        skipWhite();
+        requireNext('}');
+        return object;
+    }
+
     private Json getItem() {
         /*
         skipWhite();
-        if (peekObject()) return getJobject();
+        if (peek('{')) return getJobject();
         if (peekArray()) return getJarray();
         if (peekString()) return getJstring();
         if (peekNumber()) return getJnumber();
