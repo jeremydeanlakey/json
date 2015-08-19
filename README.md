@@ -2,6 +2,19 @@
 
 A library to make it easier for me to deal with json in Android. The style is optimized to my preferences, and not necessarily common best practices.
 
+Some usage examples:
+
+Json example = new Json("{\"a\" : [0,1,2], \"b\": true}");
+example.has("c"); // false
+example.hasArray("a"); // true
+for (Json item: json.get("a")) {
+    print(item.getLong());
+}
+Json nothing = null;
+Json.isObject(nothing); // false
+Json.isObject(example); // true
+
+
 Here are some key differences in this library vs JSONObject:
 
 1 -  To avoid try-catch blocks, I throw RuntimeExceptions.  To keep code safe, you must have an if-statement before each dangerous method call.  As a personal preference, I find an if-statements to be more pleasant than try-catch.
