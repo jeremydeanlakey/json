@@ -4,16 +4,18 @@ A library to make it easier for me to deal with json in Android. The style is op
 
 Some usage examples:
 
+```
 Json example = new Json("{\"a\" : [0,1,2], \"b\": true}");
-example.has("c"); // false
-example.hasArray("a"); // true
+example.has("c");               // false
+example.hasArray("a");          // true
 for (Json item: json.get("a")) {
-    print(item.getLong());
+    item.getLong();             // 0, 1, 2
+    item.toString();            // "0", "1", "2"
 }
 Json nothing = null;
-Json.isObject(nothing); // false
-Json.isObject(example); // true
-
+Json.isObject(nothing);         // false
+Json.isObject(example);         // true
+```
 
 Here are some key differences in this library vs JSONObject:
 
