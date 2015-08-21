@@ -8,7 +8,8 @@ Some usage examples:
 Json example = new Json("{\"a\" : [0,1,2], \"b\": true}");
 example.has("c");               // false
 example.hasArray("a");          // true
-for (Json item: json.get("a")) {
+Json array = json.get("a", null); // get or default
+for (Json item: array) {
     item.getLong();             // 0, 1, 2
     item.toString();            // "0", "1", "2"
 }
