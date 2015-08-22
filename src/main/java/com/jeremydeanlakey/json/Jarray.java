@@ -9,14 +9,13 @@ import java.util.Map;
  * Created by jeremydeanlakey on 6/23/15.
  */
 public class Jarray extends Json {
-    private static String REMOVE_ERROR = "Remove is not permitted on JarrayIterator";
     private List<Json> values;
 
     class JarrayIterator implements Iterator<Json> {
         private int i = 0;
         @Override public boolean hasNext() { return i < values.size(); }
         @Override public Json next() { return values.get(i++); }
-        @Override public void remove() { throw new RuntimeException(REMOVE_ERROR); }
+        @Override public void remove() { throw new RuntimeException("JarrayIterator.remove() Not implemented"); }
     }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
