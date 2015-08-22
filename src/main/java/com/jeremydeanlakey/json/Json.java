@@ -84,6 +84,8 @@ public abstract class Json implements Iterable<Json> {
 
 
     protected Json(){} // Disallow instantiation from outside.
+    
+    public static Json newObject() { return new Jobject(); }
 
     // TODO work with non-object JSON strings.
     public static Json fromString (String string){
