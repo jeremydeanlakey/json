@@ -57,6 +57,7 @@ public abstract class Json implements Iterable<Json> {
     public Json getArray(String key, Jarray def){throw new RuntimeException("Not an object");}
     public Json getObject(String key, Jobject def){throw new RuntimeException("Not an object");}
 
+    public void update(Json json){throw new RuntimeException("Not an object");}
 
     public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
     public boolean hasBoolean(int index){throw new RuntimeException("Not an array");}
