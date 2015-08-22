@@ -54,11 +54,11 @@ public class Jobject extends Json {
     @Override public Set<String> keys() { return map.keySet(); }
     @Override public void put(String key, Json value){map.put(key, value);}
 
-    @Override public void update(Json json) {
-        if (!Json.isObject(json))
+    @Override public void update(Json object) {
+        if (!Json.isObject(object))
             throw new RuntimeException("update(Json) requires an object as argument");
-        for (String key: json.keys())
-            put(key, json.get(key));
+        for (String key: object.keys())
+            put(key, object.get(key));
     }
 
     @Override
