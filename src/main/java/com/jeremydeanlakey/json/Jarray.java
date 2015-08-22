@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by jeremydeanlakey on 6/23/15.
  */
 public class Jarray extends Json {
-    private static String REMOVE_ERROR = "Remove is not permitted as Json is intended to be immutable.";
+    private static String REMOVE_ERROR = "Remove is not permitted on JarrayIterator";
     private List<Json> values;
 
     class JarrayIterator implements Iterator<Json> {
