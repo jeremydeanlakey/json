@@ -45,6 +45,24 @@ public class Jparser {
     private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
 
+    private Json getUnknownAlphanumeric() {
+        skipWhite();
+        int start = loc;
+        char c = peek();
+        while (!done() && !isPermissibleNameChar(next())) {}
+        String value = src.substring(start, loc-1);
+        switch(value.toLowerCase()) {
+            case "true":
+                return new Jboolean(true);
+            case "false":
+                return new Jboolean(false);
+            case "null":
+                return new Jnull();
+            default:
+                return new Jstring(value);
+        }
+    }
+
     private String getString() {
         skipWhite();
         requireQuote();
