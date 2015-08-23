@@ -50,6 +50,9 @@ public class Jparser {
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
             keyValue = getKeyValue();
+            skipWhite();
+            if (peek('}')) break;
+            requireNext(',');
         }
         skipWhite();
         requireNext('}');
