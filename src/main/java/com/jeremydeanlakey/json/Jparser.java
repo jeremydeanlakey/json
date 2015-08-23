@@ -41,7 +41,13 @@ public class Jparser {
     private double getNumber() { return 0; } // TODO
     private String getString() { skipWhite(); return null; } // TODO
 
-    private Pair<String, Json> getKeyValue() { return null; }
+    private Pair<String, Json> getKeyValue() {
+        String key = getString();
+        skipWhite();
+        requireNext(':');
+        Json value = getItem();
+        return new Pair(key, value);
+    }
 
     private Json getJobject() {
         Jobject object = new Jobject();
