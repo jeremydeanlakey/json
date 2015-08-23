@@ -42,6 +42,9 @@ public class Jparser {
 
     private double getNumber() { return 0; } // TODO
 
+    private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
+
+
     private String getString() {
         skipWhite();
         requireQuote();
