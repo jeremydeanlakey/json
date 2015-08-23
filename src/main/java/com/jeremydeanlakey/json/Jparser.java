@@ -32,6 +32,7 @@ public class Jparser {
     private boolean objectClose() { return peek() == '}'; }
 
     private void requireDone() { if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc); }
+    private void requireQuote() { if (!quote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
     private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
     private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
     private void skipWhite() { while (!done() && white()) loc++; }
@@ -39,7 +40,14 @@ public class Jparser {
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
     private double getNumber() { return 0; } // TODO
-    private String getString() { skipWhite(); return null; } // TODO
+    private String getString() {
+        skipWhite();
+        requireQuote();
+        char c = next();
+        int start = loc;
+        while (next() != c) {}
+        return src.substring(start, loc-1);
+    }
 
     private Pair<String, Json> getKeyValue() {
         String key = getString();
