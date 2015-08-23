@@ -17,6 +17,7 @@ public class Jparser {
 
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
+    private boolean peekLetter() { return Character.isAlphabetic(peek());}
     private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
@@ -40,6 +41,7 @@ public class Jparser {
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
     private double getNumber() { return 0; } // TODO
+
     private String getString() {
         skipWhite();
         requireQuote();
