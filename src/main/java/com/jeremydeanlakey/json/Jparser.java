@@ -42,6 +42,7 @@ public class Jparser {
     private String getString() { skipWhite(); return null; } // TODO
 
     private Pair<String, Json> getKeyValue() { return null; }
+
     private Json getJobject() {
         Jobject object = new Jobject();
         skipWhite();
@@ -59,11 +60,27 @@ public class Jparser {
         return object;
     }
 
+    private Json getJarray() {
+        Jarray array = new Jarray();
+        skipWhite();
+        requireNext('[');
+        skipWhite();
+        while (!peek(']')) {
+            array.add(getItem());
+            skipWhite();
+            if (peek(']')) break;
+            requireNext(',');
+        }
+        skipWhite();
+        requireNext(']');
+        return array;
+    }
+
     private Json getItem() {
         /*
         skipWhite();
         if (peek('{')) return getJobject();
-        if (peekArray()) return getJarray();
+        if (peek('[')) return getJarray();
         if (peekString()) return getJstring();
         if (peekNumber()) return getJnumber();
         if (peekBoolean()) return getJbool();
