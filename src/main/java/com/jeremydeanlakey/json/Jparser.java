@@ -18,7 +18,8 @@ public class Jparser {
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
     private boolean peekLetter() { return Character.isAlphabetic(peek());}
-    private boolean peekNumber() { return true; } // TODO
+    private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
+    private boolean peekNumber() { return isNumberStart(peek()); } // TODO
     private boolean peekAlphanumeric() { return true; } // TODO
     private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
