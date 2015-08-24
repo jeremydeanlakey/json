@@ -72,6 +72,10 @@ public class Jparser {
         return src.substring(start, loc-1);
     }
 
+    private Jstring getJstring() {
+        return new Jstring(getString());
+    }
+
     private Pair<String, Json> getKeyValue() {
         String key = getString();
         skipWhite();
@@ -114,10 +118,11 @@ public class Jparser {
     }
 
     private Json getItem() {
-        /*
         skipWhite();
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
+        if (quote()) return getJstring();
+        /*
         if (peekString()) return getJstring();
         if (peekNumber()) return getJnumber();
         if (peekBoolean()) return getJbool();
