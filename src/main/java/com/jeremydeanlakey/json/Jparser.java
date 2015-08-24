@@ -18,6 +18,8 @@ public class Jparser {
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
     private boolean peekLetter() { return Character.isAlphabetic(peek());}
+    private boolean peekNumber() { return true; } // TODO
+    private boolean peekAlphanumeric() { return true; } // TODO
     private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
@@ -72,8 +74,12 @@ public class Jparser {
         return src.substring(start, loc-1);
     }
 
-    private Jstring getJstring() {
+    private Json getJstring() {
         return new Jstring(getString());
+    }
+
+    private Json getJnumber() {
+        return null;
     }
 
     private Pair<String, Json> getKeyValue() {
@@ -122,12 +128,8 @@ public class Jparser {
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
         if (quote()) return getJstring();
-        /*
-        if (peekString()) return getJstring();
         if (peekNumber()) return getJnumber();
-        if (peekBoolean()) return getJbool();
-        if (peekNull()) return getJnull();
-        */
+        if (peekAlphanumeric()) return getUnknownAlphanumeric();
         return null;
     }
 
