@@ -19,8 +19,8 @@ public class Jparser {
     private boolean peek(char c) { return !done() && (peek() == c); }
     private boolean peekLetter() { return Character.isAlphabetic(peek());}
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
-    private boolean peekNumber() { return isNumberStart(peek()); } // TODO
-    private boolean peekAlphanumeric() { return true; } // TODO
+    private boolean peekNumber() { return isNumberStart(peek()); }
+    private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
     private char next() { return src.charAt(++loc); }
     private boolean done() { return loc >= src.length(); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
