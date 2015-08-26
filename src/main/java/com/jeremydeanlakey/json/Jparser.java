@@ -43,7 +43,20 @@ public class Jparser {
     private void skipColon() { skipWhite(); requireNotDone(':'); requireNext(':'); }
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
-    private double getNumber() { return 0; } // TODO
+    private void allowMinus() { if (!done() && peek('-')) next(); }
+    private double getNumber() {
+        /*
+        int start = loc;
+        allowMinus();
+        requireZeroOrDigits();
+        allowDecimalAndDigits();
+        allowStandardForm(); // requireE, allowSign, requireAtLeastOneDigit,
+        requireNumberDone();
+        String number = src.substring(start, loc);
+        return Double.valueOf(number);
+        */
+        return 0;
+    }
 
     private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
@@ -80,7 +93,7 @@ public class Jparser {
     }
 
     private Json getJnumber() {
-        return null;
+        return null; // TODO
     }
 
     private Pair<String, Json> getKeyValue() {
