@@ -64,18 +64,19 @@ public class Jparser {
     }
 
     private void allowMinus() { if (!done() && peek('-')) next(); }
+
+    private void allowStandardForm() {} // TODO
+    private void requireNumberDone() {} // TODO
+
     private double getNumber() {
         int start = loc;
         allowMinus();
         requireZeroOrDigits();
         allowDecimalAndDigits();
-        /*
         allowStandardForm(); // requireE, allowSign, requireAtLeastOneDigit,
         requireNumberDone();
         String number = src.substring(start, loc);
         return Double.valueOf(number);
-        */
-        return 0;
     }
 
     private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
