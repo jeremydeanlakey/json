@@ -43,22 +43,33 @@ public class Jparser {
     private void skipColon() { skipWhite(); requireNotDone(':'); requireNext(':'); }
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
-    private boolean peek0to9() { return (peek() >= '0') && (peek() <= '9'); }
+    private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
 
     private void requireZeroOrDigits() {
         if (peek('0')) {
             next(); return;
         }
-        while (peek0to9()) next();
+        if (!peek1to9()) return; // TODO throw error
+        while (peekDigit()) next();
+    }
+
+    private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
+
+    private void allowDecimalAndDigits() {
+        if (!peek('.'))
+            return;
+        next();
+        while (peekDigit())
+            next();
     }
 
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private double getNumber() {
-        /*
         int start = loc;
         allowMinus();
         requireZeroOrDigits();
         allowDecimalAndDigits();
+        /*
         allowStandardForm(); // requireE, allowSign, requireAtLeastOneDigit,
         requireNumberDone();
         String number = src.substring(start, loc);
