@@ -43,6 +43,15 @@ public class Jparser {
     private void skipColon() { skipWhite(); requireNotDone(':'); requireNext(':'); }
     private void skipComma() { skipWhite(); requireNotDone(','); requireNext(','); }
 
+    private boolean peek0to9() { return (peek() >= '0') && (peek() <= '9'); }
+
+    private void requireZeroOrDigits() {
+        if (peek('0')) {
+            next(); return;
+        }
+        while (peek0to9()) next();
+    }
+
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private double getNumber() {
         /*
