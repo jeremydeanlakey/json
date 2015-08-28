@@ -15,7 +15,7 @@ public class Jarray extends Json {
         private int i = 0;
         @Override public boolean hasNext() { return i < values.size(); }
         @Override public Json next() { return values.get(i++); }
-        @Override public void remove() { throw new RuntimeException("JarrayIterator.remove() Not implemented"); }
+        @Override public void remove() { values.remove(i); i--; } // TODO add tests
     }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }

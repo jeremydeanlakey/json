@@ -6,8 +6,8 @@ import android.util.Pair;
  * Created by jeremydeanlakey on 8/15/15.
  */
 public class Jparser {
-    String src;
-    int loc = 0;
+    private static final String END = "END";
+    private static final String NOT_END = "NOT END";
 
     public class JsonException extends RuntimeException {
         JsonException(char expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
@@ -16,8 +16,9 @@ public class Jparser {
         JsonException(String expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
     }
 
-    private static final String END = "END";
 
+    String src;
+    int loc = 0;
 
     public static Json stringToJson(String src) { return (new Jparser(src)).getJson(); }
 
