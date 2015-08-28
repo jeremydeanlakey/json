@@ -31,9 +31,10 @@ public class Jparser {
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
 
+    private void requireNotDone() { if (done()) throw new RuntimeException(); } // TODO throw better exception
     private void requireDone() { if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc); }
     private void requireQuote() { if (!peekQuote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
-    private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
+    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
     private void requireNumberDone() {} // TODO
     private void requireZeroOrDigits() {
         if (peek('0')) {
@@ -105,7 +106,7 @@ public class Jparser {
     private Pair<String, Json> getKeyValue() {
         String key = getString();
         allowWhiteSpace();
-        requireNext(':');
+        require(':');
         Json value = getItem();
         return new Pair(key, value);
     }
@@ -113,33 +114,33 @@ public class Jparser {
     private Json getJobject() {
         Jobject object = new Jobject();
         allowWhiteSpace();
-        requireNext('{');
+        require('{');
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
             keyValue = getKeyValue();
             allowWhiteSpace();
             if (peek('}')) break;
-            requireNext(',');
+            require(',');
         }
         allowWhiteSpace();
-        requireNext('}');
+        require('}');
         return object;
     }
 
     private Json getJarray() {
         Jarray array = new Jarray();
         allowWhiteSpace();
-        requireNext('[');
+        require('[');
         allowWhiteSpace();
         while (!peek(']')) {
             array.add(getItem());
             allowWhiteSpace();
             if (peek(']')) break;
-            requireNext(',');
+            require(',');
         }
         allowWhiteSpace();
-        requireNext(']');
+        require(']');
         return array;
     }
 
