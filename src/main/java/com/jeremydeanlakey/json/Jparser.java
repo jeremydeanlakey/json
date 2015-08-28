@@ -37,9 +37,9 @@ public class Jparser {
     private void requireQuote() { if (!quote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
     private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
     private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
-    private void allowWhite() { while (!done() && white()) loc++; }
-    private void skipColon() { allowWhite(); requireNotDone(':'); requireNext(':'); }
-    private void skipComma() { allowWhite(); requireNotDone(','); requireNext(','); }
+    private void allowWhiteSpace() { while (!done() && white()) loc++; }
+    private void skipColon() { allowWhiteSpace(); requireNotDone(':'); requireNext(':'); }
+    private void skipComma() { allowWhiteSpace(); requireNotDone(','); requireNext(','); }
 
     private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
 
@@ -81,7 +81,7 @@ public class Jparser {
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
 
     private Json getUnknownAlphanumeric() {
-        allowWhite();
+        allowWhiteSpace();
         int start = loc;
         char c = peek();
         while (!done() && !isPermissibleNameChar(next())) {}
@@ -99,7 +99,7 @@ public class Jparser {
     }
 
     private String getString() {
-        allowWhite();
+        allowWhiteSpace();
         requireQuote();
         char c = next();
         int start = loc;
@@ -117,7 +117,7 @@ public class Jparser {
 
     private Pair<String, Json> getKeyValue() {
         String key = getString();
-        allowWhite();
+        allowWhiteSpace();
         requireNext(':');
         Json value = getItem();
         return new Pair(key, value);
@@ -125,39 +125,39 @@ public class Jparser {
 
     private Json getJobject() {
         Jobject object = new Jobject();
-        allowWhite();
+        allowWhiteSpace();
         requireNext('{');
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
             keyValue = getKeyValue();
-            allowWhite();
+            allowWhiteSpace();
             if (peek('}')) break;
             requireNext(',');
         }
-        allowWhite();
+        allowWhiteSpace();
         requireNext('}');
         return object;
     }
 
     private Json getJarray() {
         Jarray array = new Jarray();
-        allowWhite();
+        allowWhiteSpace();
         requireNext('[');
-        allowWhite();
+        allowWhiteSpace();
         while (!peek(']')) {
             array.add(getItem());
-            allowWhite();
+            allowWhiteSpace();
             if (peek(']')) break;
             requireNext(',');
         }
-        allowWhite();
+        allowWhiteSpace();
         requireNext(']');
         return array;
     }
 
     private Json getItem() {
-        allowWhite();
+        allowWhiteSpace();
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
         if (quote()) return getJstring();
@@ -170,7 +170,7 @@ public class Jparser {
         if (src == null)
             return null;
         Json item = getItem();
-        allowWhite();
+        allowWhiteSpace();
         requireDone();
         return item;
     }
