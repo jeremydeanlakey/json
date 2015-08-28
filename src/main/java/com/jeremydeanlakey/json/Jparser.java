@@ -9,6 +9,16 @@ public class Jparser {
     String src;
     int loc = 0;
 
+    public class JsonException extends RuntimeException {
+        JsonException(char expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
+        JsonException(String expected, String actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
+        JsonException(char expected, String actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
+        JsonException(String expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
+    }
+
+    private static final String END = "END";
+
+
     public static Json stringToJson(String src) { return (new Jparser(src)).getJson(); }
 
     public Jparser(String src) { this.src = src; }
@@ -31,11 +41,12 @@ public class Jparser {
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
 
-    private void requireNotDone() { if (done()) throw new RuntimeException(); } // TODO throw better exception
-    private void requireDone() { if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc); }
-    private void requireQuote() { if (!peekQuote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
-    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
+    private void requireNotDone() { if (done()) throw new JsonException("Anything but end of String", END); }
+    private void requireDone() { if (!done()) throw new JsonException(END, peek()); }
+    private void requireQuote() { if (!peekQuote()) throw new JsonException("\" or \'",  peek()); }
+    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new JsonException(c, n); }
     private void requireNumberDone() {} // TODO
+    private void requireDigitsNotStartingZero() {} // TODO
     private void requireZeroOrDigits() {
         if (peek('0')) {
             next(); return;
