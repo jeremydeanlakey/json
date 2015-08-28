@@ -23,9 +23,7 @@ public class Jparser {
     private boolean done() { return loc >= src.length(); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
     private boolean white() { return isWhiteSpaceChar(peek()); }
-    private boolean sQuote() { return peek() == '\''; }
-    private boolean dQuote() { return peek() == '\"'; }
-    private boolean quote() { return dQuote() || sQuote(); }
+    private boolean peekQuote() { return peek('\'') || peek('\"'); }
     private boolean comma() { return peek() == ','; }
     private boolean colon() { return peek() == ':'; }
     private boolean arrayOpen() { return peek() == '['; }
@@ -34,7 +32,7 @@ public class Jparser {
     private boolean objectClose() { return peek() == '}'; }
 
     private void requireDone() { if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc); }
-    private void requireQuote() { if (!quote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
+    private void requireQuote() { if (!peekQuote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
     private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
     private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
     private void allowWhiteSpace() { while (!done() && white()) loc++; }
@@ -160,7 +158,7 @@ public class Jparser {
         allowWhiteSpace();
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
-        if (quote()) return getJstring();
+        if (peekQuote()) return getJstring();
         if (peekNumber()) return getJnumber();
         if (peekAlphanumeric()) return getUnknownAlphanumeric();
         return null;
