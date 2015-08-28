@@ -13,34 +13,28 @@ public class Jparser {
 
     public Jparser(String src) { this.src = src; }
 
+    private char next() { return src.charAt(++loc); }
+
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
-    private boolean peekLetter() { return Character.isAlphabetic(peek());}
-    private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
     private boolean peekNumber() { return isNumberStart(peek()); }
     private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
-    private char next() { return src.charAt(++loc); }
-    private boolean done() { return loc >= src.length(); }
-    private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
-    private boolean white() { return isWhiteSpaceChar(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
-    private boolean comma() { return peek() == ','; }
-    private boolean colon() { return peek() == ':'; }
-    private boolean arrayOpen() { return peek() == '['; }
-    private boolean arrayClose() { return peek() == ']'; }
-    private boolean objectOpen() { return peek() == '{'; }
-    private boolean objectClose() { return peek() == '}'; }
+    private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
+    private boolean peekLetter() { return Character.isAlphabetic(peek());}
+    private boolean done() { return loc >= src.length(); }
+    private boolean white() { return isWhiteSpaceChar(peek()); }
+    private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
+
+    private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
+    private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
+    private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
+    private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
 
     private void requireDone() { if (!done()) throw new RuntimeException("Expected end of string, but got " + peek() + " at " + loc); }
     private void requireQuote() { if (!peekQuote()) throw new RuntimeException("Expected \" or \', but got " + peek() + " at " + loc); }
-    private void requireNotDone(char c) { if (done()) throw new RuntimeException("End of string but xpected " + c); }
     private void requireNext(char c) { char n = next(); if (n != c) throw new RuntimeException(n + " but expected " + c); }
-    private void allowWhiteSpace() { while (!done() && white()) loc++; }
-    private void skipColon() { allowWhiteSpace(); requireNotDone(':'); requireNext(':'); }
-    private void skipComma() { allowWhiteSpace(); requireNotDone(','); requireNext(','); }
-
-    private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
-
+    private void requireNumberDone() {} // TODO
     private void requireZeroOrDigits() {
         if (peek('0')) {
             next(); return;
@@ -49,8 +43,9 @@ public class Jparser {
         while (peekDigit()) next();
     }
 
-    private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
-
+    private void allowWhiteSpace() { while (!done() && white()) loc++; }
+    private void allowMinus() { if (!done() && peek('-')) next(); }
+    private void allowStandardForm() {} // TODO
     private void allowDecimalAndDigits() {
         if (!peek('.'))
             return;
@@ -59,10 +54,6 @@ public class Jparser {
             next();
     }
 
-    private void allowMinus() { if (!done() && peek('-')) next(); }
-
-    private void allowStandardForm() {} // TODO
-    private void requireNumberDone() {} // TODO
 
     private double getNumber() {
         int start = loc;
@@ -75,8 +66,6 @@ public class Jparser {
         return Double.valueOf(number);
     }
 
-    private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
-    private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
 
     private Json getUnknownAlphanumeric() {
         allowWhiteSpace();
