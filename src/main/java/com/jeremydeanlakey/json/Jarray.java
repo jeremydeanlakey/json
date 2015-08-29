@@ -14,7 +14,7 @@ public class Jarray extends Json {
         private int nxt = 0;
         @Override public boolean hasNext() { return nxt < values.size(); }
         @Override public Json next() { return values.get(nxt++); }
-        @Override public void remove() { values.remove(--nxt); } // TODO add tests
+        @Override public void remove() { values.remove(--nxt); }
     }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
