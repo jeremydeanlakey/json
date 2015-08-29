@@ -3,7 +3,6 @@ package com.jeremydeanlakey.json;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jeremydeanlakey on 6/23/15.
@@ -12,10 +11,10 @@ public class Jarray extends Json {
     private List<Json> values;
 
     class JarrayIterator implements Iterator<Json> {
-        private int i = 0;
-        @Override public boolean hasNext() { return i < values.size(); }
-        @Override public Json next() { return values.get(i++); }
-        @Override public void remove() { values.remove(i); i--; } // TODO add tests
+        private int nxt = 0;
+        @Override public boolean hasNext() { return nxt < values.size(); }
+        @Override public Json next() { return values.get(nxt++); }
+        @Override public void remove() { values.remove(--nxt); } // TODO add tests
     }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
