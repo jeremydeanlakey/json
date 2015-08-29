@@ -159,13 +159,13 @@ public class Jparser {
 
     private Json getItem() {
         allowWhiteSpace();
-        if (done()) return null;
+        if (done()) throw new JsonException("not-empty string", END);
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
         if (peekQuote()) return getJstring();
         if (peekNumber()) return getJnumber();
         if (peekAlphanumeric()) return getUnknownAlphanumeric();
-        return null;
+        throw new JsonException("json value", peek());
     }
 
     private Json getJson() {
@@ -173,6 +173,8 @@ public class Jparser {
             return null;
         Json item = getItem();
         allowWhiteSpace();
+        if (done())
+            return null;
         requireDone();
         return item;
     }
