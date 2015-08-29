@@ -85,7 +85,7 @@ public class Jparser {
         int start = loc;
         while (!done() && !isPermissibleNameChar(peek()))
             next();
-        String value = src.substring(start, loc-1);
+        String value = src.substring(start, loc);
         switch(value.toLowerCase()) {
             case "true":
                 return new Jboolean(true);
