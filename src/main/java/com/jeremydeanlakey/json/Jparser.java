@@ -42,12 +42,13 @@ public class Jparser {
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
 
+    private boolean require1to9() { char c = next(); if (c<'1' || c>'9') throw new JsonException("[1-9]", c); }
     private void requireNotDone() { if (done()) throw new JsonException("Anything but end of String", END); }
     private void requireDone() { if (!done()) throw new JsonException(END, peek()); }
     private void requireQuote() { if (!peekQuote()) throw new JsonException("\" or \'",  peek()); }
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new JsonException(c, n); }
     private void requireNumberDone() {} // TODO
-    private void requireDigitsNotStartingZero() {} // TODO
+    private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
     private void requireZeroOrDigits() {
         if (peek('0')) {
             next(); return;
@@ -113,6 +114,13 @@ public class Jparser {
     }
 
     private Json getJnumber() {
+        int start = loc;
+        allowMinus();
+        if (peek('0'))
+            next();
+        else
+            requireDigitsNotStartingZero();
+
         return null; // TODO
     }
 
