@@ -49,7 +49,7 @@ public class Jparser {
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new JsonException(c, n); }
     private void requireNumberDone() {} // TODO
     private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
-    private void requireStandardForm() {} // TODO
+    private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireZeroOrDigits() {
         if (peek('0')) {
             next(); return;
