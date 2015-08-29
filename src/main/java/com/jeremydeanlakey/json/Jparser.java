@@ -41,6 +41,7 @@ public class Jparser {
     private boolean isAlphanumeric(char c) { return Character.isLetter(c) || Character.isDigit(c); }
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
+    private static boolean isDigit(char c) { return Character.isDigit(c); }
 
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw new JsonException("[1-9]", c); }
     private void requireNotDone() { if (done()) throw new JsonException("Anything but end of String", END); }
@@ -50,7 +51,7 @@ public class Jparser {
     private void requireNumberDone() {} // TODO
     private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw new JsonException('e', c); }
-    private void requireDigit() {}  // TODO
+    private void requireDigit() { char c = next(); if (!isDigit(c)) throw new JsonException("[0-9]", c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireZeroOrDigits() {
         if (peek('0')) {
