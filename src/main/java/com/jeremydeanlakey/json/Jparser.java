@@ -49,8 +49,8 @@ public class Jparser {
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new JsonException(c, n); }
     private void requireNumberDone() {} // TODO
     private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
-    private void requireE() {}
-    private void requireDigit() {}
+    private void requireE() {} // TODO
+    private void requireDigit() {}  // TODO
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireZeroOrDigits() {
         if (peek('0')) {
@@ -60,8 +60,8 @@ public class Jparser {
         while (peekDigit()) next();
     }
 
-    private void allowSign() {}
-    private void allowDigits() {}
+    private void allowSign() {}  // TODO
+    private void allowDigits() { while(peekDigit()) next(); }
     private void allowWhiteSpace() { while (!done() && white()) loc++; }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowStandardForm() { if(peek('e') || peek('E')) requireStandardForm(); }
