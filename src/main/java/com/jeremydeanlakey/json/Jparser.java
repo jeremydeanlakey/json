@@ -48,17 +48,11 @@ public class Jparser {
     private void requireDone() { if (!done()) throw makeException(END, peek()); }
     private void requireQuote() { if (!peekQuote()) throw makeException("\" or \'",  peek()); }
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
-    private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
+    private void requireDigitsNotStartingZero() { require1to9(); allowDigits(); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
-    private void requireZeroOrDigits() {
-        if (peek('0')) {
-            next(); return;
-        }
-        if (!peek1to9()) return; // TODO throw error
-        while (peekDigit()) next();
-    }
+    private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
