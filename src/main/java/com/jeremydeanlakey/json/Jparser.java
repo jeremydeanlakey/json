@@ -10,12 +10,12 @@ public class Jparser {
     private static final String NOT_END = "NOT END";
     private static final String EXCEPTION = "Unexpected character: '{}'.  Expected: '{}' at {}.";
 
-    public class JsonException extends RuntimeException {
-        JsonException(String message) { super(message); }
+    public class JparserException extends RuntimeException {
+        JparserException(String message) { super(message); }
     }
 
     private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, expected, actual, loc); }
-    private JsonException makeException(Object expected, Object actual) { return new JsonException(exceptionMessage(expected, actual)); }
+    private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
 
     String src;
     int loc = 0;
