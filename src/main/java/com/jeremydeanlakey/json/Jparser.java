@@ -8,14 +8,14 @@ import android.util.Pair;
 public class Jparser {
     private static final String END = "END";
     private static final String NOT_END = "NOT END";
+    private static final String EXCEPTION = "Unexpected character: '{}'.  Expected: '{}' at {}.";
 
     public class JsonException extends RuntimeException {
-        JsonException(char expected, char actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
-        JsonException(String expected, String actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
-        JsonException(char expected, String actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
-        JsonException(String expected, char actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
+        JsonException(String message) { super(message); }
     }
 
+    private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, expected, actual, loc); }
+    private JsonException makeException(Object expected, Object actual) { return new JsonException(exceptionMessage(expected, actual)); }
 
     String src;
     int loc = 0;
@@ -43,14 +43,14 @@ public class Jparser {
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
     private static boolean isDigit(char c) { return Character.isDigit(c); }
 
-    private void require1to9() { char c = next(); if (c<'1' || c>'9') throw new JsonException("[1-9]", c); }
-    private void requireNotDone() { if (done()) throw new JsonException("Anything but end of String", END); }
-    private void requireDone() { if (!done()) throw new JsonException(END, peek()); }
-    private void requireQuote() { if (!peekQuote()) throw new JsonException("\" or \'",  peek()); }
-    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw new JsonException(c, n); }
+    private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
+    private void requireNotDone() { if (done()) throw makeException("Anything but end of String", END); }
+    private void requireDone() { if (!done()) throw makeException(END, peek()); }
+    private void requireQuote() { if (!peekQuote()) throw makeException("\" or \'",  peek()); }
+    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void requireDigitsNotStartingZero() { require1to9(); while(peekDigit()) next(); }
-    private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw new JsonException('e', c); }
-    private void requireDigit() { char c = next(); if (!isDigit(c)) throw new JsonException("[0-9]", c); }
+    private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
+    private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireZeroOrDigits() {
         if (peek('0')) {
@@ -160,13 +160,13 @@ public class Jparser {
 
     private Json getItem() {
         allowWhiteSpace();
-        if (done()) throw new JsonException("not-empty string", END);
+        if (done()) throw makeException("not-empty string", END);
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
         if (peekQuote()) return getJstring();
         if (peekNumber()) return getJnumber();
         if (peekAlphanumeric()) return getUnknownAlphanumeric();
-        throw new JsonException("json value", peek());
+        throw makeException("json value", peek());
     }
 
     private Json getJson() {
