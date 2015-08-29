@@ -83,8 +83,8 @@ public class Jparser {
     private Json getUnknownAlphanumeric() {
         allowWhiteSpace();
         int start = loc;
-        char c = peek();
-        while (!done() && !isPermissibleNameChar(next())) {}
+        while (!done() && !isPermissibleNameChar(peek()))
+            next();
         String value = src.substring(start, loc-1);
         switch(value.toLowerCase()) {
             case "true":
@@ -125,9 +125,9 @@ public class Jparser {
     }
 
     private Json getJobject() {
-        Jobject object = new Jobject();
-        allowWhiteSpace();
         require('{');
+        Jobject object = new Jobject();
+        // allowWhiteSpace();
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
@@ -143,7 +143,7 @@ public class Jparser {
 
     private Json getJarray() {
         Jarray array = new Jarray();
-        allowWhiteSpace();
+        // allowWhiteSpace();
         require('[');
         allowWhiteSpace();
         while (!peek(']')) {
