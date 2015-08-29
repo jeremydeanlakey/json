@@ -10,10 +10,10 @@ public class Jparser {
     private static final String NOT_END = "NOT END";
 
     public class JsonException extends RuntimeException {
-        JsonException(char expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
-        JsonException(String expected, String actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
-        JsonException(char expected, String actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
-        JsonException(String expected, char actual) { super("Expected '" + expected + "' but got '" + actual + "' at " + loc + "."); }
+        JsonException(char expected, char actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
+        JsonException(String expected, String actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
+        JsonException(char expected, String actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
+        JsonException(String expected, char actual) { super("Unexpected character: '" + actual + "'.  Expected: '" + expected + "' at " + loc + "."); }
     }
 
 
@@ -32,13 +32,13 @@ public class Jparser {
     private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
     private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
-    private boolean peekLetter() { return Character.isAlphabetic(peek());}
+    private boolean peekLetter() { return Character.isLetter(peek()); }
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
 
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
-    private boolean isAlphanumeric(char c) { return Character.isAlphabetic(c) || Character.isDigit(c); }
+    private boolean isAlphanumeric(char c) { return Character.isLetter(c) || Character.isDigit(c); }
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
 
@@ -98,6 +98,7 @@ public class Jparser {
         }
     }
 
+    // TODO allow escape characters
     private String getString() {
         allowWhiteSpace();
         requireQuote();
@@ -158,6 +159,7 @@ public class Jparser {
 
     private Json getItem() {
         allowWhiteSpace();
+        if (done()) return null;
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
         if (peekQuote()) return getJstring();
