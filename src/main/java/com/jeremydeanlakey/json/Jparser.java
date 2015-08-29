@@ -109,20 +109,9 @@ public class Jparser {
         return src.substring(start, loc-1);
     }
 
-    private Json getJstring() {
-        return new Jstring(getString());
-    }
+    private Json getJstring() { return new Jstring(getString()); }
 
-    private Json getJnumber() {
-        int start = loc;
-        allowMinus();
-        if (peek('0'))
-            next();
-        else
-            requireDigitsNotStartingZero();
-
-        return null; // TODO
-    }
+    private Json getJnumber() { return new Jnumber(getNumber()); }
 
     private Pair<String, Json> getKeyValue() {
         String key = getString();
