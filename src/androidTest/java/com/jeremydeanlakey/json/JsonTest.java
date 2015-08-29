@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -224,6 +225,15 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyArray.equals(EMPTY_OBJECT));
         Assert.assertFalse(emptyArray.equals(NULL));
         Assert.assertFalse(emptyArray.equals(FALSE));
+
+        emptyArray.add(EMPTY_OBJECT);
+        Assert.assertEquals(emptyArray.length(), 1);
+        Iterator<Json> iter = emptyArray.iterator();
+        while (iter.hasNext()) {
+            iter.next();
+            iter.remove();
+        }
+        Assert.assertEquals(emptyArray.length(), 0);
     }
 
     public void testObject() throws Throwable {
