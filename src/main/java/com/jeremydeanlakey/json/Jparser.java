@@ -43,29 +43,24 @@ public class Jparser {
     private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
     private static boolean isDigit(char c) { return Character.isDigit(c); }
 
+    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
+    private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
+    private void requireDigits() { requireDigit(); allowDigits(); }
+    private void requireDigitsNotStartingZero() { require1to9(); allowDigits(); }
+    private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
     private void requireNotDone() { if (done()) throw makeException("Anything but end of String", END); }
     private void requireDone() { if (!done()) throw makeException(END, peek()); }
     private void requireQuote() { if (!peekQuote()) throw makeException("\" or \'",  peek()); }
-    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
-    private void requireDigitsNotStartingZero() { require1to9(); allowDigits(); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
-    private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
-    private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
     private void allowWhiteSpace() { while (!done() && white()) loc++; }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowStandardForm() { if(peek('e') || peek('E')) requireStandardForm(); }
-    private void allowDecimalAndDigits() {
-        if (!peek('.'))
-            return;
-        next();
-        while (peekDigit())
-            next();
-    }
+    private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
 
     private double getNumber() {
