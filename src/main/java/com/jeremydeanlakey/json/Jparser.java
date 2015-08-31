@@ -94,7 +94,8 @@ public class Jparser {
     }
 
     private static char[] escapableChars = {'\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u'}; // u should be followed by 4 hex digits
-    private char requireEscapedChar() { require('\''); return ' '; } // TODO
+    private char requireEscapableChar() { return ' '; } // TODO
+    private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private String getString() {
         allowWhiteSpace();
