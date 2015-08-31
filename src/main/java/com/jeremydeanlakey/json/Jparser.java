@@ -93,12 +93,15 @@ public class Jparser {
         }
     }
 
-    // TODO allow escape characters
     private String getString() {
         allowWhiteSpace();
         char c = requireQuote();
+        char nxt;
         int start = loc;
-        while (next() != c) {}
+        do {
+            nxt = next();
+            if (nxt == '\\') {next(); nxt = next();} // TODO make this more clear
+        } while (next() != c);
         return src.substring(start, loc-1);
     }
 
