@@ -2,6 +2,10 @@ package com.jeremydeanlakey.json;
 
 import android.util.Pair;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by jeremydeanlakey on 8/15/15.
  */
@@ -93,8 +97,8 @@ public class Jparser {
         }
     }
 
-    private static char[] escapableChars = {'\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u'}; // u should be followed by 4 hex digits
-    private char requireEscapableChar() { return ' '; } // TODO
+    private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
+    private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) makeException("escapable char", c); return c; } // TODO this is ugly
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private String getString() {
