@@ -28,6 +28,7 @@ public class Jparser {
 
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
+    private boolean peekE() { char c = peek(); return (c =='e') || (c == 'E'); }
     private boolean peekNumber() { return isNumberStart(peek()); }
     private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
@@ -59,7 +60,6 @@ public class Jparser {
     private void allowDigits() { while(peekDigit()) next(); }
     private void allowWhiteSpace() { while (!done() && white()) loc++; }
     private void allowMinus() { if (!done() && peek('-')) next(); }
-    private void allowStandardForm() { if(peek('e') || peek('E')) requireStandardForm(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
 
@@ -68,7 +68,8 @@ public class Jparser {
         allowMinus();
         requireZeroOrDigits();
         allowDecimalAndDigits();
-        allowStandardForm(); // requireE, allowSign, requireAtLeastOneDigit,
+        if (peekE())
+            requireStandardForm();
         String number = src.substring(start, loc);
         return Double.valueOf(number);
     }
