@@ -93,14 +93,17 @@ public class Jparser {
         }
     }
 
+    private static char[] escapableChars = {'\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u'}; // u should be followed by 4 hex digits
+    private char requireEscapedChar() { require('\''); return ' '; } // TODO
+
     private String getString() {
         allowWhiteSpace();
         char c = requireQuote();
         char nxt;
         int start = loc;
         do {
-            nxt = next();
-            if (nxt == '\\') {next(); nxt = next();} // TODO make this more clear
+            if (peek('\\'))
+                requireEscapedChar();
         } while (next() != c);
         return src.substring(start, loc-1);
     }
