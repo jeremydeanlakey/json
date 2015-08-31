@@ -52,7 +52,7 @@ public class Jparser {
     private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
     private void requireNotDone() { if (done()) throw makeException("Anything but end of String", END); }
     private void requireDone() { if (!done()) throw makeException(END, peek()); }
-    private void requireQuote() { if (!peekQuote()) throw makeException("\" or \'",  peek()); }
+    private char requireQuote() { if (peekQuote()) return next(); else throw makeException("\" or \'",  peek()); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
 
@@ -96,8 +96,7 @@ public class Jparser {
     // TODO allow escape characters
     private String getString() {
         allowWhiteSpace();
-        requireQuote();
-        char c = next();
+        char c = requireQuote();
         int start = loc;
         while (next() != c) {}
         return src.substring(start, loc-1);
