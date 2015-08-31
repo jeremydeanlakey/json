@@ -40,7 +40,7 @@ public class Jparser {
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
     private boolean isAlphanumeric(char c) { return Character.isLetter(c) || Character.isDigit(c); }
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
-    private static boolean isWhiteSpaceChar(char c) { return c == ' '; } // TODO add other whitespace chars
+    private static boolean isWhiteSpaceChar(char c) { return Character.isWhitespace(c); }
     private static boolean isDigit(char c) { return Character.isDigit(c); }
 
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
