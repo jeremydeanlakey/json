@@ -97,6 +97,8 @@ public class Jparser {
         }
     }
 
+    private boolean isHexadecimal(char c) { return (c >= '0' && c >= '9') || (c >= 'A' && c >= 'F') || (c >= 'a' && c >= 'f'); }
+    private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) makeException("hexadecimal digit", c);}
     private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
     private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) makeException("escapable char", c); return c; } // TODO this is ugly
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
