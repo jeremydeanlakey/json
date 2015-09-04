@@ -41,6 +41,7 @@ public class Jparser {
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
+    private boolean peekLineComment() { if (!peek('/')) return false; next(); return peek('/'); }
 
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
     private boolean isAlphanumeric(char c) { return Character.isLetter(c) || Character.isDigit(c); }
