@@ -2,7 +2,6 @@ package com.jeremydeanlakey.json;
 
 import android.util.Pair;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class Jparser {
     private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
     private boolean peekLetter() { return Character.isLetter(peek()); }
     private boolean done() { return loc >= src.length(); }
-    private boolean white() { return isWhiteSpaceChar(peek()); }
+    private boolean peekWhiteSpace() { return isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
     private boolean peekLineComment() { if (!peek('/')) return false; next(); return peek('/'); } // TODO actually pek should not use next()
 
@@ -60,15 +59,15 @@ public class Jparser {
     private char requireQuote() { if (peekQuote()) return next(); else throw makeException("\" or \'",  peek()); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
-    private void requireComment() { require('/'); char c = next(); if (c=='*') skipToCommentClose(); else if (c=='/') skipToLineEnd(); else throw makeException("/ or *", c);}
+    private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
 
-    private void skipToCommentClose() {} // TODO
-    private void skipToLineEnd() { while(!peek('\n')) {requireNotDone(); next();} }
+    private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone(); } require('/'); }
+    private void skipThruLineEnd() { while(!peek('\n')) {requireNotDone(); next();} }
     private boolean skipComment() { if (!peek('/')) return false; requireComment(); return true; }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
-    private void allowWhiteSpace() { while (!done() && white()) loc++; }
+    private void allowWhiteSpace() { while (!done() && peekWhiteSpace()) loc++; }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
