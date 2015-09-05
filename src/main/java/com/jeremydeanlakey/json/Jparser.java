@@ -64,6 +64,7 @@ public class Jparser {
 
     private void skipToCommentClose() {} // TODO
     private void skipToLineEnd() {} // TODO
+    private boolean skipComment() { if (!peek('/')) return false; requireComment(); return true; }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
