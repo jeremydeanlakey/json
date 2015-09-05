@@ -41,7 +41,7 @@ public class Jparser {
     private boolean done() { return loc >= src.length(); }
     private boolean white() { return isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
-    private boolean peekLineComment() { if (!peek('/')) return false; next(); return peek('/'); }
+    private boolean peekLineComment() { if (!peek('/')) return false; next(); return peek('/'); } // TODO actually pek should not use next()
 
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
     private boolean isAlphanumeric(char c) { return Character.isLetter(c) || Character.isDigit(c); }
@@ -60,6 +60,10 @@ public class Jparser {
     private char requireQuote() { if (peekQuote()) return next(); else throw makeException("\" or \'",  peek()); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
+    private void requireComment() { require('/'); char c = next(); if (c=='*') skipToCommentClose(); else if (c=='/') skipToLineEnd(); else throw makeException("/ or *", c);}
+
+    private void skipToCommentClose() {} // TODO
+    private void skipToLineEnd() {} // TODO
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
