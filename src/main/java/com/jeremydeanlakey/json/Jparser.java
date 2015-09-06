@@ -66,7 +66,7 @@ public class Jparser {
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
-    private void allowWhiteSpace() { while (!done() && peekWhiteSpace() || skipComment()) loc++; }
+    private void allowWhiteSpaceAndComments() { while (!done() && peekWhiteSpace() || skipComment()) loc++; }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
@@ -84,7 +84,7 @@ public class Jparser {
 
 
     private Json getUnknownAlphanumeric() {
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         int start = loc;
         while (!done() && !isPermissibleNameChar(peek()))
             next();
@@ -110,7 +110,7 @@ public class Jparser {
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private String getString() {
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         char c = requireQuote();
         char nxt;
         int start = loc;
@@ -127,7 +127,7 @@ public class Jparser {
 
     private Pair<String, Json> getKeyValue() {
         String key = getString();
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         require(':');
         Json value = getItem();
         return new Pair(key, value);
@@ -136,38 +136,38 @@ public class Jparser {
     private Json getJobject() {
         require('{');
         Jobject object = new Jobject();
-        // allowWhiteSpace();
+        // allowWhiteSpaceAndComments();
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
             keyValue = getKeyValue();
-            allowWhiteSpace();
+            allowWhiteSpaceAndComments();
             if (peek('}')) break;
             require(',');
         }
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         require('}');
         return object;
     }
 
     private Json getJarray() {
         Jarray array = new Jarray();
-        // allowWhiteSpace();
+        // allowWhiteSpaceAndComments();
         require('[');
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         while (!peek(']')) {
             array.add(getItem());
-            allowWhiteSpace();
+            allowWhiteSpaceAndComments();
             if (peek(']')) break;
             require(',');
         }
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         require(']');
         return array;
     }
 
     private Json getItem() {
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         if (done()) throw makeException("not-empty string", END);
         if (peek('{')) return getJobject();
         if (peek('[')) return getJarray();
@@ -181,7 +181,7 @@ public class Jparser {
         if (src == null)
             return null;
         Json item = getItem();
-        allowWhiteSpace();
+        allowWhiteSpaceAndComments();
         if (done())
             return null;
         requireDone();
