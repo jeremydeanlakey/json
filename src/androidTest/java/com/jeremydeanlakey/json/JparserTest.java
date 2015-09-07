@@ -38,6 +38,6 @@ public class JparserTest extends AndroidTestCase {
 
 
     public void testStringToJson() throws Throwable {
-        
+        Json test = Jparser.stringToJson(TEST_CASE_STRING);
     }
 }
