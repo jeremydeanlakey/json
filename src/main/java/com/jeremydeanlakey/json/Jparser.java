@@ -11,7 +11,7 @@ import java.util.List;
 public class Jparser {
     private static final String END = "END";
     private static final String NOT_END = "NOT END";
-    private static final String EXCEPTION = "Unexpected character: '{}'.  Expected: '{}' at {}.";
+    private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
 
     public class JparserException extends RuntimeException {
         JparserException(String message) { super(message); }
