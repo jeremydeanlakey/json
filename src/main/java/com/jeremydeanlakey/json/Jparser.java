@@ -10,6 +10,7 @@ import java.util.List;
  * Created by jeremydeanlakey on 8/15/15.
  */
 public class Jparser {
+    private static final String TAG = "JparserTest";
     private static final String END = "END";
     private static final String NOT_END = "NOT END";
     private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
@@ -164,6 +165,7 @@ public class Jparser {
         }
         allowWhiteSpaceAndComments();
         require(']');
+        Log.d(TAG, "getJarray got value: " + array);
         return array;
     }
 
