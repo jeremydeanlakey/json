@@ -17,7 +17,7 @@ public class Jparser {
         JparserException(String message) { super(message); }
     }
 
-    private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, expected, actual, loc); }
+    private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, actual, expected, loc); }
     private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
 
     String src;
@@ -47,7 +47,7 @@ public class Jparser {
     private static boolean isWhiteSpaceChar(char c) { return Character.isWhitespace(c); }
     private static boolean isDigit(char c) { return Character.isDigit(c); }
 
-    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(n, c); }
+    private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
     private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
     private void requireDigits() { requireDigit(); allowDigits(); }
