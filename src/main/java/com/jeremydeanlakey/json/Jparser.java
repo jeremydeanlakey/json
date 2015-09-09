@@ -149,6 +149,7 @@ public class Jparser {
         }
         allowWhiteSpaceAndComments();
         require('}');
+        Log.d(TAG, "getJobject got value: " + object);
         return object;
     }
 
