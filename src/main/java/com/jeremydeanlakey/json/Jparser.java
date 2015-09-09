@@ -1,5 +1,6 @@
 package com.jeremydeanlakey.json;
 
+import android.util.Log;
 import android.util.Pair;
 
 import java.util.Arrays;
@@ -140,10 +141,10 @@ public class Jparser {
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
-            keyValue = getKeyValue();
             allowWhiteSpaceAndComments();
             if (peek('}')) break;
             require(',');
+            keyValue = getKeyValue();
         }
         allowWhiteSpaceAndComments();
         require('}');
