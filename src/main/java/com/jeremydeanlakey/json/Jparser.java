@@ -123,11 +123,12 @@ public class Jparser {
         return src.substring(start, loc-1);
     }
 
-    private Json getJstring() { return new Jstring(getString()); }
+    private Json getJstring() { Log.d(TAG, "calling getJstring at " + loc); return new Jstring(getString()); }
 
-    private Json getJnumber() { return new Jnumber(getNumber()); }
+    private Json getJnumber() { Log.d(TAG, "calling getJnumber at " + loc); return new Jnumber(getNumber()); }
 
     private Pair<String, Json> getKeyValue() {
+        Log.d(TAG, "calling getKeyValue at " + loc);
         String key = getString();
         allowWhiteSpaceAndComments();
         require(':');
@@ -136,6 +137,7 @@ public class Jparser {
     }
 
     private Json getJobject() {
+        Log.d(TAG, "calling Jobject at " + loc);
         require('{');
         Jobject object = new Jobject();
         // allowWhiteSpaceAndComments();
@@ -154,6 +156,7 @@ public class Jparser {
     }
 
     private Json getJarray() {
+        Log.d(TAG, "calling getJarry at " + loc);
         Jarray array = new Jarray();
         // allowWhiteSpaceAndComments();
         require('[');
@@ -171,6 +174,7 @@ public class Jparser {
     }
 
     private Json getItem() {
+        Log.d(TAG, "calling getItem at " + loc);
         allowWhiteSpaceAndComments();
         if (done()) throw makeException("not-empty string", END);
         if (peek('{')) return getJobject();
