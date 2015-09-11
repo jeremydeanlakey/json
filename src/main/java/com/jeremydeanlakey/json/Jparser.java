@@ -167,7 +167,7 @@ public class Jparser {
             if (peek(']')) break;
             require(',');
         }
-        allowWhiteSpaceAndComments();
+        // allowWhiteSpaceAndComments();
         require(']');
         Log.d(TAG, "getJarray got value: " + array);
         return array;
