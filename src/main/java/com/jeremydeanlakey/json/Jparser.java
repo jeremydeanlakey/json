@@ -85,7 +85,7 @@ public class Jparser {
     }
 
 
-    private Json getUnknownAlphanumeric() {
+    protected Json getUnknownAlphanumeric() {
         allowWhiteSpaceAndComments();
         int start = loc;
         while (!done() && !isPermissibleNameChar(peek()))
@@ -123,9 +123,9 @@ public class Jparser {
         return src.substring(start, loc-1);
     }
 
-    private Json getJstring() { Log.d(TAG, "calling getJstring at " + loc); return new Jstring(getString()); }
+    protected Json getJstring() { Log.d(TAG, "calling getJstring at " + loc); return new Jstring(getString()); }
 
-    private Json getJnumber() { Log.d(TAG, "calling getJnumber at " + loc); return new Jnumber(getNumber()); }
+    protected Json getJnumber() { Log.d(TAG, "calling getJnumber at " + loc); return new Jnumber(getNumber()); }
 
     private Pair<String, Json> getKeyValue() {
         Log.d(TAG, "calling getKeyValue at " + loc);
@@ -136,7 +136,7 @@ public class Jparser {
         return new Pair(key, value);
     }
 
-    private Json getJobject() {
+    protected Json getJobject() {
         Log.d(TAG, "calling Jobject at " + loc);
         require('{');
         Jobject object = new Jobject();
@@ -155,7 +155,7 @@ public class Jparser {
         return object;
     }
 
-    private Json getJarray() {
+    protected Json getJarray() {
         Log.d(TAG, "calling getJarry at " + loc);
         Jarray array = new Jarray();
         // allowWhiteSpaceAndComments();
@@ -173,7 +173,7 @@ public class Jparser {
         return array;
     }
 
-    private Json getItem() {
+    protected Json getItem() {
         Log.d(TAG, "calling getItem at " + loc);
         allowWhiteSpaceAndComments();
         if (done()) throw makeException("not-empty string", END);

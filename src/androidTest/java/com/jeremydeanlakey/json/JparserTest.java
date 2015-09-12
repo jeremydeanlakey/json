@@ -16,7 +16,7 @@ import java.util.Set;
 public class JparserTest extends AndroidTestCase {
     public static String TEST_CASE_STRING =
             "{"
-        +    "\"emptyArray\":[],"
+        +    "\"emptyArray\":[true],"
         +    "\"nonEmptyArray\":[{\"contents\": 1}, 2, false, null, \"string\", []],"
         +    "\"string\": \"I am a string\","
         +    "\"numbers\":[-2e0, -1.000, 0e10, 10e-1, 2],"
