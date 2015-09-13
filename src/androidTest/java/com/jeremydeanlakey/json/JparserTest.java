@@ -37,7 +37,16 @@ public class JparserTest extends AndroidTestCase {
         +    "}";
 
 
+    public void testGetItem() throws Throwable {
+        Jparser parser = new Jparser("{}");
+        Json emptyObject = parser.getJobject();
+
+        // Json test = Jparser.stringToJson(TEST_CASE_STRING);
+    }
+
+    
+
     public void testStringToJson() throws Throwable {
-        Json test = Jparser.stringToJson(TEST_CASE_STRING);
+        // Json test = Jparser.stringToJson(TEST_CASE_STRING);
     }
 }
