@@ -44,7 +44,24 @@ public class JparserTest extends AndroidTestCase {
         // Json test = Jparser.stringToJson(TEST_CASE_STRING);
     }
 
-    
+    public void testGetJarray() throws Throwable {
+        // TODO
+    }
+
+    public void testGetJobject() throws Throwable {
+        // TODO
+    }
+
+    public void testGetJstring() throws Throwable {
+        // TODO
+    }
+
+    public void testGetUnknownAlphanumeric() throws Throwable {
+        // TODO null
+        // TODO string
+        // TODO boolean
+        // TODO string
+    }
 
     public void testStringToJson() throws Throwable {
         // Json test = Jparser.stringToJson(TEST_CASE_STRING);
