@@ -63,11 +63,11 @@ public class JparserTest extends AndroidTestCase {
         // TODO null
         // TODO string
         Jparser parser = new Jparser("test ");
-        Json string = parser.getJstring();
+        Json string = parser.getUnknownAlphanumeric();
 //        Assert.assertEquals(string.getString(), "test"); // Unexpected character: 't'.  Expected: '" or '' at 0.
         // TODO boolean
         parser = new Jparser("true ");
-        Json booleanTrue = parser.getJstring();
+        Json booleanTrue = parser.getUnknownAlphanumeric();
         Assert.assertEquals(booleanTrue.getBoolean(), true); // Unexpected character: 't'.  Expected: '" or '' at 0.
         // TODO string
     }
