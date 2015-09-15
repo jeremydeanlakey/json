@@ -49,11 +49,14 @@ public class JparserTest extends AndroidTestCase {
     public void testGetJobject() throws Throwable {
         // TODO
         Jparser parser = new Jparser("{}");
-        Json emptyObject = parser.getJobject();
+//        Json emptyObject = parser.getJobject();
     }
 
     public void testGetJstring() throws Throwable {
         // TODO
+        Jparser parser = new Jparser("\"test\"");
+        Json string = parser.getJstring();
+        Assert.assertEquals(string.toString(), "test"); // expected:<["test"]> but was:<[test]>
     }
 
     public void testGetUnknownAlphanumeric() throws Throwable {
