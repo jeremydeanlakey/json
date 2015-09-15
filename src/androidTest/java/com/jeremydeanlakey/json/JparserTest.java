@@ -39,9 +39,7 @@ public class JparserTest extends AndroidTestCase {
 
     public void testGetItem() throws Throwable {
         Jparser parser = new Jparser("{}");
-        Json emptyObject = parser.getJobject();
-
-        // Json test = Jparser.stringToJson(TEST_CASE_STRING);
+//        Json emptyObject = parser.getJobject();
     }
 
     public void testGetJarray() throws Throwable {
@@ -50,6 +48,8 @@ public class JparserTest extends AndroidTestCase {
 
     public void testGetJobject() throws Throwable {
         // TODO
+        Jparser parser = new Jparser("{}");
+        Json emptyObject = parser.getJobject();
     }
 
     public void testGetJstring() throws Throwable {
