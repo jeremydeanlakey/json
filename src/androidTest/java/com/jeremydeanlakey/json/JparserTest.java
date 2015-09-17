@@ -60,16 +60,25 @@ public class JparserTest extends AndroidTestCase {
     }
 
     public void testGetUnknownAlphanumeric() throws Throwable {
-        // TODO null
-        // TODO string
+        // string
         Jparser parser = new Jparser("test ");
         Json string = parser.getUnknownAlphanumeric();
-        Assert.assertEquals(string.getString(), "test"); // Unexpected character: 't'.  Expected: '" or '' at 0.
-        // TODO boolean
+        Assert.assertEquals(string.getString(), "test");
+
+        // null
+        parser = new Jparser("null ");
+        Json jnull = parser.getUnknownAlphanumeric();
+        Assert.assertTrue(jnull.isNull());
+
+        // boolean
         parser = new Jparser("true ");
         Json booleanTrue = parser.getUnknownAlphanumeric();
-        Assert.assertEquals(booleanTrue.getBoolean(), true); // Unexpected character: 't'.  Expected: '" or '' at 0.
-        // TODO string
+        Assert.assertEquals(booleanTrue.getBoolean(), true);
+
+        // boolean
+        parser = new Jparser("false ");
+        Json booleanFalse = parser.getUnknownAlphanumeric();
+        Assert.assertEquals(booleanFalse.getBoolean(), false);
     }
 
     public void testStringToJson() throws Throwable {
