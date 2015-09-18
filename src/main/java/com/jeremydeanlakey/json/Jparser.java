@@ -88,7 +88,7 @@ public class Jparser {
     protected Json getUnknownAlphanumeric() {
         allowWhiteSpaceAndComments();
         int start = loc;
-        while (!done() && !isPermissibleNameChar(peek()))
+        while (!done() && isPermissibleNameChar(peek()))
             next();
         String value = src.substring(start, loc);
         switch(value.toLowerCase()) {
