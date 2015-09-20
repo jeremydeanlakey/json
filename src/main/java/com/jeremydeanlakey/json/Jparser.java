@@ -140,7 +140,10 @@ public class Jparser {
         Log.d(TAG, "calling Jobject at " + loc);
         require('{');
         Jobject object = new Jobject();
-        // allowWhiteSpaceAndComments();
+        allowWhiteSpaceAndComments();
+        if (peek('}')) {
+            require('}'); return object;
+        }
         Pair<String, Json> keyValue = getKeyValue();
         while (keyValue != null) {
             object.put(keyValue.first, keyValue.second);
