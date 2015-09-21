@@ -39,7 +39,7 @@ public class JparserTest extends AndroidTestCase {
 
     public void testGetItem() throws Throwable {
         Jparser parser = new Jparser("{}");
-//        Json emptyObject = parser.getJobject();
+        Json emptyObject = parser.getJobject();
     }
 
     public void testGetJarray() throws Throwable {
