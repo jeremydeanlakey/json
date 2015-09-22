@@ -84,13 +84,16 @@ public class Jparser {
         return Double.valueOf(number);
     }
 
-
-    protected Json getUnknownAlphanumeric() {
+    private String getUnquotedString() {
         allowWhiteSpaceAndComments();
         int start = loc;
         while (!done() && isPermissibleNameChar(peek()))
             next();
-        String value = src.substring(start, loc);
+        return src.substring(start, loc);
+    }
+
+    protected Json getUnknownAlphanumeric() {
+        String value = getUnquotedString();
         switch(value.toLowerCase()) {
             case "true":
                 return new Jboolean(true);
@@ -112,7 +115,7 @@ public class Jparser {
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     // TODO alow this to get quoted or unquoted string
-    private String getString() {
+    private String getQuotedString() {
         allowWhiteSpaceAndComments();
         char c = requireQuote();
         char nxt;
@@ -122,6 +125,14 @@ public class Jparser {
                 requireEscapedChar();
         } while (next() != c);
         return src.substring(start, loc-1);
+    }
+
+    private String getString() {
+        allowWhiteSpaceAndComments();
+        if (peekQuote())
+            return getQuotedString();
+        else
+            return getUnquotedString();
     }
 
     protected Json getJstring() { Log.d(TAG, "calling getJstring at " + loc); return new Jstring(getString()); }
