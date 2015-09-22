@@ -58,7 +58,7 @@ public class JparserTest extends AndroidTestCase {
         // TODO
         Jparser parser = new Jparser("\"test\"");
         Json string = parser.getJstring();
-//         Assert.assertEquals(string.toString(), "test"); // expected:<["test"]> but was:<[test]>
+         Assert.assertEquals(string.getString(), "test"); // expected:<["test"]> but was:<[test]>
     }
 
     public void testGetUnknownAlphanumeric() throws Throwable {
