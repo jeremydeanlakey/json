@@ -111,6 +111,7 @@ public class Jparser {
     private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) makeException("escapable char", c); return c; } // TODO this is ugly
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
+    // TODO alow this to get quoted or unquoted string
     private String getString() {
         allowWhiteSpaceAndComments();
         char c = requireQuote();
