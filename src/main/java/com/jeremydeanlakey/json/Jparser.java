@@ -205,8 +205,6 @@ public class Jparser {
             return null;
         Json item = getItem();
         allowWhiteSpaceAndComments();
-        if (done())
-            return null;
         requireDone();
         return item;
     }
