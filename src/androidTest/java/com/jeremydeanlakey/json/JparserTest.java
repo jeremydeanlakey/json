@@ -86,6 +86,8 @@ public class JparserTest extends AndroidTestCase {
     public void testStringToJson() throws Throwable {
         Json test = Jparser.stringToJson(TEST_CASE_STRING);
         Json copy = Jparser.stringToJson(test.toString());
+        Json emptyObject = Jparser.stringToJson("{}");
         Assert.assertEquals(test, copy);
+        Assert.assertFalse(test.equals(emptyObject));
     }
 }
