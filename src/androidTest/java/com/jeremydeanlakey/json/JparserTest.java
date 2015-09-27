@@ -52,6 +52,12 @@ public class JparserTest extends AndroidTestCase {
         // TODO
         Jparser parser = new Jparser("{}");
         Json emptyObject = parser.getJobject();
+
+        parser = new Jparser("{'a': 1'}");
+        Json simpleObject = parser.getJobject();
+        Assert.assertNotNull(simpleObject);
+        Assert.assertTrue(simpleObject.has("a"));
+
     }
 
     public void testGetJstring() throws Throwable {
