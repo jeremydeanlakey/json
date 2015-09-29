@@ -53,7 +53,7 @@ public class JparserTest extends AndroidTestCase {
         Jparser parser = new Jparser("{}");
         Json emptyObject = parser.getJobject();
 
-        parser = new Jparser("{'a': 1}");
+        parser = new Jparser("{'a': 1, \"b\":2,}");
         Json simpleObject = parser.getJobject();
         Assert.assertNotNull(simpleObject);
         Assert.assertTrue(simpleObject.has("a"));
