@@ -96,4 +96,10 @@ public class JparserTest extends AndroidTestCase {
         Assert.assertEquals(test, copy);
         Assert.assertFalse(test.equals(emptyObject));
     }
+    
+    public void testComment() throws Throwable {
+        Json withComment = Jparser.stringToJson("{'a':1, /**/}");
+        Json copy = Jparser.stringToJson(withComment.toString());
+        Assert.assertEquals(withComment, copy);
+    }
 }
