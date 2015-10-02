@@ -37,7 +37,6 @@ public class Jparser {
     private boolean peekNumber() { return isNumberStart(peek()); }
     private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
-    private boolean peek1to9() { return (peek() >= '1') && (peek() <= '9'); }
     private boolean peekLetter() { return Character.isLetter(peek()); }
     private boolean done() { return loc >= src.length(); }
     private boolean peekWhiteSpace() { return isWhiteSpaceChar(peek()); }
@@ -52,7 +51,6 @@ public class Jparser {
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
     private void requireDigit() { char c = next(); if (!isDigit(c)) throw makeException("[0-9]", c); }
-    private void requireDigits() { requireDigit(); allowDigits(); }
     private void requireDigitsNotStartingZero() { require1to9(); allowDigits(); }
     private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
     private void requireNotDone() { if (done()) throw makeException("Anything but end of String", END); }
