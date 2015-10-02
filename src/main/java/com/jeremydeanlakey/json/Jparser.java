@@ -162,6 +162,8 @@ public class Jparser {
             allowWhiteSpaceAndComments();
             if (peek('}')) break;
             require(',');
+            allowWhiteSpaceAndComments();
+            if (peek('}')) break;
             keyValue = getKeyValue();
         }
         allowWhiteSpaceAndComments();
