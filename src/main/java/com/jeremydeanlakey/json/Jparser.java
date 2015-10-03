@@ -60,13 +60,13 @@ public class Jparser {
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
 
-    private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone(); } require('/'); }
+    private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone();  } require('/'); }
     private void skipThruLineEnd() { while(!peek('\n')) {requireNotDone(); next();} }
     private boolean skipComment() { if (!peek('/')) return false; requireComment(); return true; }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
-    private void allowWhiteSpaceAndComments() { while (!done() && peekWhiteSpace() || skipComment()) loc++; }
+    private void allowWhiteSpaceAndComments() { while (!done() && (peekWhiteSpace() || peek('/'))) {if (peek('/')) skipComment(); else loc++;} }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
@@ -162,6 +162,7 @@ public class Jparser {
             require(',');
             allowWhiteSpaceAndComments();
             if (peek('}')) break;
+            requireNotDone();
             keyValue = getKeyValue();
         }
         allowWhiteSpaceAndComments();
