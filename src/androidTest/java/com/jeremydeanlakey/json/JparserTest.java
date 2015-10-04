@@ -48,6 +48,9 @@ public class JparserTest extends AndroidTestCase {
         Json emptyArray= parser.getJarray();
         parser = new Jparser("[1,]");
         Json nonEmptyArray= parser.getJarray();
+        parser = new Jparser(nonEmptyArray.toString());
+        Json copy = parser.getJarray();
+        Assert.assertEquals(nonEmptyArray, copy);
     }
 
     public void testGetJobject() throws Throwable {
