@@ -61,7 +61,9 @@ public class JparserTest extends AndroidTestCase {
         Json simpleObject = parser.getJobject();
         Assert.assertNotNull(simpleObject);
         Assert.assertTrue(simpleObject.has("a"));
-
+        parser = new Jparser(simpleObject.toString());
+        Json copy = parser.getJobject();
+        Assert.assertEquals(simpleObject, copy);
     }
 
     public void testGetJstring() throws Throwable {
