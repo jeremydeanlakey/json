@@ -43,7 +43,6 @@ public class JparserTest extends AndroidTestCase {
     }
 
     public void testGetJarray() throws Throwable {
-        // TODO
         Jparser parser = new Jparser("[]");
         Json emptyArray= parser.getJarray();
         parser = new Jparser("[1,]");
