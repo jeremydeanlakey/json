@@ -66,7 +66,7 @@ public class Jparser {
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
     private void allowDigits() { while(peekDigit()) next(); }
-    private void allowWhiteSpaceAndComments() { while (!done() && (peekWhiteSpace() || peek('/'))) {if (peek('/')) skipComment(); else loc++;} }
+    private void allowWhiteSpaceAndComments() { while (!done() && peekWhiteSpace() || peek('/')) {if (peek('/')) skipComment(); else loc++;} }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
