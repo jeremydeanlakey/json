@@ -37,7 +37,6 @@ public class Jparser {
     private boolean peekNumber() { return isNumberStart(peek()); }
     private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
-    private boolean peekLetter() { return Character.isLetter(peek()); }
     private boolean done() { return loc >= src.length(); }
     private boolean peekWhiteSpace() { return isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
