@@ -171,7 +171,6 @@ public class Jparser {
     }
 
     protected Json getJarray() {
-        Log.d(TAG, "calling getJarry at " + loc);
         Jarray array = new Jarray();
         allowWhiteSpaceAndComments();
         require('[');
@@ -184,7 +183,6 @@ public class Jparser {
         }
         allowWhiteSpaceAndComments();
         require(']');
-        Log.d(TAG, "getJarray got value: " + array);
         return array;
     }
 
