@@ -107,7 +107,6 @@ public class Jparser {
     private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) makeException("hexadecimal digit", c); return c; }
     private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
     private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
-    private void requireU() { require('u'); requireFourHex(); }
     private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) makeException("escapable char", c); return c; } // TODO this is ugly
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
