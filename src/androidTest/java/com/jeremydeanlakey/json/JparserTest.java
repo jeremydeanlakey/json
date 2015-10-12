@@ -76,6 +76,8 @@ public class JparserTest extends AndroidTestCase {
         Jparser parser = new Jparser("test ");
         Json string = parser.getUnknownAlphanumeric();
         Assert.assertEquals(string.getString(), "test");
+        Json unquotedObject = Jparser.stringToJson("{a:1} ");
+        Assert.assertEquals(unquotedObject.getLong("a"), 1);
 
         // null
         parser = new Jparser("null ");
