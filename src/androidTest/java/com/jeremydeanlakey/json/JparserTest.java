@@ -101,6 +101,9 @@ public class JparserTest extends AndroidTestCase {
         Json emptyObject = Jparser.stringToJson("{}");
         Assert.assertEquals(test, copy);
         Assert.assertFalse(test.equals(emptyObject));
+
+        Json messyObject = Jparser.stringToJson("{/*comment*/a:1 } // ");
+        Assert.assertEquals(messyObject.getLong("a"), 1);
     }
     
     public void testComment() throws Throwable {
