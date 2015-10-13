@@ -113,7 +113,6 @@ public class Jparser {
     private String getQuotedString() {
         allowWhiteSpaceAndComments();
         char c = requireQuote();
-        char nxt;
         int start = loc;
         do {
             if (peek('\\'))
