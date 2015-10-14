@@ -15,15 +15,15 @@ public class Jparser {
     private static final String NOT_END = "NOT END";
     private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
 
+    String src;
+    int loc = 0;
+
     public class JparserException extends RuntimeException {
         JparserException(String message) { super(message); }
     }
 
     private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, actual, expected, loc); }
     private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
-
-    String src;
-    int loc = 0;
 
     public static Json stringToJson(String src) { return (new Jparser(src)).getJson(); }
 
