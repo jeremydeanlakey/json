@@ -60,7 +60,7 @@ public class Jparser {
     private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
 
     private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone();  } require('/'); }
-    private void skipThruLineEnd() { while(!peek('\n')) {requireNotDone(); next();} }
+    private void skipThruLineEnd() { while(!peek('\n') && !done()) {next();} }
     private boolean skipComment() { if (!peek('/')) return false; requireComment(); return true; }
 
     private void allowSign() { if (peek('-') || peek('+')) next(); }
