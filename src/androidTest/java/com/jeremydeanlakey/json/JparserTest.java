@@ -93,6 +93,9 @@ public class JparserTest extends AndroidTestCase {
         parser = new Jparser("false ");
         Json booleanFalse = parser.getUnknownAlphanumeric();
         Assert.assertEquals(booleanFalse.getBoolean(), false);
+
+        // variety of weird values
+        Json.fromString("{'t': true, f: False, n: \"null\"}");
     }
 
     public void testStringToJson() throws Throwable {
