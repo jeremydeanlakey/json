@@ -18,6 +18,7 @@ public class Jstring extends Json {
         else throw new RuntimeException("Not a boolean value");
     }
     @Override public double getDouble() { try { return Double.valueOf(value); } catch (Exception e) { throw new RuntimeException("Not a number");} }
+    @Override public long getLong() { try { return Long.valueOf(value); } catch (Exception e) { throw new RuntimeException("Not a number");} }
 
     @Override public String toString() { return "\"" + value + "\""; }
     @Override protected void writeTo(StringBuilder builder) { builder.append(QUOTE).append(value).append(QUOTE); }
