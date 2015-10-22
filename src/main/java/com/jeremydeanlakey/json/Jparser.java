@@ -115,8 +115,10 @@ public class Jparser {
         char c = requireQuote();
         int start = loc;
         do {
-            if (peek('\\'))
-                requireEscapedChar();
+            if (peek('\\')) {
+                if (requireEscapedChar() == 'u')
+                    requireFourHex();
+            }
         } while (next() != c);
         return src.substring(start, loc-1);
     }
