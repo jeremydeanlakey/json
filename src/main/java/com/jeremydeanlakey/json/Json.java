@@ -10,12 +10,12 @@ import java.util.Set;
  * Created by jeremydeanlakey on 6/22/15.
  */
 public abstract class Json implements Iterable<Json> {
-    private static String NOT_OBJECT = "Not an object";
-    private static String NOT_ARRAY = "Not an array";
-    private static String NOT_ARRAY_OBJECT = "Not an array or object";
-    private static String NOT_NUMBER = "Not an number";
-    private static String NOT_BOOLEAN = "Not an boolean value";
-    private static String NOT_STRING = "Not an string value";
+    protected static String NOT_OBJECT = "Not an object";
+    protected static String NOT_ARRAY = "Not an array";
+    protected static String NOT_ARRAY_OBJECT = "Not an array or object";
+    protected static String NOT_NUMBER = "Not an number";
+    protected static String NOT_BOOLEAN = "Not an boolean value";
+    protected static String NOT_STRING = "Not an string value";
 
     public boolean isNull() {return false;}
     public boolean isBoolean() {return false;}
