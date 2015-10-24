@@ -199,6 +199,7 @@ public abstract class Json implements Iterable<Json> {
 
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 
+    // TODO add tests
     public static final boolean isObject(Json unknown){ return unknown instanceof Jobject; }
     public static final boolean isArray(Json unknown){ return unknown instanceof Jarray; }
     public static final boolean isBoolean(Json unknown){ return unknown instanceof Jboolean; }
