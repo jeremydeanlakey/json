@@ -24,72 +24,72 @@ public abstract class Json implements Iterable<Json> {
     public boolean isArray() {return false;}
     public boolean isObject() {return false;}
 
-    public boolean isEmpty() { throw new RuntimeException("Not an array or object"); }
+    public boolean isEmpty() { throw new RuntimeException(NOT_ARRAY_OBJECT); }
 
-    public boolean getBoolean(){throw new RuntimeException("Not a boolean value");}
-    public long getLong(){throw new RuntimeException("Not a number");}
-    public double getDouble(){throw new RuntimeException("Not a number");}
-    public String getString(){throw new RuntimeException("Not a String value");}
+    public boolean getBoolean(){throw new RuntimeException(NOT_BOOLEAN);}
+    public long getLong(){throw new RuntimeException(NOT_NUMBER);}
+    public double getDouble(){throw new RuntimeException(NOT_NUMBER);}
+    public String getString(){throw new RuntimeException(NOT_STRING);}
 
-    public boolean isNull(String key) {throw new RuntimeException("Not an object");}
-    public boolean isBoolean(String key) {throw new RuntimeException("Not an object");}
-    public boolean isLong(String key) {throw new RuntimeException("Not an object");}
-    public boolean isDouble(String key) {throw new RuntimeException("Not an object");}
-    public boolean isString(String key) {throw new RuntimeException("Not an object");}
-    public boolean isObject(String key) {throw new RuntimeException("Not an object");}
-    public boolean isArray(String key) {throw new RuntimeException("Not an object");}
+    public boolean isNull(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isBoolean(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isLong(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isDouble(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isString(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isObject(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean isArray(String key) {throw new RuntimeException(NOT_OBJECT);}
 
-    public boolean has(String key){throw new RuntimeException("Not an object");}
+    public boolean has(String key){throw new RuntimeException(NOT_OBJECT);}
 
-    public boolean hasNull(String key) {throw new RuntimeException("Not an object");}
-    public boolean hasBoolean(String key){throw new RuntimeException("Not an array");}
-    public boolean hasLong(String key){throw new RuntimeException("Not an array");}
-    public boolean hasDouble(String key){throw new RuntimeException("Not an array");}
-    public boolean hasString(String key){throw new RuntimeException("Not an array");}
-    public boolean hasObject(String key){throw new RuntimeException("Not an array");}
-    public boolean hasArray(String key){throw new RuntimeException("Not an array");}
+    public boolean hasNull(String key) {throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasBoolean(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasLong(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasDouble(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasString(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasObject(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasArray(String key){throw new RuntimeException(NOT_ARRAY);}
 
-    public Json get(String key){throw new RuntimeException("Not an object");}
+    public Json get(String key){throw new RuntimeException(NOT_OBJECT);}
 
-    public boolean getBoolean(String key){throw new RuntimeException("Not an object");}
-    public long getLong(String key){throw new RuntimeException("Not an object");}
-    public double getDouble(String key){throw new RuntimeException("Not an object");}
-    public String getString(String key){throw new RuntimeException("Not an object");}
+    public boolean getBoolean(String key){throw new RuntimeException(NOT_OBJECT);}
+    public long getLong(String key){throw new RuntimeException(NOT_OBJECT);}
+    public double getDouble(String key){throw new RuntimeException(NOT_OBJECT);}
+    public String getString(String key){throw new RuntimeException(NOT_OBJECT);}
 
-    public boolean getBoolean(String key, boolean def){throw new RuntimeException("Not an object");}
-    public long getLong(String key, long def){throw new RuntimeException("Not an object");}
-    public double getDouble(String key, double def){throw new RuntimeException("Not an object");}
-    public String getString(String key, String def){throw new RuntimeException("Not an object");}
+    public boolean getBoolean(String key, boolean def){throw new RuntimeException(NOT_OBJECT);}
+    public long getLong(String key, long def){throw new RuntimeException(NOT_OBJECT);}
+    public double getDouble(String key, double def){throw new RuntimeException(NOT_OBJECT);}
+    public String getString(String key, String def){throw new RuntimeException(NOT_OBJECT);}
     // TODO evaluate if these functions make sense
-    public Json getArray(String key, Jarray def){throw new RuntimeException("Not an object");}
-    public Json getObject(String key, Jobject def){throw new RuntimeException("Not an object");}
+    public Json getArray(String key, Jarray def){throw new RuntimeException(NOT_OBJECT);}
+    public Json getObject(String key, Jobject def){throw new RuntimeException(NOT_OBJECT);}
 
     // TODO add tests
-    public void update(Json object){throw new RuntimeException("Not an object");}
+    public void update(Json object){throw new RuntimeException(NOT_OBJECT);}
 
-    public boolean hasNull(int index) {throw new RuntimeException("Not an array");}
-    public boolean hasBoolean(int index){throw new RuntimeException("Not an array");}
-    public boolean hasLong(int index){throw new RuntimeException("Not an array");}
-    public boolean hasDouble(int index){throw new RuntimeException("Not an array");}
-    public boolean hasString(int index){throw new RuntimeException("Not an array");}
-    public boolean hasArray(int index){throw new RuntimeException("Not an array");}
-    public boolean hasObject(int index){throw new RuntimeException("Not an array");}
+    public boolean hasNull(int index) {throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasBoolean(int index){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasLong(int index){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasDouble(int index){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasString(int index){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasArray(int index){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasObject(int index){throw new RuntimeException(NOT_ARRAY);}
 
-    public Json get(int index){throw new RuntimeException("Not an array");}
+    public Json get(int index){throw new RuntimeException(NOT_ARRAY);}
 
-    public boolean getBoolean(int index){throw new RuntimeException("Not an array");}
-    public long getLong(int index){throw new RuntimeException("Not an array");}
-    public double getDouble(int index){throw new RuntimeException("Not an array");}
-    public String getString(int index){throw new RuntimeException("Not an array");}
+    public boolean getBoolean(int index){throw new RuntimeException(NOT_ARRAY);}
+    public long getLong(int index){throw new RuntimeException(NOT_ARRAY);}
+    public double getDouble(int index){throw new RuntimeException(NOT_ARRAY);}
+    public String getString(int index){throw new RuntimeException(NOT_ARRAY);}
     // TODO evaluate if these functions make sense
-    public Json getArray(int index){throw new RuntimeException("Not an array");}
-    public Json getObject(int index){throw new RuntimeException("Not an array");}
+    public Json getArray(int index){throw new RuntimeException(NOT_ARRAY);}
+    public Json getObject(int index){throw new RuntimeException(NOT_ARRAY);}
 
 
-    public Set<String> keys() { throw new RuntimeException("Not an object"); }
-    protected void add(Json value){throw new RuntimeException("Not an array");}
-    protected void put(String key, Json value){throw new RuntimeException("Not an object");}
-    public int length() { throw new RuntimeException("Not an array"); }
+    public Set<String> keys() { throw new RuntimeException(NOT_OBJECT); }
+    protected void add(Json value){throw new RuntimeException(NOT_ARRAY);}
+    protected void put(String key, Json value){throw new RuntimeException(NOT_OBJECT);}
+    public int length() { throw new RuntimeException(NOT_ARRAY); }
 
 
     protected Json(){} // Disallow instantiation from outside.
