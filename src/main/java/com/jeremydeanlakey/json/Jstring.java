@@ -16,7 +16,7 @@ public class Jstring extends Json {
     @Override public boolean getBoolean(){
         if (value.equalsIgnoreCase("true")) return true;
         else if (value.equalsIgnoreCase("false")) return false;
-        else throw new RuntimeException("Not a boolean value");
+        else throw new RuntimeException(Json.NOT_BOOLEAN);
     }
     @Override public double getDouble() { try { return Double.valueOf(value); } catch (Exception e) { throw new RuntimeException("Not a number");} }
     @Override public long getLong() { try { return Long.valueOf(value); } catch (Exception e) { throw new RuntimeException("Not a number");} }
