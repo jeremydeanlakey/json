@@ -329,6 +329,11 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(emptyObject.equals(EMPTY_ARRAY));
         Assert.assertFalse(emptyObject.equals(NULL));
         Assert.assertFalse(emptyObject.equals(FALSE));
+
+        Json update = Json.fromString("{\"contents\": 2}");
+        nonEmptyObject.update(update);
+        Assert.assertEquals(nonEmptyObject.getLong("contents"), 2);
+
     }
 
     public void testToString() throws Throwable {
