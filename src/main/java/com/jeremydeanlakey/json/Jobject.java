@@ -11,6 +11,7 @@ import java.util.Set;
 public class Jobject extends Json {
     private Map<String, Json> map;
     private static final String QUOTE = "\"";
+    protected static final String UPDATE_ERROR = "update(Json) requires an object as argument";
     protected Jobject(){map = new HashMap();}
 
 
@@ -56,7 +57,7 @@ public class Jobject extends Json {
 
     @Override public void update(Json object) {
         if (object == null || !Json.isObject(object))
-            throw new RuntimeException("update(Json) requires an object as argument");
+            throw new RuntimeException(UPDATE_ERROR);
         for (String key: object.keys())
             put(key, object.get(key));
     }
