@@ -12,6 +12,7 @@ public class Jstring extends Json {
     @Override public boolean isString() { return true; }
 
     @Override public String getString(){ return value; }
+    @Override public boolean isBoolean() { return value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false"); }
     @Override public boolean isNull(String key) { return value.equalsIgnoreCase("null"); }
     @Override public boolean getBoolean(){
         if (value.equalsIgnoreCase("true")) return true;
