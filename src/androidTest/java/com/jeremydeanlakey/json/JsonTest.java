@@ -234,6 +234,15 @@ public class JsonTest extends AndroidTestCase {
             iter.remove();
         }
         Assert.assertEquals(emptyArray.length(), 0);
+
+        try {
+            Json update = Json.fromString("{\"contents\": 2}");
+            emptyArray.update(null);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
     }
 
     public void testObject() throws Throwable {
@@ -295,6 +304,11 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(testObject.getString("nothing", "nothing"), "nothing");
 
 
+        Json testBoolString = Jparser.stringToJson("true");
+        Assert.assertTrue(testBoolString.isBoolean());
+
+        Assert.assertEquals(testObject.getString("bool"), "true");
+        Assert.assertTrue(testObject.isBoolean("bool"));
         Assert.assertTrue(testObject.isBoolean("bool"));
         Assert.assertFalse(testObject.isBoolean("number"));
         Assert.assertFalse(testObject.hasBoolean("number"));
@@ -337,12 +351,16 @@ public class JsonTest extends AndroidTestCase {
         try {
             nonEmptyObject.update(null);
             Assert.fail();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Jobject.UPDATE_ERROR);
+        }
 
         try {
             nonEmptyObject.update(Json.fromString("[]"));
             Assert.fail();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Jobject.UPDATE_ERROR);
+        }
 
     }
 
