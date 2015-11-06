@@ -405,4 +405,20 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(STRING.isArray());
         Assert.assertFalse(TRUE.isArray());
     }
+
+    public void testIsBoolean() throws Throwable {
+        // TODO
+    }
+
+    public void testIsString() throws Throwable {
+        // TODO
+    }
+
+    public void testIsNull() throws Throwable {
+        // TODO
+    }
+
+    public void testIsNumber() throws Throwable {
+        // TODO
+    }
 }
