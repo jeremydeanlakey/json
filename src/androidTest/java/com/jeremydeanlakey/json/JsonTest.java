@@ -455,6 +455,18 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsNumber() throws Throwable {
-        // TODO
+        Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
+        Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
+        Assert.assertFalse(Json.isNumber(NULL));
+        Assert.assertTrue(Json.isNumber(ONE));
+        Assert.assertFalse(Json.isNumber(STRING));
+        Assert.assertFalse(Json.isNumber(TRUE));
+
+        Assert.assertFalse(EMPTY_ARRAY.isNumber());
+        Assert.assertFalse(EMPTY_OBJECT.isNumber());
+        Assert.assertFalse(NULL.isNumber());
+        Assert.assertTrue(ONE.isNumber());
+        Assert.assertFalse(STRING.isNumber());
+        Assert.assertFalse(TRUE.isNumber());
     }
 }
