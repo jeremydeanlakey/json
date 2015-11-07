@@ -423,7 +423,19 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsString() throws Throwable {
-        // TODO
+        Assert.assertFalse(Json.isString(EMPTY_ARRAY));
+        Assert.assertFalse(Json.isString(EMPTY_OBJECT));
+        Assert.assertFalse(Json.isString(NULL));
+        Assert.assertFalse(Json.isString(ONE));
+        Assert.assertTrue(Json.isString(STRING));
+        Assert.assertFalse(Json.isString(TRUE));
+
+        Assert.assertFalse(EMPTY_ARRAY.isString());
+        Assert.assertFalse(EMPTY_OBJECT.isString());
+        Assert.assertFalse(NULL.isString());
+        Assert.assertFalse(ONE.isString());
+        Assert.assertTrue(STRING.isString());
+        Assert.assertFalse(TRUE.isString());
     }
 
     public void testIsNull() throws Throwable {

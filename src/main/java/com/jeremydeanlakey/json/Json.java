@@ -99,8 +99,9 @@ public abstract class Json implements Iterable<Json> {
 
     // TODO work with non-object JSON strings.
     public static Json fromString (String string){
-        return Jparser.stringToJson(string);
         /*
+        return Jparser.stringToJson(string);
+        */
         if (string == null)
             return null;
         JSONObject jsonObject = null;
@@ -112,7 +113,6 @@ public abstract class Json implements Iterable<Json> {
         if (jsonArray != null)
             return Json.fromJsonArray(jsonArray);
         return null;
-        */
     }
 
     public static Json fromJsonObject(JSONObject jsonObject){
