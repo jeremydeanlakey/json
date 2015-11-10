@@ -368,42 +368,21 @@ public class JsonTest extends AndroidTestCase {
         }
     }
 
-    public void testToString() throws Throwable {
-        String testJsonString = testJson.toString();
-        Json testJson2 = Json.fromString(testJsonString);
-        Assert.assertEquals(testJson, testJson2);
-    }
 
-    public void testIsObject() throws Throwable {
-        Assert.assertFalse(Json.isObject(EMPTY_ARRAY));
-        Assert.assertTrue(Json.isObject(EMPTY_OBJECT));
-        Assert.assertFalse(Json.isObject(NULL));
-        Assert.assertFalse(Json.isObject(ONE));
-        Assert.assertFalse(Json.isObject(STRING));
-        Assert.assertFalse(Json.isObject(TRUE));
+    public void testIsNull() throws Throwable {
+        Assert.assertFalse(Json.isNull(EMPTY_ARRAY));
+        Assert.assertFalse(Json.isNull(EMPTY_OBJECT));
+        Assert.assertTrue(Json.isNull(NULL));
+        Assert.assertFalse(Json.isNull(ONE));
+        Assert.assertFalse(Json.isNull(STRING));
+        Assert.assertFalse(Json.isNull(TRUE));
 
-        Assert.assertFalse(EMPTY_ARRAY.isObject());
-        Assert.assertTrue(EMPTY_OBJECT.isObject());
-        Assert.assertFalse(NULL.isObject());
-        Assert.assertFalse(ONE.isObject());
-        Assert.assertFalse(STRING.isObject());
-        Assert.assertFalse(TRUE.isObject());
-    }
-
-    public void testIsArray() throws Throwable {
-        Assert.assertTrue(Json.isArray(EMPTY_ARRAY));
-        Assert.assertFalse(Json.isArray(EMPTY_OBJECT));
-        Assert.assertFalse(Json.isArray(NULL));
-        Assert.assertFalse(Json.isArray(ONE));
-        Assert.assertFalse(Json.isArray(STRING));
-        Assert.assertFalse(Json.isArray(TRUE));
-
-        Assert.assertTrue(EMPTY_ARRAY.isArray());
-        Assert.assertFalse(EMPTY_OBJECT.isArray());
-        Assert.assertFalse(NULL.isArray());
-        Assert.assertFalse(ONE.isArray());
-        Assert.assertFalse(STRING.isArray());
-        Assert.assertFalse(TRUE.isArray());
+        Assert.assertFalse(EMPTY_ARRAY.isNull());
+        Assert.assertFalse(EMPTY_OBJECT.isNull());
+        Assert.assertTrue(NULL.isNull());
+        Assert.assertFalse(ONE.isNull());
+        Assert.assertFalse(STRING.isNull());
+        Assert.assertFalse(TRUE.isNull());
     }
 
     public void testIsBoolean() throws Throwable {
@@ -422,6 +401,22 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(TRUE.isBoolean());
     }
 
+    public void testIsNumber() throws Throwable {
+        Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
+        Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
+        Assert.assertFalse(Json.isNumber(NULL));
+        Assert.assertTrue(Json.isNumber(ONE));
+        Assert.assertFalse(Json.isNumber(STRING));
+        Assert.assertFalse(Json.isNumber(TRUE));
+
+        Assert.assertFalse(EMPTY_ARRAY.isNumber());
+        Assert.assertFalse(EMPTY_OBJECT.isNumber());
+        Assert.assertFalse(NULL.isNumber());
+        Assert.assertTrue(ONE.isNumber());
+        Assert.assertFalse(STRING.isNumber());
+        Assert.assertFalse(TRUE.isNumber());
+    }
+
     public void testIsString() throws Throwable {
         Assert.assertFalse(Json.isString(EMPTY_ARRAY));
         Assert.assertFalse(Json.isString(EMPTY_OBJECT));
@@ -438,35 +433,41 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(TRUE.isString());
     }
 
-    public void testIsNull() throws Throwable {
-        Assert.assertFalse(Json.isNull(EMPTY_ARRAY));
-        Assert.assertFalse(Json.isNull(EMPTY_OBJECT));
-        Assert.assertTrue(Json.isNull(NULL));
-        Assert.assertFalse(Json.isNull(ONE));
-        Assert.assertFalse(Json.isNull(STRING));
-        Assert.assertFalse(Json.isNull(TRUE));
+    public void testIsArray() throws Throwable {
+        Assert.assertTrue(Json.isArray(EMPTY_ARRAY));
+        Assert.assertFalse(Json.isArray(EMPTY_OBJECT));
+        Assert.assertFalse(Json.isArray(NULL));
+        Assert.assertFalse(Json.isArray(ONE));
+        Assert.assertFalse(Json.isArray(STRING));
+        Assert.assertFalse(Json.isArray(TRUE));
 
-        Assert.assertFalse(EMPTY_ARRAY.isNull());
-        Assert.assertFalse(EMPTY_OBJECT.isNull());
-        Assert.assertTrue(NULL.isNull());
-        Assert.assertFalse(ONE.isNull());
-        Assert.assertFalse(STRING.isNull());
-        Assert.assertFalse(TRUE.isNull());
+        Assert.assertTrue(EMPTY_ARRAY.isArray());
+        Assert.assertFalse(EMPTY_OBJECT.isArray());
+        Assert.assertFalse(NULL.isArray());
+        Assert.assertFalse(ONE.isArray());
+        Assert.assertFalse(STRING.isArray());
+        Assert.assertFalse(TRUE.isArray());
     }
 
-    public void testIsNumber() throws Throwable {
-        Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
-        Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
-        Assert.assertFalse(Json.isNumber(NULL));
-        Assert.assertTrue(Json.isNumber(ONE));
-        Assert.assertFalse(Json.isNumber(STRING));
-        Assert.assertFalse(Json.isNumber(TRUE));
+    public void testIsObject() throws Throwable {
+        Assert.assertFalse(Json.isObject(EMPTY_ARRAY));
+        Assert.assertTrue(Json.isObject(EMPTY_OBJECT));
+        Assert.assertFalse(Json.isObject(NULL));
+        Assert.assertFalse(Json.isObject(ONE));
+        Assert.assertFalse(Json.isObject(STRING));
+        Assert.assertFalse(Json.isObject(TRUE));
 
-        Assert.assertFalse(EMPTY_ARRAY.isNumber());
-        Assert.assertFalse(EMPTY_OBJECT.isNumber());
-        Assert.assertFalse(NULL.isNumber());
-        Assert.assertTrue(ONE.isNumber());
-        Assert.assertFalse(STRING.isNumber());
-        Assert.assertFalse(TRUE.isNumber());
+        Assert.assertFalse(EMPTY_ARRAY.isObject());
+        Assert.assertTrue(EMPTY_OBJECT.isObject());
+        Assert.assertFalse(NULL.isObject());
+        Assert.assertFalse(ONE.isObject());
+        Assert.assertFalse(STRING.isObject());
+        Assert.assertFalse(TRUE.isObject());
+    }
+
+    public void testToString() throws Throwable {
+        String testJsonString = testJson.toString();
+        Json testJson2 = Json.fromString(testJsonString);
+        Assert.assertEquals(testJson, testJson2);
     }
 }

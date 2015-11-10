@@ -60,7 +60,6 @@ public abstract class Json implements Iterable<Json> {
     public long getLong(String key, long def){throw new RuntimeException(NOT_OBJECT);}
     public double getDouble(String key, double def){throw new RuntimeException(NOT_OBJECT);}
     public String getString(String key, String def){throw new RuntimeException(NOT_OBJECT);}
-    // TODO evaluate if these functions make sense
     public Json getArray(String key, Jarray def){throw new RuntimeException(NOT_OBJECT);}
     public Json getObject(String key, Jobject def){throw new RuntimeException(NOT_OBJECT);}
 
@@ -80,7 +79,6 @@ public abstract class Json implements Iterable<Json> {
     public long getLong(int index){throw new RuntimeException(NOT_ARRAY);}
     public double getDouble(int index){throw new RuntimeException(NOT_ARRAY);}
     public String getString(int index){throw new RuntimeException(NOT_ARRAY);}
-    // TODO evaluate if these functions make sense
     public Json getArray(int index){throw new RuntimeException(NOT_ARRAY);}
     public Json getObject(int index){throw new RuntimeException(NOT_ARRAY);}
 
@@ -208,10 +206,10 @@ public abstract class Json implements Iterable<Json> {
 
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 
-    public static final boolean isObject(Json unknown){ return unknown instanceof Jobject; }
-    public static final boolean isArray(Json unknown){ return unknown instanceof Jarray; }
-    public static final boolean isBoolean(Json unknown){ return unknown instanceof Jboolean; }
-    public static final boolean isString(Json unknown){ return unknown instanceof Jstring; }
     public static final boolean isNull(Json unknown){ return unknown instanceof Jnull; }
+    public static final boolean isBoolean(Json unknown){ return unknown instanceof Jboolean; }
     public static final boolean isNumber(Json unknown){ return unknown instanceof Jnumber; }
+    public static final boolean isString(Json unknown){ return unknown instanceof Jstring; }
+    public static final boolean isArray(Json unknown){ return unknown instanceof Jarray; }
+    public static final boolean isObject(Json unknown){ return unknown instanceof Jobject; }
 }
