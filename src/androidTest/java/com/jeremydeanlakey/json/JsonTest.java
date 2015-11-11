@@ -346,6 +346,23 @@ public class JsonTest extends AndroidTestCase {
 
     }
 
+
+    /*
+    TODO items:
+        testGetXXXX
+        testHasXXXX
+
+        testKeys
+        testAdd
+        testPut
+        testLength
+
+        testIterator
+        testFromString
+        testFromJsonObject
+        testFromJsonArray
+    */
+
     public void testUpdate() throws Throwable {
         Json nonEmptyObject = testJson.get("nonEmptyObject");
 
@@ -370,6 +387,7 @@ public class JsonTest extends AndroidTestCase {
 
 
     public void testIsNull() throws Throwable {
+        // TODO add test for string "null"
         Assert.assertFalse(Json.isNull(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNull(EMPTY_OBJECT));
         Assert.assertTrue(Json.isNull(NULL));
@@ -386,6 +404,7 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsBoolean() throws Throwable {
+        // TODO add test for string "true" or "false"
         Assert.assertFalse(Json.isBoolean(EMPTY_ARRAY));
         Assert.assertFalse(Json.isBoolean(EMPTY_OBJECT));
         Assert.assertFalse(Json.isBoolean(NULL));
@@ -402,6 +421,7 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsNumber() throws Throwable {
+        // TODO add test for string like "1.5"
         Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
         Assert.assertFalse(Json.isNumber(NULL));
