@@ -16,6 +16,7 @@ public abstract class Json implements Iterable<Json> {
     protected static String NOT_NUMBER = "Not an number";
     protected static String NOT_BOOLEAN = "Not an boolean value";
     protected static String NOT_STRING = "Not an string value";
+    protected static String ITERATOR_ERROR = "Json.iterator() only supported for arrays or objects";
 
     public boolean isNull() {return false;}
     public boolean isBoolean() {return false;}
@@ -199,8 +200,7 @@ public abstract class Json implements Iterable<Json> {
         return output;
     }
 
-    @Override
-    public Iterator<Json> iterator() { throw new RuntimeException("Json.iterator() only supported for arrays or objects"); }
+    @Override public Iterator<Json> iterator() { throw new RuntimeException(ITERATOR_ERROR); }
 
     protected abstract void writeTo(StringBuilder builder);
 
