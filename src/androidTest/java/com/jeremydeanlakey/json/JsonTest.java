@@ -39,7 +39,7 @@ public class JsonTest extends AndroidTestCase {
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -55,6 +55,7 @@ public class JsonTest extends AndroidTestCase {
         NULL = new Jnull();
         ONE = new Jnumber(1);
         STRING = new Jstring("I am a string");
+        STRING_TRUE = new Jstring("true");
         DIFFERENT_STRING = new Jstring("different string");
         TRUE = new Jboolean(true);
         FALSE = new Jboolean(false);
@@ -363,6 +364,8 @@ public class JsonTest extends AndroidTestCase {
         testFromJsonArray
     */
 
+
+
     public void testUpdate() throws Throwable {
         Json nonEmptyObject = testJson.get("nonEmptyObject");
 
@@ -404,13 +407,13 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsBoolean() throws Throwable {
-        // TODO add test for string "true" or "false"
         Assert.assertFalse(Json.isBoolean(EMPTY_ARRAY));
         Assert.assertFalse(Json.isBoolean(EMPTY_OBJECT));
         Assert.assertFalse(Json.isBoolean(NULL));
         Assert.assertFalse(Json.isBoolean(ONE));
         Assert.assertFalse(Json.isBoolean(STRING));
         Assert.assertTrue(Json.isBoolean(TRUE));
+        Assert.assertTrue(Json.isBoolean(STRING_TRUE));
 
         Assert.assertFalse(EMPTY_ARRAY.isBoolean());
         Assert.assertFalse(EMPTY_OBJECT.isBoolean());
@@ -418,6 +421,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(ONE.isBoolean());
         Assert.assertFalse(STRING.isBoolean());
         Assert.assertTrue(TRUE.isBoolean());
+        Assert.assertTrue(STRING_TRUE.isBoolean());
     }
 
     public void testIsNumber() throws Throwable {
