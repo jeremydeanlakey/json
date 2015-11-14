@@ -14,6 +14,8 @@ public class Jstring extends Json {
     @Override public String getString(){ return value; }
     @Override public boolean isBoolean() { return value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false"); }
     @Override public boolean isNull(String key) { return value.equalsIgnoreCase("null"); }
+    @Override public boolean isNumber() { try { Double.valueOf(value); return true; } catch (Exception e) { return false;} }
+
     @Override public boolean getBoolean(){
         if (value.equalsIgnoreCase("true")) return true;
         else if (value.equalsIgnoreCase("false")) return false;
