@@ -39,7 +39,7 @@ public class JsonTest extends AndroidTestCase {
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, STRING_ONE_POINT_FIVE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -56,6 +56,7 @@ public class JsonTest extends AndroidTestCase {
         ONE = new Jnumber(1);
         STRING = new Jstring("I am a string");
         STRING_TRUE = new Jstring("true");
+        STRING_ONE_POINT_FIVE = new Jstring("1.5");
         DIFFERENT_STRING = new Jstring("different string");
         TRUE = new Jboolean(true);
         FALSE = new Jboolean(false);
@@ -425,12 +426,12 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsNumber() throws Throwable {
-        // TODO add test for string like "1.5"
         Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
         Assert.assertFalse(Json.isNumber(NULL));
         Assert.assertTrue(Json.isNumber(ONE));
         Assert.assertFalse(Json.isNumber(STRING));
+        Assert.assertTrue(Json.isNumber(STRING_ONE_POINT_FIVE));
         Assert.assertFalse(Json.isNumber(TRUE));
 
         Assert.assertFalse(EMPTY_ARRAY.isNumber());
@@ -438,6 +439,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(NULL.isNumber());
         Assert.assertTrue(ONE.isNumber());
         Assert.assertFalse(STRING.isNumber());
+        Assert.assertTrue(STRING_ONE_POINT_FIVE.isNumber());
         Assert.assertFalse(TRUE.isNumber());
     }
 
