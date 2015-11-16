@@ -97,9 +97,8 @@ public abstract class Json implements Iterable<Json> {
 
     // TODO work with non-object JSON strings.
     public static Json fromString (String string){
-        /*
         return Jparser.stringToJson(string);
-        */
+        /*
         if (string == null)
             return null;
         JSONObject jsonObject = null;
@@ -111,6 +110,7 @@ public abstract class Json implements Iterable<Json> {
         if (jsonArray != null)
             return Json.fromJsonArray(jsonArray);
         return null;
+        */
     }
 
     public static Json fromJsonObject(JSONObject jsonObject){
@@ -206,9 +206,9 @@ public abstract class Json implements Iterable<Json> {
 
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 
-    public static final boolean isNull(Json unknown){ return unknown instanceof Jnull; }
-    public static final boolean isBoolean(Json unknown){ return unknown instanceof Jboolean; }
-    public static final boolean isNumber(Json unknown){ return unknown instanceof Jnumber; }
+    public static final boolean isNull(Json unknown){ return (unknown instanceof Json) && unknown.isNull(); }
+    public static final boolean isBoolean(Json unknown){ return(unknown instanceof Json) && unknown.isBoolean(); }
+    public static final boolean isNumber(Json unknown){ return (unknown instanceof Json) && unknown.isNumber(); }
     public static final boolean isString(Json unknown){ return unknown instanceof Jstring; }
     public static final boolean isArray(Json unknown){ return unknown instanceof Jarray; }
     public static final boolean isObject(Json unknown){ return unknown instanceof Jobject; }
