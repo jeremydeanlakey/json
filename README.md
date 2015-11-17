@@ -5,7 +5,7 @@ A library to make it easier for me to deal with json in Android. The style is op
 Some usage examples:
 
 ```
-Json example = new Json("{\"a\" : [0,1,2], \"b\": true}");
+Json example = Json.fromString("{\"a\" : [0,1,2], \"b\": true}");
 example.has("c");               // false
 example.hasArray("a");          // true
 Json array = json.get("a", null); // get or default
@@ -47,3 +47,4 @@ if (myJson.hasDouble("key")) {
 
 3 -  I find easier to handle JSON in a dynamically typed language.  So I made a main class (Json) and subclassed it with different types of values (Jnull, Jobject, Jstring, etc.).  This way, you can fetch a value from an object without knowing what type of value it is.  You can then test the object type with functions like isBoolean() and convert it to a regular value with functions like toBoolean().
 
+cd json
