@@ -95,7 +95,7 @@ public abstract class Json implements Iterable<Json> {
     public static Json newObject() { return new Jobject(); }
     public static Json newArray() { return new Jarray(); }
 
-    // TODO work with non-object JSON strings.
+
     public static Json fromString (String string){
         return Jparser.stringToJson(string);
         /*
