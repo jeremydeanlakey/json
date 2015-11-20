@@ -39,7 +39,7 @@ public class JsonTest extends AndroidTestCase {
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, STRING_ONE_POINT_FIVE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, STRING_NULL, STRING_ONE_POINT_FIVE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -60,6 +60,7 @@ public class JsonTest extends AndroidTestCase {
         DIFFERENT_STRING = new Jstring("different string");
         TRUE = new Jboolean(true);
         FALSE = new Jboolean(false);
+        STRING_NULL = new Jstring("null");
     }
 
     public void testNull() throws Throwable {
@@ -391,12 +392,12 @@ public class JsonTest extends AndroidTestCase {
 
 
     public void testIsNull() throws Throwable {
-        // TODO add test for string "null"
         Assert.assertFalse(Json.isNull(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNull(EMPTY_OBJECT));
         Assert.assertTrue(Json.isNull(NULL));
         Assert.assertFalse(Json.isNull(ONE));
         Assert.assertFalse(Json.isNull(STRING));
+        Assert.assertTrue(Json.isNull(STRING_NULL));
         Assert.assertFalse(Json.isNull(TRUE));
 
         Assert.assertFalse(EMPTY_ARRAY.isNull());
@@ -404,6 +405,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(NULL.isNull());
         Assert.assertFalse(ONE.isNull());
         Assert.assertFalse(STRING.isNull());
+        Assert.assertTrue(STRING_NULL.isNull());
         Assert.assertFalse(TRUE.isNull());
     }
 
