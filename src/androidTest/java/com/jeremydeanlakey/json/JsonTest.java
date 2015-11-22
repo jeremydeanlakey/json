@@ -56,11 +56,11 @@ public class JsonTest extends AndroidTestCase {
         ONE = new Jnumber(1);
         STRING = new Jstring("I am a string");
         STRING_TRUE = new Jstring("true");
+        STRING_NULL = new Jstring("null");
         STRING_ONE_POINT_FIVE = new Jstring("1.5");
         DIFFERENT_STRING = new Jstring("different string");
         TRUE = new Jboolean(true);
         FALSE = new Jboolean(false);
-        STRING_NULL = new Jstring("null");
     }
 
     public void testNull() throws Throwable {
@@ -358,7 +358,6 @@ public class JsonTest extends AndroidTestCase {
         testKeys
         testAdd
         testPut
-        testLength
 
         testIterator
         testFromString
@@ -390,6 +389,20 @@ public class JsonTest extends AndroidTestCase {
         }
     }
 
+    public void testLength() throws Throwable {
+        Assert.assertEquals(EMPTY_ARRAY.length(), 0);
+        Json array4 = Json.fromString("[1, 2, \"3\", 4]");
+        Assert.assertEquals(array4.length(), 4);
+
+        // TODO implement length for Jobject?
+
+        try {
+            STRING.length();
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+    }
 
     public void testIsNull() throws Throwable {
         Assert.assertFalse(Json.isNull(EMPTY_ARRAY));
