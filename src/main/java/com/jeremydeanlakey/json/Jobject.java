@@ -54,6 +54,7 @@ public class Jobject extends Json {
 
     @Override public Set<String> keys() { return map.keySet(); }
     @Override public void put(String key, Json value){map.put(key, value);}
+    @Override public int length() { return map.size(); }
 
     @Override public void update(Json object) {
         if (object == null || !Json.isObject(object))
