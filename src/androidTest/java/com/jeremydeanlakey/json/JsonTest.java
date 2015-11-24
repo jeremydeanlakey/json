@@ -394,7 +394,8 @@ public class JsonTest extends AndroidTestCase {
         Json array4 = Json.fromString("[1, 2, \"3\", 4]");
         Assert.assertEquals(array4.length(), 4);
 
-        // TODO implement length for Jobject?
+        Json obj= Json.fromString("{\"a\":1, \"b\":2}");
+        Assert.assertEquals(obj.length(), 2);
 
         try {
             STRING.length();
