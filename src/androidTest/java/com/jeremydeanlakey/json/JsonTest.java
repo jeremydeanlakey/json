@@ -355,7 +355,6 @@ public class JsonTest extends AndroidTestCase {
         testGetXXXX
         testHasXXXX
 
-        testKeys
         testAdd
         testPut
 
@@ -366,6 +365,30 @@ public class JsonTest extends AndroidTestCase {
     */
 
 
+    public void testKeys() throws Throwable {
+
+        Assert.assertEquals(EMPTY_OBJECT.keys().size(), 0);
+
+        Json sizeTwo = Json.fromString("{\"A\": 1, \"B\": 2}");
+        Assert.assertEquals(sizeTwo.keys().size(), 2);
+        Assert.assertTrue(sizeTwo.keys().contains("A"));
+        Assert.assertTrue(sizeTwo.keys().contains("B"));
+        Assert.assertFalse(sizeTwo.keys().contains("C"));
+
+        try {
+            NON_EMPTY_ARRAY.keys();
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+        try {
+            STRING.keys();
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+    }
 
     public void testUpdate() throws Throwable {
         Json nonEmptyObject = testJson.get("nonEmptyObject");
