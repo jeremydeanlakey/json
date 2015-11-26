@@ -39,7 +39,8 @@ public class JsonTest extends AndroidTestCase {
     protected Json testJson = Json.fromString(TEST_CASE_STRING);
 
 
-    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, ONE, STRING, STRING_TRUE, STRING_NULL, STRING_ONE_POINT_FIVE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
+    private Json EMPTY_ARRAY, NULL, EMPTY_OBJECT, OBJECT_A1_B2, ONE, STRING, STRING_TRUE, STRING_NULL,
+            STRING_ONE_POINT_FIVE, DIFFERENT_STRING, TRUE, FALSE, NON_EMPTY_ARRAY;
 
     public void setUp() {
         JSONArray ja = null, jna = null;
@@ -51,6 +52,7 @@ public class JsonTest extends AndroidTestCase {
         } catch (Exception e) {}
         EMPTY_ARRAY = Json.fromJsonArray(ja);
         NON_EMPTY_ARRAY = Json.fromJsonArray(jna);
+        OBJECT_A1_B2 = Json.fromString("{\"A\": 1, \"B\": 2}");
         EMPTY_OBJECT = Json.fromJsonObject(jo);
         NULL = new Jnull();
         ONE = new Jnumber(1);
@@ -358,12 +360,38 @@ public class JsonTest extends AndroidTestCase {
         testAdd
         testPut
 
-        testIterator
         testFromString
         testFromJsonObject
         testFromJsonArray
     */
 
+
+    public void testIterator() throws Throwable {
+
+        // TODO should Jobject have an iterator?
+        // Assert.assertFalse(EMPTY_OBJECT.iterator().hasNext());
+        Assert.assertFalse(EMPTY_ARRAY.iterator().hasNext());
+
+        int arraySize = 0;
+        for (Json x: NON_EMPTY_ARRAY)
+            arraySize++;
+        Assert.assertEquals(NON_EMPTY_ARRAY.length(), arraySize);
+
+        /*
+        Json sizeTwo = Json.fromString("{\"A\": 1, \"B\": 2}");
+        int objectSize = 0;
+        for (Json x: sizeTwo)
+            objectSize++;
+        Assert.assertEquals(sizeTwo.length(), objectSize);
+        */
+
+        try {
+            STRING.iterator();
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.ITERATOR_ERROR);
+        }
+    }
 
     public void testKeys() throws Throwable {
 
