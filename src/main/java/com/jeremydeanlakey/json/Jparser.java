@@ -33,12 +33,12 @@ public class Jparser {
 
     private char peek() { return src.charAt(loc); }
     private boolean peek(char c) { return !done() && (peek() == c); }
-    private boolean peekE() { char c = peek(); return (c =='e') || (c == 'E'); }
-    private boolean peekNumber() { return isNumberStart(peek()); }
-    private boolean peekAlphanumeric() { return isAlphanumeric(peek()); }
+    private boolean peekE() { return peek('E') || peek('e'); }
+    private boolean peekNumber() { return !done() && isNumberStart(peek()); }
+    private boolean peekAlphanumeric() { return !done() && isAlphanumeric(peek()); }
     private boolean peekQuote() { return peek('\'') || peek('\"'); }
     private boolean done() { return loc >= src.length(); }
-    private boolean peekWhiteSpace() { return isWhiteSpaceChar(peek()); }
+    private boolean peekWhiteSpace() { return !done() && isWhiteSpaceChar(peek()); }
     private boolean peekDigit() { return (!done() && Character.isDigit(peek())); }
 
     private static boolean isNumberStart(char c) { return (c == '-') || Character.isDigit(c); }
