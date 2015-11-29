@@ -357,13 +357,33 @@ public class JsonTest extends AndroidTestCase {
         testGetXXXX
         testHasXXXX
 
-        testAdd
-
         testFromString
         testFromJsonObject
         testFromJsonArray
     */
 
+    public void testAdd() throws Throwable {
+        Json array = Json.fromString("[]");
+        Assert.assertTrue(array.isEmpty());
+
+        // test add item
+        array.add(Json.fromString("1"));
+        Assert.assertFalse(array.isEmpty());
+        Assert.assertTrue(array.hasLong(0));
+        Assert.assertEquals(array.getLong(0), 1);
+
+        // test add null
+        array.add(null);
+        Assert.assertNull(array.get(0));
+
+        // test add non-array
+        try {
+            EMPTY_OBJECT.add(Json.fromString("1"));
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+    }
 
     public void testPut() throws Throwable {
         Json object = Json.fromString("{}");
