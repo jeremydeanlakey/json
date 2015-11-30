@@ -352,15 +352,70 @@ public class JsonTest extends AndroidTestCase {
     }
 
 
-    /*
-    TODO items:
-        testGetXXXX
-        testHasXXXX
+    public void testHas() throws Throwable {
+        // TODO
+    }
 
-        testFromString
-        testFromJsonObject
-        testFromJsonArray
-    */
+    public void testHasNull() throws Throwable {
+        // TODO
+    }
+
+    public void testHasBoolean() throws Throwable {
+        // TODO
+    }
+
+    public void testHasLong() throws Throwable {
+        // TODO
+    }
+
+    public void testHasDouble() throws Throwable {
+        // TODO
+    }
+
+    public void testHasString() throws Throwable {
+        // TODO
+    }
+
+    public void testHasArray() throws Throwable {
+        // TODO
+    }
+
+    public void testHasObject() throws Throwable {
+        // TODO
+    }
+
+
+    public void testGet() throws Throwable {
+        // TODO
+    }
+
+    public void testGetBoolean() throws Throwable {
+        // TODO
+    }
+
+    public void testGetLong() throws Throwable {
+        // TODO
+    }
+
+    public void testGetDouble() throws Throwable {
+        // TODO
+    }
+
+    public void testGetString() throws Throwable {
+        // TODO
+    }
+
+    public void testGetArray() throws Throwable {
+        // TODO
+    }
+
+    public void testGetObject() throws Throwable {
+        // TODO
+    }
+
+    public void testIsEmpty() throws Throwable {
+        // TODO
+    }
 
     public void testAdd() throws Throwable {
         Json array = Json.fromString("[]");
@@ -540,6 +595,7 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsNumber() throws Throwable {
+        // TODO add testIsLong and testIsDouble ?
         Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
         Assert.assertFalse(Json.isNumber(NULL));
@@ -609,5 +665,13 @@ public class JsonTest extends AndroidTestCase {
         String testJsonString = testJson.toString();
         Json testJson2 = Json.fromString(testJsonString);
         Assert.assertEquals(testJson, testJson2);
+    }
+
+    public void testNewArray() throws Throwable {
+        // TODO
+    }
+
+    public void testNewObject() throws Throwable {
+        // TODO
     }
 }
