@@ -676,6 +676,10 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testNewObject() throws Throwable {
-        // TODO
+        Json obj = Json.newObject();
+        Assert.assertTrue(obj.isObject());
+        Assert.assertTrue(obj.isEmpty());
+        obj.put("1", Json.fromString("1"));
+        Assert.assertFalse(obj.isEmpty());
     }
 }
