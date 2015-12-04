@@ -414,7 +414,17 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsEmpty() throws Throwable {
-        // TODO
+        Assert.assertTrue(EMPTY_ARRAY.isEmpty());
+        Assert.assertTrue(EMPTY_OBJECT.isEmpty());
+        Assert.assertFalse(NON_EMPTY_ARRAY.isEmpty());
+        Assert.assertFalse(OBJECT_A1_B2.isEmpty());
+
+        try {
+            STRING.isEmpty();
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY_OBJECT);
+        }
     }
 
     public void testAdd() throws Throwable {
