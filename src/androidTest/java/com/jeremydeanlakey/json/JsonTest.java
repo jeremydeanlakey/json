@@ -353,7 +353,15 @@ public class JsonTest extends AndroidTestCase {
 
 
     public void testHas() throws Throwable {
-        // TODO
+        Assert.assertTrue(OBJECT_A1_B2.has("A"));
+        Assert.assertFalse(OBJECT_A1_B2.has("C"));
+
+        try {
+            STRING.has("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
     }
 
     public void testHasNull() throws Throwable {
