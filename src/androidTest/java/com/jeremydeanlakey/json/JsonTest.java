@@ -447,7 +447,7 @@ public class JsonTest extends AndroidTestCase {
 
         // test add null
         array.add(null);
-        Assert.assertNull(array.get(0));
+        Assert.assertNull(array.get(1));
 
         // test add non-array
         try {
