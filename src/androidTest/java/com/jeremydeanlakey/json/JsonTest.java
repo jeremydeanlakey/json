@@ -365,10 +365,54 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testHasNull() throws Throwable {
-        // TODO
+        Json testObject = Json.fromString("{\"null\": null, \"notnull\": 1}");
+        Assert.assertTrue(testObject.hasNull("null"));
+        Assert.assertTrue(testObject.has("notnull"));
+        Assert.assertFalse(testObject.hasNull("notnull"));
+        Assert.assertFalse(testObject.hasNull("doesn't exist"));
+        try {
+            testObject.hasNull(0);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+
+        Json testArray = Json.fromString("[null, 1]");
+        Assert.assertTrue(testArray.hasNull(0));
+        Assert.assertFalse(testArray.hasNull(1));
+        try {
+            STRING.hasNull("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+
+        try {
+            STRING.hasNull("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+        try {
+            EMPTY_ARRAY.hasNull("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+        try {
+            EMPTY_OBJECT.hasNull(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
     }
 
     public void testHasBoolean() throws Throwable {
+        Json testObject = Json.fromString("{\"bool\": true, \"notbool\": 1, \"stringbool\": \"true\"}");
+        Assert.assertTrue(testObject.hasBoolean("bool"));
         // TODO
     }
 
