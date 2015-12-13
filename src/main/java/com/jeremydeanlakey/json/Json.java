@@ -43,12 +43,12 @@ public abstract class Json implements Iterable<Json> {
     public boolean has(String key){throw new RuntimeException(NOT_OBJECT);}
 
     public boolean hasNull(String key) {throw new RuntimeException(NOT_OBJECT);}
-    public boolean hasBoolean(String key){throw new RuntimeException(NOT_ARRAY);}
-    public boolean hasLong(String key){throw new RuntimeException(NOT_ARRAY);}
-    public boolean hasDouble(String key){throw new RuntimeException(NOT_ARRAY);}
-    public boolean hasString(String key){throw new RuntimeException(NOT_ARRAY);}
-    public boolean hasObject(String key){throw new RuntimeException(NOT_ARRAY);}
-    public boolean hasArray(String key){throw new RuntimeException(NOT_ARRAY);}
+    public boolean hasBoolean(String key){throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasLong(String key){throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasDouble(String key){throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasString(String key){throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasObject(String key){throw new RuntimeException(NOT_OBJECT);}
+    public boolean hasArray(String key){throw new RuntimeException(NOT_OBJECT);}
 
     public Json get(String key){throw new RuntimeException(NOT_OBJECT);}
 
