@@ -486,7 +486,42 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testHasDouble() throws Throwable {
-        // TODO
+        // test Jobject.hasDouble
+        Json testObject = Json.fromString("{\"long\": 1, \"notlong\": \"a\"");
+        Assert.assertTrue(testObject.hasDouble("long"));
+        Assert.assertFalse(testObject.hasDouble("notlong"));
+        Assert.assertFalse(testObject.hasDouble("whatever"));
+        try {
+            testObject.hasDouble(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+
+        // test Jarray.hasDouble
+        Json testArray = Json.fromString("[1, \"false\"]");
+        Assert.assertTrue(testArray.hasDouble(0));
+        Assert.assertFalse(testArray.hasDouble(1));
+        try {
+            testArray.hasDouble("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+        // test Json.hasDouble
+        try {
+            STRING.hasDouble("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+        try {
+            STRING.hasDouble(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
     }
 
     public void testHasString() throws Throwable {
