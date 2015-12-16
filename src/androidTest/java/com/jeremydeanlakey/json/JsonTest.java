@@ -525,7 +525,42 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testHasString() throws Throwable {
-        // TODO
+        // test Jobject.hasString
+        Json testObject = Json.fromString("{\"long\": 1, \"string\": \"a\"");
+        Assert.assertTrue(testObject.hasString("string"));
+        Assert.assertFalse(testObject.hasString("long"));
+        Assert.assertFalse(testObject.hasString("whatever"));
+        try {
+            testObject.hasString(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+
+        // test Jarray.hasString
+        Json testArray = Json.fromString("[1, \"a\"]");
+        Assert.assertTrue(testArray.hasString(1));
+        Assert.assertFalse(testArray.hasString(0));
+        try {
+            testArray.hasString("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+
+        // test Json.hasString
+        try {
+            STRING.hasString("anything");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
+        try {
+            STRING.hasString(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
     }
 
     public void testHasArray() throws Throwable {
