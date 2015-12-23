@@ -449,7 +449,7 @@ public class JsonTest extends AndroidTestCase {
 
     public void testHasLong() throws Throwable {
         // test Jobject.hasLong
-        Json testObject = Json.fromString("{\"long\": 1, \"notlong\": \"a\"");
+        Json testObject = Json.fromString("{\"long\": 1, \"notlong\": \"a\"}");
         Assert.assertTrue(testObject.hasLong("long"));
         Assert.assertFalse(testObject.hasLong("notlong"));
         Assert.assertFalse(testObject.hasLong("whatever"));
@@ -488,7 +488,7 @@ public class JsonTest extends AndroidTestCase {
 
     public void testHasDouble() throws Throwable {
         // test Jobject.hasDouble
-        Json testObject = Json.fromString("{\"long\": 1, \"notlong\": \"a\"");
+        Json testObject = Json.fromString("{\"long\": 1, \"notlong\": \"a\"}");
         Assert.assertTrue(testObject.hasDouble("long"));
         Assert.assertFalse(testObject.hasDouble("notlong"));
         Assert.assertFalse(testObject.hasDouble("whatever"));
@@ -527,7 +527,7 @@ public class JsonTest extends AndroidTestCase {
 
     public void testHasString() throws Throwable {
         // test Jobject.hasString
-        Json testObject = Json.fromString("{\"long\": 1, \"string\": \"a\"");
+        Json testObject = Json.fromString("{\"long\": 1, \"string\": \"a\"}");
         Assert.assertTrue(testObject.hasString("string"));
         Assert.assertFalse(testObject.hasString("long"));
         Assert.assertFalse(testObject.hasString("whatever"));
@@ -648,12 +648,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertNotNull(testObject.get("object"));
         Assert.assertTrue(testObject.get("object").isObject());
         Assert.assertFalse(testObject.has("whatever"));
-        try {
-            testObject.get("whatever");
-            Assert.fail();
-        } catch (Exception e) {
-            Assert.assertEquals(e.getClass(), NullPointerException.class);
-        }
+        Assert.assertNull(testObject.get("whatever"));
         try {
             testObject.get(1);
             Assert.fail();
@@ -662,7 +657,7 @@ public class JsonTest extends AndroidTestCase {
         }
 
 
-        Json testArray = Json.fromString("[{}, []}");
+        Json testArray = Json.fromString("[{}, []]");
         Assert.assertNotNull(testArray.get(0));
         Assert.assertTrue(testObject.get(0).isObject());
         try {
