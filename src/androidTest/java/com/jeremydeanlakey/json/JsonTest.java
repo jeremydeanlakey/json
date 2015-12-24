@@ -689,7 +689,56 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testGetBoolean() throws Throwable {
-        // TODO
+        Json testObject = Json.fromString("{\"boolean\": true, \"array\": []}");
+        Assert.assertNotNull(testObject.getBoolean("boolean"));
+        try {
+            testObject.getBoolean("array");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_BOOLEAN);
+        }
+        try {
+            testObject.getBoolean("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), NullPointerException.class);
+        }
+
+
+        Json testArray = Json.fromString("[true, []]");
+        Assert.assertNotNull(testArray.getBoolean(0));
+        try {
+            testObject.getBoolean(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_BOOLEAN);
+        }
+        try {
+            testObject.getBoolean(2);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
+        }
+        try {
+            testObject.getBoolean("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), NullPointerException.class);
+        }
+
+
+        try {
+            STRING.getBoolean(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+        try {
+            STRING.getBoolean("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
     }
 
     public void testGetLong() throws Throwable {
