@@ -848,7 +848,56 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testGetString() throws Throwable {
-        // TODO
+        Json testObject = Json.fromString("{\"string\": \"memimo\", \"array\": []}");
+        Assert.assertNotNull(testObject.getString("string"));
+        try {
+            testObject.getString("array");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_STRING);
+        }
+        try {
+            testObject.getString("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), NullPointerException.class);
+        }
+
+
+        Json testArray = Json.fromString("[\"memimo\", []]");
+        Assert.assertNotNull(testArray.getString(0));
+        try {
+            testObject.getString(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_STRING);
+        }
+        try {
+            testObject.getString(2);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
+        }
+        try {
+            testObject.getDouble("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getClass(), NullPointerException.class);
+        }
+
+
+        try {
+            STRING.getString(1);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+        }
+        try {
+            STRING.getString("whatever");
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
+        }
     }
 
     public void testGetArray() throws Throwable {
