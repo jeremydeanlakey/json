@@ -879,7 +879,7 @@ public class JsonTest extends AndroidTestCase {
             Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
         }
         try {
-            testObject.getDouble("whatever");
+            testObject.getString("whatever");
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getClass(), NullPointerException.class);
