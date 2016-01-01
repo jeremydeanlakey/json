@@ -642,7 +642,7 @@ public class JsonTest extends AndroidTestCase {
         }
     }
 
-
+    // TODO: test get or default functions
     public void testGet() throws Throwable {
         Json testObject = Json.fromString("{\"object\": {}, \"array\": []}");
         Assert.assertNotNull(testObject.get("object"));
@@ -691,6 +691,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetBoolean() throws Throwable {
         Json testObject = Json.fromString("{\"boolean\": true, \"array\": []}");
         Assert.assertNotNull(testObject.getBoolean("boolean"));
+        Assert.assertTrue(testObject.getBoolean("boolean", false));
+        Assert.assertFalse(testObject.getBoolean("whatever", false));
         try {
             testObject.getBoolean("array");
             Assert.fail();
