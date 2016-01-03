@@ -45,6 +45,7 @@ public class Jobject extends Json {
     @Override public String getString(String key){ return map.get(key).getString(); }
     // TODO implement sub-type checks on all versions of getArray and getObject
     @Override public Json getArray(String key){ return map.get(key); }
+    @Override public Json getObject(String key){ return map.get(key); }
 
     @Override public Json get(String key, Json def){return has(key) ? get(key) : def;}
     @Override public boolean getBoolean(String key, boolean def){ return hasBoolean(key) ? getBoolean(key) : def; }
