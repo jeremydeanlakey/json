@@ -649,6 +649,8 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertTrue(testObject.get("object").isObject());
         Assert.assertFalse(testObject.has("whatever"));
         Assert.assertNull(testObject.get("whatever"));
+        Assert.assertTrue(testObject.get("whatever", STRING).isString());
+        Assert.assertFalse(testObject.get("object", STRING).isString());
         try {
             testObject.get(1);
             Assert.fail();
