@@ -65,7 +65,6 @@ public abstract class Json implements Iterable<Json> {
     public long getLong(String key, long def){throw new RuntimeException(NOT_OBJECT);}
     public double getDouble(String key, double def){throw new RuntimeException(NOT_OBJECT);}
     public String getString(String key, String def){throw new RuntimeException(NOT_OBJECT);}
-    // TODO implement tests using defaults
     public Json getArray(String key, Jarray def){throw new RuntimeException(NOT_OBJECT);}
     public Json getObject(String key, Jobject def){throw new RuntimeException(NOT_OBJECT);}
 
