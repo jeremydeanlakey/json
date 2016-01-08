@@ -803,8 +803,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetDouble() throws Throwable {
         Json testObject = Json.fromString("{\"number\": 1, \"array\": []}");
         Assert.assertNotNull(testObject.getDouble("number"));
-        Assert.assertEquals(1, testObject.getLong("number", 2));
-        Assert.assertEquals(2, testObject.getLong("whatever", 2));
+        Assert.assertEquals(1, testObject.getDouble("number", 2));
+        Assert.assertEquals(2, testObject.getDouble("whatever", 2));
         try {
             testObject.getDouble("array");
             Assert.fail();
