@@ -858,6 +858,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetString() throws Throwable {
         Json testObject = Json.fromString("{\"string\": \"memimo\", \"array\": []}");
         Assert.assertNotNull(testObject.getString("string"));
+        Assert.assertEquals("memimo", testObject.getString("string", "bzzzt"));
+        Assert.assertEquals("bzzzt", testObject.getString("whatever", "bzzzt"));
         try {
             testObject.getString("array");
             Assert.fail();
