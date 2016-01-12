@@ -968,6 +968,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetObject() throws Throwable {
         Json testObject = Json.fromString("{\"string\": \"memimo\", \"object\": {}}");
         Assert.assertNotNull(testObject.getObject("object"));
+        Assert.assertEquals(EMPTY_OBJECT, testObject.getObject("object", NON_EMPTY_OBJECT));
+        Assert.assertNotEquals(EMPTY_OBJECT, testObject.getObject("whatever", NON_EMPTY_OBJECT));
         try {
             testObject.getObject("string");
             Assert.fail();
