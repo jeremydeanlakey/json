@@ -102,19 +102,6 @@ public abstract class Json implements Iterable<Json> {
 
     public static Json fromString (String string){
         return Jparser.stringToJson(string);
-        /*
-        if (string == null)
-            return null;
-        JSONObject jsonObject = null;
-        try { jsonObject = new JSONObject(string); } catch (JSONException e) {}
-        if (jsonObject != null)
-            return Json.fromJsonObject(jsonObject);
-        JSONArray jsonArray = null;
-        try { jsonArray = new JSONArray(string); } catch (JSONException e) {}
-        if (jsonArray != null)
-            return Json.fromJsonArray(jsonArray);
-        return null;
-        */
     }
 
     public static Json fromJsonObject(JSONObject jsonObject){
