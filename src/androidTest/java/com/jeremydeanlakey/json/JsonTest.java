@@ -1085,23 +1085,12 @@ public class JsonTest extends AndroidTestCase {
 
 
     public void testIterator() throws Throwable {
-
-        // TODO should Jobject have an iterator?
-        // Assert.assertFalse(EMPTY_OBJECT.iterator().hasNext());
         Assert.assertFalse(EMPTY_ARRAY.iterator().hasNext());
 
         int arraySize = 0;
         for (Json x: NON_EMPTY_ARRAY)
             arraySize++;
         Assert.assertEquals(NON_EMPTY_ARRAY.length(), arraySize);
-
-        /*
-        Json sizeTwo = Json.fromString("{\"A\": 1, \"B\": 2}");
-        int objectSize = 0;
-        for (Json x: sizeTwo)
-            objectSize++;
-        Assert.assertEquals(sizeTwo.length(), objectSize);
-        */
 
         try {
             STRING.iterator();
