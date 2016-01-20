@@ -912,8 +912,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetArray() throws Throwable {
         Json testObject = Json.fromString("{\"string\": \"memimo\", \"array\": []}");
         Assert.assertNotNull(testObject.getArray("array"));
-        Assert.assertEquals(EMPTY_ARRAY, testObject.getArray("array", NON_EMPTY_ARRAY));
-        Assert.assertNotSame(EMPTY_ARRAY, testObject.getArray("whatever", NON_EMPTY_ARRAY));
+        Assert.assertEquals(EMPTY_ARRAY, testObject.getArray("array", (Jarray) NON_EMPTY_ARRAY));
+        Assert.assertNotSame(EMPTY_ARRAY, testObject.getArray("whatever", (Jarray) NON_EMPTY_ARRAY));
         try {
             testObject.getArray("array");
             Assert.fail();
@@ -967,8 +967,8 @@ public class JsonTest extends AndroidTestCase {
     public void testGetObject() throws Throwable {
         Json testObject = Json.fromString("{\"string\": \"memimo\", \"object\": {}}");
         Assert.assertNotNull(testObject.getObject("object"));
-        Assert.assertEquals(EMPTY_OBJECT, testObject.getObject("object", NON_EMPTY_OBJECT));
-        Assert.assertNotSame(EMPTY_OBJECT, testObject.getObject("whatever", NON_EMPTY_OBJECT));
+        Assert.assertEquals(EMPTY_OBJECT, testObject.getObject("object", (Jobject) OBJECT_A1_B2));
+        Assert.assertNotSame(EMPTY_OBJECT, testObject.getObject("whatever", (Jobject) OBJECT_A1_B2));
         try {
             testObject.getObject("string");
             Assert.fail();
