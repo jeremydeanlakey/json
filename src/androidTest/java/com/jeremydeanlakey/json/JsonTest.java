@@ -1200,7 +1200,6 @@ public class JsonTest extends AndroidTestCase {
     }
 
     public void testIsNumber() throws Throwable {
-        // TODO add testIsLong and testIsDouble ?
         Assert.assertFalse(Json.isNumber(EMPTY_ARRAY));
         Assert.assertFalse(Json.isNumber(EMPTY_OBJECT));
         Assert.assertFalse(Json.isNumber(NULL));
@@ -1216,6 +1215,14 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(STRING.isNumber());
         Assert.assertTrue(STRING_ONE_POINT_FIVE.isNumber());
         Assert.assertFalse(TRUE.isNumber());
+    }
+
+    public void testIsDouble() throws Throwable {
+        // TODO
+    }
+
+    public void testIsLong() throws Throwable {
+        // TODO
     }
 
     public void testIsString() throws Throwable {
