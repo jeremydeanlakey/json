@@ -660,7 +660,7 @@ public class JsonTest extends AndroidTestCase {
 
         Json testArray = Json.fromString("[{}, []]");
         Assert.assertNotNull(testArray.get(0));
-        Assert.assertTrue(testObject.get(0).isObject());
+        Assert.assertTrue(testArray.get(0).isObject());
         try {
             testObject.get(2);
             Assert.fail();
