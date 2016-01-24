@@ -915,7 +915,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(EMPTY_ARRAY, testObject.getArray("array", (Jarray) NON_EMPTY_ARRAY));
         Assert.assertNotSame(EMPTY_ARRAY, testObject.getArray("whatever", (Jarray) NON_EMPTY_ARRAY));
         try {
-            testObject.getArray("array");
+            testObject.getArray("string");
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
