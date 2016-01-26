@@ -711,7 +711,7 @@ public class JsonTest extends AndroidTestCase {
         Json testArray = Json.fromString("[true, []]");
         Assert.assertNotNull(testArray.getBoolean(0));
         try {
-            testObject.getBoolean(1);
+            testArray.getBoolean(1);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getMessage(), Json.NOT_BOOLEAN);
