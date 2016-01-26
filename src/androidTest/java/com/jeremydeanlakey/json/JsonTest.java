@@ -717,7 +717,7 @@ public class JsonTest extends AndroidTestCase {
             Assert.assertEquals(e.getMessage(), Json.NOT_BOOLEAN);
         }
         try {
-            testObject.getBoolean(2);
+            testArray.getBoolean(2);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
