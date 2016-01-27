@@ -876,13 +876,13 @@ public class JsonTest extends AndroidTestCase {
         Json testArray = Json.fromString("[\"memimo\", []]");
         Assert.assertNotNull(testArray.getString(0));
         try {
-            testObject.getString(1);
+            testArray.getString(1);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getMessage(), Json.NOT_STRING);
         }
         try {
-            testObject.getString(2);
+            testArray.getString(2);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
