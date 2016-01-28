@@ -1,4 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
 
 android {
     compileSdkVersion 21
@@ -11,6 +16,9 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
