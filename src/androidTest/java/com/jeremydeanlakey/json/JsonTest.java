@@ -766,13 +766,13 @@ public class JsonTest extends AndroidTestCase {
         Json testArray = Json.fromString("[1, []]");
         Assert.assertNotNull(testArray.getLong(0));
         try {
-            testObject.getLong(1);
+            testArray.getLong(1);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getMessage(), Json.NOT_NUMBER);
         }
         try {
-            testObject.getLong(2);
+            testArray.getLong(2);
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(e.getClass(), IndexOutOfBoundsException.class);
