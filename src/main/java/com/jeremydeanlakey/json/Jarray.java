@@ -41,7 +41,7 @@ public class Jarray extends Json {
     @Override public double getDouble(int i){ return get(i).getDouble(); }
     @Override public String getString(int i){ return get(i).getString(); }
     @Override public Json getArray(int i){ return get(i); }
-    @Override public Json getObject(int i){ return get(i); }
+    @Override public Json getObject(int i){ if (!values.get(i).isObject()) throw new RuntimeException(NOT_OBJECT); return get(i); }
 
     @Override
     public void writeTo(StringBuilder builder) {
