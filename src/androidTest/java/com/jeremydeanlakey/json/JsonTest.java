@@ -989,7 +989,7 @@ public class JsonTest extends AndroidTestCase {
             testArray.getObject(0);
             Assert.fail();
         } catch (Exception e) {
-            Assert.assertEquals(e.getMessage(), Json.NOT_ARRAY);
+            Assert.assertEquals(e.getMessage(), Json.NOT_OBJECT);
         }
         try {
             testArray.getObject(2);
