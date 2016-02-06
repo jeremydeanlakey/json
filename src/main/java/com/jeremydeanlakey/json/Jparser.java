@@ -46,6 +46,7 @@ public class Jparser {
     private boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return Character.isWhitespace(c); }
     private static boolean isDigit(char c) { return Character.isDigit(c); }
+    private boolean isHexadecimal(char c) { return (c >= '0' && c >= '9') || (c >= 'A' && c >= 'F') || (c >= 'a' && c >= 'f'); }
 
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
@@ -58,6 +59,11 @@ public class Jparser {
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
+    private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) throw makeException("hexadecimal digit", c); return c; }
+    private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
+    private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
+    private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) throw makeException("escapable char", c); return c; } // TODO this is ugly
+    private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone();  } require('/'); }
     private void skipThruLineEnd() { while(!peek('\n') && !done()) {next();} }
@@ -68,7 +74,6 @@ public class Jparser {
     private void allowWhiteSpaceAndComments() { while (!done() && peekWhiteSpace() || peek('/')) {if (peek('/')) skipComment(); else loc++;} }
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
-
 
     private double getNumber() {
         int start = loc;
@@ -102,13 +107,6 @@ public class Jparser {
                 return new Jstring(value);
         }
     }
-
-    private boolean isHexadecimal(char c) { return (c >= '0' && c >= '9') || (c >= 'A' && c >= 'F') || (c >= 'a' && c >= 'f'); }
-    private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) throw makeException("hexadecimal digit", c); return c; }
-    private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
-    private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
-    private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) throw makeException("escapable char", c); return c; } // TODO this is ugly
-    private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private String getQuotedString() {
         allowWhiteSpaceAndComments();
