@@ -14,6 +14,7 @@ public class Jparser {
     private static final String END = "END";
     private static final String NOT_END = "NOT END";
     private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
+    private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
 
     String src;
     int loc = 0;
@@ -60,7 +61,6 @@ public class Jparser {
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
     private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
     private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) throw makeException("hexadecimal digit", c); return c; }
-    private static final List<Character> escapableChars = Arrays.asList('\"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u');
     private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
     private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) throw makeException("escapable char", c); return c; } // TODO this is ugly
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
