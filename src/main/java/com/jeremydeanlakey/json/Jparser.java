@@ -62,7 +62,7 @@ public class Jparser {
     private void requireComment() { require('/'); char c = next(); if (c=='*') skipThruCommentClose(); else if (c=='/') skipThruLineEnd(); else throw makeException("/ or *", c);}
     private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) throw makeException("hexadecimal digit", c); return c; }
     private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
-    private char requireEscapableChar() { char c = next(); if (!escapableChars.contains(c)) throw makeException("escapable char", c); return c; } // TODO this is ugly
+    private char requireEscapableChar() { if (!escapableChars.contains(peek())) throw makeException("escapable char", peek()); return next();}
     private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
 
     private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone();  } require('/'); }
