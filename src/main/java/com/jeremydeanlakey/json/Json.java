@@ -1,8 +1,5 @@
 package com.jeremydeanlakey.json;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -104,6 +101,7 @@ public abstract class Json implements Iterable<Json> {
         return Jparser.stringToJson(string);
     }
 
+    /*
     public static Json fromJsonObject(JSONObject jsonObject){
         if (jsonObject == null)
             return null;
@@ -190,6 +188,7 @@ public abstract class Json implements Iterable<Json> {
         }
         return output;
     }
+    */
 
     @Override public Iterator<Json> iterator() { throw new RuntimeException(ITERATOR_ERROR); }
 
