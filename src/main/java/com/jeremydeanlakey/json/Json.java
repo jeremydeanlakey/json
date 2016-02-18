@@ -48,7 +48,6 @@ public abstract class Json implements Iterable<Json> {
     public boolean hasArray(String key){throw new RuntimeException(NOT_OBJECT);}
 
     public Json get(String key){throw new RuntimeException(NOT_OBJECT);}
-
     public boolean getBoolean(String key){throw new RuntimeException(NOT_OBJECT);}
     public long getLong(String key){throw new RuntimeException(NOT_OBJECT);}
     public double getDouble(String key){throw new RuntimeException(NOT_OBJECT);}
@@ -57,7 +56,6 @@ public abstract class Json implements Iterable<Json> {
     public Json getObject(String key){throw new RuntimeException(NOT_OBJECT);}
 
     public Json get(String key, Json def){throw new RuntimeException(NOT_OBJECT);}
-
     public boolean getBoolean(String key, boolean def){throw new RuntimeException(NOT_OBJECT);}
     public long getLong(String key, long def){throw new RuntimeException(NOT_OBJECT);}
     public double getDouble(String key, double def){throw new RuntimeException(NOT_OBJECT);}
@@ -76,7 +74,6 @@ public abstract class Json implements Iterable<Json> {
     public boolean hasObject(int index){throw new RuntimeException(NOT_ARRAY);}
 
     public Json get(int index){throw new RuntimeException(NOT_ARRAY);}
-
     public boolean getBoolean(int index){throw new RuntimeException(NOT_ARRAY);}
     public long getLong(int index){throw new RuntimeException(NOT_ARRAY);}
     public double getDouble(int index){throw new RuntimeException(NOT_ARRAY);}
