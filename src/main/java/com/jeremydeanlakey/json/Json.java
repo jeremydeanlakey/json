@@ -38,7 +38,6 @@ public abstract class Json implements Iterable<Json> {
     public boolean isArray(String key) {throw new RuntimeException(NOT_OBJECT);}
 
     public boolean has(String key){throw new RuntimeException(NOT_OBJECT);}
-
     public boolean hasNull(String key) {throw new RuntimeException(NOT_OBJECT);}
     public boolean hasBoolean(String key){throw new RuntimeException(NOT_OBJECT);}
     public boolean hasLong(String key){throw new RuntimeException(NOT_OBJECT);}
@@ -92,16 +91,11 @@ public abstract class Json implements Iterable<Json> {
 
     public static Json newObject() { return new Jobject(); }
     public static Json newArray() { return new Jarray(); }
-
-
-    public static Json fromString (String string){
-        return Jparser.stringToJson(string);
-    }
+    public static Json fromString (String string){ return Jparser.stringToJson(string); }
 
     @Override public Iterator<Json> iterator() { throw new RuntimeException(ITERATOR_ERROR); }
 
     protected abstract void writeTo(StringBuilder builder);
-
     @Override public String toString() {StringBuilder sb = new StringBuilder(); writeTo(sb); return sb.toString(); }
 
     public static final boolean isNull(Json unknown){ return (unknown instanceof Json) && unknown.isNull(); }
