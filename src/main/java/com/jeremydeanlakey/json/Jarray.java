@@ -10,17 +10,17 @@ import java.util.List;
 public class Jarray extends Json {
     private List<Json> values;
 
-    class JarrayIterator implements Iterator<Json> {
+    public class JarrayIterator implements Iterator<Json> {
         private int nxt = 0;
         @Override public boolean hasNext() { return nxt < values.size(); }
         @Override public Json next() { return values.get(nxt++); }
         @Override public void remove() { values.remove(--nxt); }
     }
 
-    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
 
     protected Jarray() { values = new ArrayList<>(); }
 
+    @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
     @Override protected void add(Json value) { values.add(value); }
     @Override public int length() { return values.size(); }
     @Override public boolean isArray() { return true; }
