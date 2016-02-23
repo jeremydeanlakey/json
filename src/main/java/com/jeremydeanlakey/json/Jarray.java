@@ -17,7 +17,6 @@ public class Jarray extends Json {
         @Override public void remove() { values.remove(--nxt); }
     }
 
-
     protected Jarray() { values = new ArrayList<>(); }
 
     @Override public Iterator<Json> iterator() { return new JarrayIterator(); }
