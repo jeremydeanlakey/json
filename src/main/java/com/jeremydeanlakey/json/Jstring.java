@@ -9,8 +9,6 @@ public class Jstring extends Json {
 
     protected Jstring(String value){ this.value = value; }
 
-    @Override public boolean equals(Object o) { return (o instanceof Jstring) && ((Jstring)o).getString().equals(value); }
-
     @Override public boolean isString() { return true; }
     @Override public boolean isNull() { return value.equalsIgnoreCase("null"); }
     @Override public boolean isBoolean() { return value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false"); }
@@ -27,4 +25,6 @@ public class Jstring extends Json {
 
     @Override public String toString() { return "\"" + value + "\""; }
     @Override protected void writeTo(StringBuilder builder) { builder.append(QUOTE).append(value).append(QUOTE); }
+
+    @Override public boolean equals(Object o) { return (o instanceof Jstring) && ((Jstring)o).getString().equals(value); }
 }
