@@ -3,13 +3,19 @@ package com.jeremydeanlakey.json;
 /**
  * Created by jeremydeanlakey on 2/25/16.
  */
-abstract class Jtoken {
-    protected abstract boolean isJsonValue();
-    protected abstract Json getJsonValue();
-    protected abstract boolean isObjectStart();
-    protected abstract boolean isObjectEnd();
-    protected abstract boolean isColon();
-    protected abstract boolean isArrayStart();
-    protected abstract boolean isArrayEnd();
-    protected abstract boolean isComma();
+class Jtoken {
+    private char c;
+    private Json json;
+
+    protected Jtoken(char c) { this.c = c; }
+    protected Jtoken(Json json) { this.json = json; }
+
+    protected boolean isJsonValue() { return json != null; }
+    protected Json getJsonValue() { return json; }
+    protected boolean isObjectStart() { return (c == '{'); }
+    protected boolean isObjectEnd() { return (c == '}'); }
+    protected boolean isColon() { return (c == ':'); }
+    protected boolean isArrayStart() { return (c == '['); }
+    protected boolean isArrayEnd() { return (c == ']'); }
+    protected boolean isComma() { return (c == ','); }
 }
