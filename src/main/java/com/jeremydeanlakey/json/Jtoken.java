@@ -19,3 +19,11 @@ class Jtoken {
     protected boolean isArrayEnd() { return (c == ']'); }
     protected boolean isComma() { return (c == ','); }
 }
+
+
+class Jtokenizer {
+    String source;
+    int position = 0;
+    protected Jtokenizer(String source) { this.source = source; }
+    protected Jtoken nextToken() { return null; } // TODO
+}
