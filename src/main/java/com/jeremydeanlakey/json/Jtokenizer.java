@@ -22,6 +22,8 @@ class Jtokenizer {
     private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, actual, expected, i); }
     private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
 
+    private char next() { return src.charAt(i++); }
+
     private char peek() { return src.charAt(i); }
     private boolean peek(char c) { return !done() && (peek() == c); }
     private boolean peekE() { return peek('E') || peek('e'); }
@@ -65,9 +67,61 @@ class Jtokenizer {
     private void allowMinus() { if (!done() && peek('-')) next(); }
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
-    private char next() { return src.charAt(i++); }
     protected Jtokenizer(String source) { src = source; }
     protected Jtoken nextToken() { return null; } // TODO
 
 
+    private double getNumber() {
+        int start = i;
+        allowMinus();
+        requireZeroOrDigits();
+        allowDecimalAndDigits();
+        if (peekE())
+            requireStandardForm();
+        String number = src.substring(start, i);
+        return Double.valueOf(number);
+    }
+
+    private String getUnquotedString() {
+        allowWhiteSpaceAndComments();
+        int start = i;
+        while (!done() && isPermissibleNameChar(peek()))
+            next();
+        return src.substring(start, i);
+    }
+
+    protected Json getUnknownAlphanumeric() {
+        String value = getUnquotedString();
+        switch(value.toLowerCase()) {
+            case "true":
+                return new Jboolean(true);
+            case "false":
+                return new Jboolean(false);
+            case "null":
+                return new Jnull();
+            default:
+                return new Jstring(value);
+        }
+    }
+
+    private String getQuotedString() {
+        allowWhiteSpaceAndComments();
+        char c = requireQuote();
+        int start = i;
+        do {
+            if (peek('\\')) {
+                if (requireEscapedChar() == 'u')
+                    requireFourHex();
+            }
+        } while (next() != c);
+        return src.substring(start, i-1);
+    }
+
+    private String getString() {
+        allowWhiteSpaceAndComments();
+        if (peekQuote())
+            return getQuotedString();
+        else
+            return getUnquotedString();
+    }
 }
