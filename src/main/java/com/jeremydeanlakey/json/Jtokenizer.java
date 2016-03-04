@@ -68,7 +68,13 @@ class Jtokenizer {
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
     protected Jtokenizer(String source) { src = source; }
-    protected Jtoken nextToken() { return null; } // TODO
+    protected Jtoken nextToken() {
+        allowWhiteSpaceAndComments();
+        if (done()) return null;
+        if (peekQuote()) return new Jtoken(getQuotedString());
+        if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
+        return new Jtoken(next());
+    }
 
 
     private double getNumber() {
@@ -124,4 +130,5 @@ class Jtokenizer {
         else
             return getUnquotedString();
     }
+
 }
