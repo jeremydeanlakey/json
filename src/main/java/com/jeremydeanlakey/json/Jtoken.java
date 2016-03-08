@@ -7,11 +7,13 @@ import java.util.List;
  * Created by jeremydeanlakey on 2/25/16.
  */
 class Jtoken {
+    protected Jtoken END = new Jtoken();
     private char c;
     private Json json;
     private String s;
     private static List<Character> tokenChars = Arrays.asList('{', '}', ':', '[', ']', ',');
 
+    private Jtoken() {}
     protected Jtoken(char c) { this.c = c; }
     protected Jtoken(Json json) { this.json = json; }
     protected Jtoken(String s) { this.s = s; }
@@ -26,6 +28,7 @@ class Jtoken {
     protected boolean isArrayStart() { return (c == '['); }
     protected boolean isArrayEnd() { return (c == ']'); }
     protected boolean isComma() { return (c == ','); }
+    protected boolean isEnd() { return this == END; }
 
     public static boolean isValidToken(char c) { return tokenChars.contains(c); }
 }
