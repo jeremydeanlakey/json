@@ -73,7 +73,8 @@ class Jtokenizer {
         if (done()) return null;
         if (peekQuote()) return new Jtoken(getQuotedString());
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
-        return new Jtoken(next());
+        if (Jtoken.isValidToken(peek())) return new Jtoken(next());
+        return null; // TODO throw error
     }
 
 
