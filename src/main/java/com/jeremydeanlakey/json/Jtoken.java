@@ -7,7 +7,7 @@ import java.util.List;
  * Created by jeremydeanlakey on 2/25/16.
  */
 class Jtoken {
-    protected Jtoken END = new Jtoken();
+    protected static Jtoken END = new Jtoken();
     private char c;
     private Json json;
     private String s;
@@ -30,5 +30,6 @@ class Jtoken {
     protected boolean isComma() { return (c == ','); }
     protected boolean isEnd() { return this == END; }
 
+    public static Jtoken end() { return END; }
     public static boolean isValidToken(char c) { return tokenChars.contains(c); }
 }
