@@ -70,7 +70,7 @@ class Jtokenizer {
     protected Jtokenizer(String source) { src = source; }
     protected Jtoken nextToken() {
         allowWhiteSpaceAndComments();
-        if (done()) return null;
+        if (done()) return Jtoken.end();
         if (peekQuote()) return new Jtoken(getQuotedString());
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
         if (Jtoken.isValidToken(peek())) return new Jtoken(next());
