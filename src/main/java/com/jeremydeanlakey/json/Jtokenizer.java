@@ -74,6 +74,7 @@ class Jtokenizer {
         if (peekQuote()) return new Jtoken(getQuotedString());
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
         if (Jtoken.isValidToken(peek())) return new Jtoken(next());
+        if (peek('-') || peekDigit()) return new Jtoken(getNumber());
         return null; // TODO throw error
     }
 

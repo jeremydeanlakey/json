@@ -11,6 +11,7 @@ class Jtoken {
     private char c;
     private Json json;
     private String s;
+    private Double d;
     private static List<Character> tokenChars = Arrays.asList('{', '}', ':', '[', ']', ',');
 
     private Jtoken() {}
