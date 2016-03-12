@@ -19,6 +19,8 @@ class Jtoken {
     protected Jtoken(Json json) { this.json = json; }
     protected Jtoken(String s) { this.s = s; }
 
+    protected boolean isNumber() { return d != null; }
+    protected Double getNumberValue() { return d; }
     protected boolean isStringValue() { return s != null; }
     protected String getStringValue() { return s; }
     protected boolean isJsonValue() { return json != null; }
