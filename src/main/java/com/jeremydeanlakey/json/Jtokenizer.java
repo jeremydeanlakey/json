@@ -75,7 +75,7 @@ class Jtokenizer {
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
         if (Jtoken.isValidToken(peek())) return new Jtoken(next());
         if (peek('-') || peekDigit()) return new Jtoken(getNumber());
-        return null; // TODO throw error
+        throw new JparserException("Not a valid token: " + next());
     }
 
 
