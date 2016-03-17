@@ -27,5 +27,11 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
+    public void testColon() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer(" :   ");
+        Jtoken token = tokenizer.nextToken();
+        Assert.assertTrue(token.isColon());
+        Assert.assertTrue(tokenizer.nextToken().isEnd());
+    }
 
 }
