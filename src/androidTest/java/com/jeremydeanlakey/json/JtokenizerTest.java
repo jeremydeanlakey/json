@@ -18,4 +18,14 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertEquals("test", token.getStringValue());
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
+
+    public void testNumber() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer(" -5.2   ");
+        Jtoken token = tokenizer.nextToken();
+        Assert.assertTrue(token.isNumber());
+        Assert.assertEquals(-5.2, token.getNumberValue());
+        Assert.assertTrue(tokenizer.nextToken().isEnd());
+    }
+
+
 }
