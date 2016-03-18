@@ -34,4 +34,11 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
+    public void testComma() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer(" ,   ");
+        Jtoken token = tokenizer.nextToken();
+        Assert.assertTrue(token.isComma());
+        Assert.assertTrue(tokenizer.nextToken().isEnd());
+    }
+
 }
