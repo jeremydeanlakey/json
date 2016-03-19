@@ -46,15 +46,10 @@ public class JsonTest extends AndroidTestCase {
     public void setUp() {
         JSONArray ja = null, jna = null;
         JSONObject jo = null;
-        try {
-            ja = new JSONArray("[]");
-            jna = new JSONArray("[{\"contents\": 1}, 2, false, null, \"string\", []]");
-            jo = new JSONObject("{}");
-        } catch (Exception e) {}
-        EMPTY_ARRAY = Json.fromJsonArray(ja);
-        NON_EMPTY_ARRAY = Json.fromJsonArray(jna);
+        EMPTY_ARRAY = Json.fromString("[]");
+        NON_EMPTY_ARRAY = Json.fromString("[{\"contents\": 1}, 2, false, null, \"string\", []]");
         OBJECT_A1_B2 = Json.fromString("{\"A\": 1, \"B\": 2}");
-        EMPTY_OBJECT = Json.fromJsonObject(jo);
+        EMPTY_OBJECT = Json.fromString("{}");
         NULL = new Jnull();
         ONE = new Jnumber(1);
         STRING = new Jstring("I am a string");
