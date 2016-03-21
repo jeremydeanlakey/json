@@ -48,4 +48,11 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
+    public void testArrayEnd() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer(" ]  ");
+        Jtoken token = tokenizer.nextToken();
+        Assert.assertTrue(token.isArrayStart());
+        Assert.assertTrue(tokenizer.nextToken().isEnd());
+    }
+
 }
