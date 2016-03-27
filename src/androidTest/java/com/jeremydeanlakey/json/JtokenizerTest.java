@@ -7,6 +7,7 @@ import junit.framework.Assert;
  * Created by jeremydeanlakey on 3/14/16.
  */
 public class JtokenizerTest extends AndroidTestCase {
+    // TODO: test hex, single line comment, multiline comment
 
     public void setUp() {
     }
@@ -28,10 +29,14 @@ public class JtokenizerTest extends AndroidTestCase {
     }
 
     public void testNumber() throws Throwable {
-        Jtokenizer tokenizer = new Jtokenizer(" -5.2   ");
+        Jtokenizer tokenizer = new Jtokenizer(" -5.2   2.3e1");
         Jtoken token = tokenizer.nextToken();
         Assert.assertTrue(token.isNumber());
         Assert.assertEquals(-5.2, token.getNumberValue());
+
+        token = tokenizer.nextToken();
+        Assert.assertTrue(token.isNumber());
+        Assert.assertEquals(23.0, token.getNumberValue());
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
