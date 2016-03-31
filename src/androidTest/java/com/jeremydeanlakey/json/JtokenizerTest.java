@@ -7,7 +7,6 @@ import junit.framework.Assert;
  * Created by jeremydeanlakey on 3/14/16.
  */
 public class JtokenizerTest extends AndroidTestCase {
-    // TODO: test hex, single line comment, multiline comment
 
     public void setUp() {
     }
@@ -99,4 +98,10 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
+    public void testEscapedCharacters() {
+        Jtokenizer tokenizer = new Jtokenizer(" \"test\\ttest\"  ");
+        Jtoken token = tokenizer.nextToken();
+        Assert.assertTrue(token.isStringValue());
+        Assert.assertEquals(token.getStringValue(), "test\ttest");
+    }
 }
