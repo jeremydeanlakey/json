@@ -55,7 +55,7 @@ class Jtokenizer {
     private char requireHexademical() { char c = next(); if (!isHexadecimal(c)) throw makeException("hexadecimal digit", c); return c; }
     private void requireFourHex() { for (int i=0; i<4; i++) requireHexademical(); }
     private char requireEscapableChar() { if (!escapableChars.contains(peek())) throw makeException("escapable char", peek()); return next();}
-    private char requireEscapedChar() { require('\''); return requireEscapableChar(); }
+    private char requireEscapedChar() { require('\\'); return requireEscapableChar(); }
 
     private void skipThruCommentClose() { requireNotDone(); while(next()!='*' || !peek('/')) { requireNotDone();  } require('/'); }
     private void skipThruLineEnd() { while(!peek('\n') && !done()) {next();} }
