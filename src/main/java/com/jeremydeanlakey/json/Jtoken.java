@@ -36,4 +36,12 @@ class Jtoken {
 
     public static Jtoken end() { return END; }
     public static boolean isValidToken(char c) { return tokenChars.contains(c); }
+
+    @Override
+    public String toString() {
+        if (isStringValue()) { return s; }
+        else if (isNumber()) { return d.toString(); }
+        else if (isJsonValue()) { return json.toString(); }
+        else { return String.valueOf(c); }
+    }
 }
