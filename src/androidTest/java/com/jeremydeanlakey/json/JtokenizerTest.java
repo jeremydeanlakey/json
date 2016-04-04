@@ -28,7 +28,7 @@ public class JtokenizerTest extends AndroidTestCase {
     }
 
     public void testNumber() throws Throwable {
-        Jtokenizer tokenizer = new Jtokenizer(" -5.2   2.3e1");
+        Jtokenizer tokenizer = new Jtokenizer(" -5.2   2.3e1  \t  5.2  -2e2");
         Jtoken token = tokenizer.nextToken();
         Assert.assertTrue(token.isNumber());
         Assert.assertEquals(-5.2, token.getNumberValue());
@@ -36,6 +36,15 @@ public class JtokenizerTest extends AndroidTestCase {
         token = tokenizer.nextToken();
         Assert.assertTrue(token.isNumber());
         Assert.assertEquals(23.0, token.getNumberValue());
+
+        token = tokenizer.nextToken();
+        Assert.assertTrue(token.isNumber());
+        Assert.assertEquals(5.2, token.getNumberValue());
+
+        token = tokenizer.nextToken();
+        Assert.assertTrue(token.isNumber());
+        Assert.assertEquals(-20.0, token.getNumberValue());
+
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
 
