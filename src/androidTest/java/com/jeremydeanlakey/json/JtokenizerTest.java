@@ -108,12 +108,15 @@ public class JtokenizerTest extends AndroidTestCase {
     }
 
     public void testEscapedCharacters() {
-        Jtokenizer tokenizer = new Jtokenizer(" \"test\\ttest\" \"t\nt\"  \"\\\"\"  \"\\b\"");
+        Jtokenizer tokenizer = new Jtokenizer(" \"test\\ttest\"  \"\\\"\"  \"\\b\"  \"\\f\"  \"\\n\"  \"\\r\"  \"t\nt\"  ");
         Jtoken token = tokenizer.nextToken();
         Assert.assertTrue(token.isStringValue());
         Assert.assertEquals(token.getStringValue(), "test\ttest");
-        Assert.assertEquals(token.getStringValue(), "t\nt");
         Assert.assertEquals(token.getStringValue(), "\"");
         Assert.assertEquals(token.getStringValue(), "\b");
+        Assert.assertEquals(token.getStringValue(), "\f");
+        Assert.assertEquals(token.getStringValue(), "\n");
+        Assert.assertEquals(token.getStringValue(), "\r");
+        Assert.assertEquals(token.getStringValue(), "t\nt");
     }
 }
