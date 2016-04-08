@@ -72,9 +72,9 @@ class Jtokenizer {
         allowWhiteSpaceAndComments();
         if (done()) return Jtoken.end();
         if (peekQuote()) return new Jtoken(getQuotedString());
+        if (peek('-') || peekDigit()) return new Jtoken(getNumber());
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
         if (Jtoken.isValidToken(peek())) return new Jtoken(next());
-        if (peek('-') || peekDigit()) return new Jtoken(getNumber());
         throw new JparserException("Not a valid token: " + next());
     }
 
