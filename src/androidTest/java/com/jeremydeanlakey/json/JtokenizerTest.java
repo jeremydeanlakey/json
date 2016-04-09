@@ -43,7 +43,7 @@ public class JtokenizerTest extends AndroidTestCase {
 
         token = tokenizer.nextToken();
         Assert.assertTrue(token.isNumber());
-        Assert.assertEquals(-20.0, token.getNumberValue());
+        Assert.assertEquals(-200.0, token.getNumberValue());
 
         Assert.assertTrue(tokenizer.nextToken().isEnd());
     }
@@ -111,12 +111,13 @@ public class JtokenizerTest extends AndroidTestCase {
         Jtokenizer tokenizer = new Jtokenizer(" \"test\\ttest\"  \"\\\"\"  \"\\b\"  \"\\f\"  \"\\n\"  \"\\r\"  \"t\nt\"  ");
         Jtoken token = tokenizer.nextToken();
         Assert.assertTrue(token.isStringValue());
-        Assert.assertEquals(token.getStringValue(), "test\ttest");
+        Assert.assertEquals(token.getStringValue(), "test\ttest"); // TODO special characters need to be swapped out
         Assert.assertEquals(token.getStringValue(), "\"");
         Assert.assertEquals(token.getStringValue(), "\b");
         Assert.assertEquals(token.getStringValue(), "\f");
         Assert.assertEquals(token.getStringValue(), "\n");
         Assert.assertEquals(token.getStringValue(), "\r");
         Assert.assertEquals(token.getStringValue(), "t\nt");
+        // TODO hex
     }
 }
