@@ -19,6 +19,17 @@ class Jtokenizer {
         JparserException(String message) { super(message); }
     }
 
+    protected Jtoken nextToken() {
+        allowWhiteSpaceAndComments();
+        if (done()) return Jtoken.end();
+        if (peekQuote()) return new Jtoken(getQuotedString());
+        if (peek('-') || peekDigit()) return new Jtoken(getNumber());
+        if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
+        if (Jtoken.isValidToken(peek())) return new Jtoken(next());
+        throw new JparserException("Not a valid token: " + next());
+    }
+
+
     private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, actual, expected, i); }
     private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
 
@@ -68,15 +79,6 @@ class Jtokenizer {
     private void allowDecimalAndDigits() { if (peek('.')) { next(); allowDigits(); } }
 
     protected Jtokenizer(String source) { src = source; }
-    protected Jtoken nextToken() {
-        allowWhiteSpaceAndComments();
-        if (done()) return Jtoken.end();
-        if (peekQuote()) return new Jtoken(getQuotedString());
-        if (peek('-') || peekDigit()) return new Jtoken(getNumber());
-        if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
-        if (Jtoken.isValidToken(peek())) return new Jtoken(next());
-        throw new JparserException("Not a valid token: " + next());
-    }
 
 
     private double getNumber() {
@@ -98,7 +100,7 @@ class Jtokenizer {
         return src.substring(start, i);
     }
 
-    protected Json getUnknownAlphanumeric() {
+    private Json getUnknownAlphanumeric() {
         String value = getUnquotedString();
         switch(value.toLowerCase()) {
             case "true":
@@ -132,5 +134,4 @@ class Jtokenizer {
         else
             return getUnquotedString();
     }
-
 }
