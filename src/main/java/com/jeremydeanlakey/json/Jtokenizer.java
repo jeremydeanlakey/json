@@ -118,12 +118,15 @@ class Jtokenizer {
         allowWhiteSpaceAndComments();
         char c = requireQuote();
         int start = i;
-        boolean hasEscapedChars = false;
+        StringBuilder alternative = new StringBuilder();
+        int lastStop = i;
         do {
             if (peek('\\')) {
-                hasEscapedChars = true;
+                alternative.append(src.substring(lastStop, i-1));
                 if (requireEscapedChar() == 'u')
                     requireFourHex();
+                // TODO add escaped char
+                lastStop = i;
             }
         } while (next() != c);
         return src.substring(start, i-1);
