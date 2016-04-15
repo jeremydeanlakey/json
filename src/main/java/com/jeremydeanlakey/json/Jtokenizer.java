@@ -136,8 +136,13 @@ class Jtokenizer {
         do {
             if (peek('\\')) {
                 alternative.append(src.substring(lastStop, i-1));
-                if (requireEscapedChar() == 'u')
+                char escapedChar = requireEscapedChar();
+                if (escapedChar == 'u') {
                     requireFourHex();
+                }
+                else {
+                    alternative.append(convertEscapedChar(escapedChar));
+                }
                 // TODO add escaped char
                 lastStop = i;
             }
