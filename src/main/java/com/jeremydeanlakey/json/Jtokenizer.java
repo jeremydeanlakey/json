@@ -127,6 +127,13 @@ class Jtokenizer {
         }
     }
 
+    private String convertedUnicodeString(String s) {
+        // TODO test that this works for all possible unicode values allowed in JSON format.
+        int i = Integer.parseInt(s, 16);
+        char[] c = Character.toChars(i);
+        return new String(c);
+    }
+
     private String getQuotedString() {
         allowWhiteSpaceAndComments();
         char c = requireQuote();
