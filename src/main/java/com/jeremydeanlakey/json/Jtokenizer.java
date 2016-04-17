@@ -145,16 +145,23 @@ class Jtokenizer {
                 alternative.append(src.substring(lastStop, i-1));
                 char escapedChar = requireEscapedChar();
                 if (escapedChar == 'u') {
+                    int hexStart = i;
                     requireFourHex();
+                    alternative.append(convertedUnicodeString(src.substring(hexStart, i-1)));
                 }
                 else {
                     alternative.append(convertEscapedChar(escapedChar));
                 }
-                // TODO add escaped char
                 lastStop = i;
             }
         } while (next() != c);
-        return src.substring(start, i-1);
+        if (alternative.length() > 0) {
+            alternative.append(src.substring(lastStop, i-1));
+            return alternative.toString();
+        }
+        else {
+            return src.substring(start, i-1);
+        }
     }
 
     private String getString() {
