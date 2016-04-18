@@ -142,7 +142,7 @@ class Jtokenizer {
         int lastStop = i;
         do {
             if (peek('\\')) {
-                alternative.append(src.substring(lastStop, i-1));
+                alternative.append(src.substring(lastStop, i));
                 char escapedChar = requireEscapedChar();
                 if (escapedChar == 'u') {
                     int hexStart = i;
