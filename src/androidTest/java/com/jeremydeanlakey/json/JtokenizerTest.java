@@ -130,6 +130,10 @@ public class JtokenizerTest extends AndroidTestCase {
         token = tokenizer.nextToken();
         Assert.assertTrue(token.isStringValue());
         Assert.assertEquals(token.getStringValue(), "t\nt");
-        // TODO hex
+
+        tokenizer = new Jtokenizer(" \"\\u1234\"  ");
+        token = tokenizer.nextToken();
+        Assert.assertTrue(token.isStringValue());
+        Assert.assertEquals(token.getStringValue(), "\u1234");
     }
 }
