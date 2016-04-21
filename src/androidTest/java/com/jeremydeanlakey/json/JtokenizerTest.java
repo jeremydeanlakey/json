@@ -131,9 +131,13 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertTrue(token.isStringValue());
         Assert.assertEquals(token.getStringValue(), "t\nt");
 
-        tokenizer = new Jtokenizer(" \"\\u1234\"  ");
+        tokenizer = new Jtokenizer(" \"\\u1234\"  \"\\uffff\" \"\\u0000\" ");
         token = tokenizer.nextToken();
         Assert.assertTrue(token.isStringValue());
         Assert.assertEquals(token.getStringValue(), "\u1234");
+        token = tokenizer.nextToken();
+        Assert.assertEquals(token.getStringValue(), "\uffff");
+        token = tokenizer.nextToken();
+        Assert.assertEquals(token.getStringValue(), "\u0000");
     }
 }
