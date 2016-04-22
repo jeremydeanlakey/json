@@ -50,7 +50,7 @@ class Jtokenizer {
     private static boolean isPermissibleNameChar(char c) { return isAlphanumeric(c) || (c == '_'); }
     private static boolean isWhiteSpaceChar(char c) { return Character.isWhitespace(c); }
     private static boolean isDigit(char c) { return Character.isDigit(c); }
-    private static boolean isHexadecimal(char c) { return (c >= '0' && c >= '9') || (c >= 'A' && c >= 'F') || (c >= 'a' && c >= 'f'); }
+    private static boolean isHexadecimal(char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c >= 'F') || (c >= 'a' && c >= 'f'); }
 
     private void require(char c) { requireNotDone(); char n = next(); if (n != c) throw makeException(c, n); }
     private void require1to9() { char c = next(); if (c<'1' || c>'9') throw makeException("[1-9]", c); }
