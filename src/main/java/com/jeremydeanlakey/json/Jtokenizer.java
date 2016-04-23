@@ -147,7 +147,7 @@ class Jtokenizer {
                 if (escapedChar == 'u') {
                     int hexStart = i;
                     requireFourHex();
-                    alternative.append(convertedUnicodeString(src.substring(hexStart, i-1)));
+                    alternative.append(convertedUnicodeString(src.substring(hexStart, i)));
                 }
                 else {
                     alternative.append(convertEscapedChar(escapedChar));
