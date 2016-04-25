@@ -141,10 +141,20 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertEquals(token.getStringValue(), "\u0000");
 
         try {
+            // test non-hex digits
             tokenizer = new Jtokenizer(" \"\\uhhhh\"  ");
             token = tokenizer.nextToken();
         } catch(Exception e) {
             Assert.fail();
         }
+
+        try {
+            // test too few hex digits
+            tokenizer = new Jtokenizer(" \"\\u123\"  ");
+            token = tokenizer.nextToken();
+        } catch(Exception e) {
+            Assert.fail();
+        }
     }
+
 }
