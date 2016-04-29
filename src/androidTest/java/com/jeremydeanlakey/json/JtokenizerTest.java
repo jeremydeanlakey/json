@@ -108,7 +108,6 @@ public class JtokenizerTest extends AndroidTestCase {
     }
 
     public void testEscapedCharacters() {
-
         Jtokenizer tokenizer = new Jtokenizer(" \"test\\ttest\"  \"\\\"\"  \"\\b\"  \"\\f\"  \"\\n\"  \"\\r\"  \"t\nt\"  ");
         Jtoken token = tokenizer.nextToken();
         Assert.assertTrue(token.isStringValue());
@@ -140,23 +139,19 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertEquals(token.getStringValue(), "\uffff");
         token = tokenizer.nextToken();
         Assert.assertEquals(token.getStringValue(), "\u0000");
-        //Jtokenizer tokenizer; Jtoken token;
 
         try {
             // test non-hex digits
             tokenizer = new Jtokenizer(" \"\\uhhhh\"  ");
             token = tokenizer.nextToken();
             Assert.fail();
-        } catch(Exception e) {
-        }
+        } catch(Exception e) {}
 
         try {
             // test too few hex digits
             tokenizer = new Jtokenizer(" \"\\u123\"  ");
             token = tokenizer.nextToken();
             Assert.fail();
-        } catch(Exception e) {
-        }
+        } catch(Exception e) {}
     }
-
 }
