@@ -143,14 +143,14 @@ public class JtokenizerTest extends AndroidTestCase {
         try {
             // test non-hex digits
             tokenizer = new Jtokenizer(" \"\\uhhhh\"  ");
-            token = tokenizer.nextToken();
+            tokenizer.nextToken();
             Assert.fail();
         } catch(Exception e) {}
 
         try {
             // test too few hex digits
             tokenizer = new Jtokenizer(" \"\\u123\"  ");
-            token = tokenizer.nextToken();
+            tokenizer.nextToken();
             Assert.fail();
         } catch(Exception e) {}
     }
