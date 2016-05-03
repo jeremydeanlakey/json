@@ -16,9 +16,17 @@ public class Jtparser {
 
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
 
+    private void requireDone() {  } // TODO
+
+    protected Json getItem() {
+        return null; // TODO
+    }
+
     private Json getJson() {
         if (tokenizer == null)
             return null;
-        return null; // TODO fill out this function
+        Json item = getItem();
+        requireDone();
+        return item;
     }
 }
