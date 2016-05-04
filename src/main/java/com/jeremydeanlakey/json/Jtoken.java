@@ -8,6 +8,7 @@ import java.util.List;
  */
 class Jtoken {
     protected static Jtoken END = new Jtoken();
+    private String END_STR = "END";
     private char c;
     private Json json;
     private String s;
@@ -40,6 +41,7 @@ class Jtoken {
     @Override
     public String toString() {
         if (isStringValue()) { return s; }
+        else if (isEnd()) { return END_STR; }
         else if (isNumber()) { return d.toString(); }
         else if (isJsonValue()) { return json.toString(); }
         else { return String.valueOf(c); }
