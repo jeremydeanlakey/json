@@ -28,11 +28,12 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isEnd());
 
         // isValidToken(c)
-        // toString()
-        // getNumberValue());
-        // getStringValue());
-        // getJsonValue());
+        Assert.assertEquals(token.toString(), "5.3");
+        Assert.assertEquals(token.getNumberValue(), 5.3);
+        // Assert.assertEquals(getStringValue(), whatever));
+        // Assert.assertEquals(getJsonValue(), whatever));
     }
+    
     // TODO: number
     // TODO: string
     // TODO: json
