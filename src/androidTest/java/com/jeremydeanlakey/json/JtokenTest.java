@@ -56,6 +56,28 @@ public class JtokenTest extends AndroidTestCase {
         // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
+    public void testObjectStart() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer(" {   ");
+        Jtoken token = tokenizer.nextToken();
+
+        Assert.assertFalse(token.isNumber());
+        Assert.assertFalse(token.isStringValue());
+        Assert.assertFalse(token.isJsonValue());
+        Assert.assertTrue(token.isObjectStart());
+        Assert.assertFalse(token.isObjectEnd());
+        Assert.assertFalse(token.isColon());
+        Assert.assertFalse(token.isArrayStart());
+        Assert.assertFalse(token.isArrayEnd());
+        Assert.assertFalse(token.isComma());
+        Assert.assertFalse(token.isEnd());
+
+        Assert.assertTrue(Jtoken.isValidToken('{'));
+        // Assert.assertEquals(token.toString(), "I'm a string!");
+        //Assert.assertEquals(token.getNumberValue(), 5.3);
+        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
+        // Assert.assertEquals(token.getJsonValue(), whatever);
+    }
+
     // TODO: json
     // TODO: {
     // TODO: :
