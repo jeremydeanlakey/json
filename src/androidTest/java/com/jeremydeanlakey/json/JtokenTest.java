@@ -123,7 +123,7 @@ public class JtokenTest extends AndroidTestCase {
     }
 
     public void testArrayEnd() throws Throwable {
-        Jtokenizer tokenizer = new Jtokenizer(" [   ");
+        Jtokenizer tokenizer = new Jtokenizer(" ]   ");
         Jtoken token = tokenizer.nextToken();
 
         Assert.assertFalse(token.isNumber());
@@ -137,15 +137,33 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isComma());
         Assert.assertFalse(token.isEnd());
 
-        Assert.assertTrue(Jtoken.isValidToken('['));
-        // Assert.assertEquals(token.toString(), "I'm a string!");
+        Assert.assertTrue(Jtoken.isValidToken(']'));
+        Assert.assertEquals(token.toString(), "]");
         //Assert.assertEquals(token.getNumberValue(), 5.3);
         //Assert.assertEquals(token.getStringValue(), "I'm a string!");
         // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
     public void Comma() throws Throwable {
-        // TODO
+        Jtokenizer tokenizer = new Jtokenizer(" ,   ");
+        Jtoken token = tokenizer.nextToken();
+
+        Assert.assertFalse(token.isNumber());
+        Assert.assertFalse(token.isStringValue());
+        Assert.assertFalse(token.isJsonValue());
+        Assert.assertFalse(token.isObjectStart());
+        Assert.assertFalse(token.isObjectEnd());
+        Assert.assertFalse(token.isColon());
+        Assert.assertFalse(token.isArrayStart());
+        Assert.assertFalse(token.isArrayEnd());
+        Assert.assertTrue(token.isComma());
+        Assert.assertFalse(token.isEnd());
+
+        Assert.assertTrue(Jtoken.isValidToken(','));
+        Assert.assertEquals(token.toString(), ",");
+        //Assert.assertEquals(token.getNumberValue(), 5.3);
+        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
+        // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
     public void testJson() throws Throwable {
