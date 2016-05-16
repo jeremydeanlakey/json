@@ -27,11 +27,8 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isComma());
         Assert.assertFalse(token.isEnd());
 
-        // isValidToken(c)
         Assert.assertEquals(token.toString(), "5.3");
         Assert.assertEquals(token.getNumberValue(), 5.3);
-        // Assert.assertEquals(token.getStringValue(), whatever);
-        // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
     public void testString() throws Throwable {
@@ -49,11 +46,8 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isComma());
         Assert.assertFalse(token.isEnd());
 
-        // isValidToken(c)
         Assert.assertEquals(token.toString(), "I'm a string!");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
         Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
     public void testObjectStart() throws Throwable {
@@ -72,10 +66,7 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isEnd());
 
         Assert.assertTrue(Jtoken.isValidToken('{'));
-        // Assert.assertEquals(token.toString(), "I'm a string!");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
+        Assert.assertEquals(token.toString(), "{");
     }
 
     public void testObjectEnd() throws Throwable {
@@ -94,10 +85,7 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isEnd());
 
         Assert.assertTrue(Jtoken.isValidToken('}'));
-        // Assert.assertEquals(token.toString(), "I'm a string!");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
+        Assert.assertEquals(token.toString(), "}");
     }
 
     public void testArrayStart() throws Throwable {
@@ -116,10 +104,7 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isEnd());
 
         Assert.assertTrue(Jtoken.isValidToken('['));
-        // Assert.assertEquals(token.toString(), "I'm a string!");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
+        Assert.assertEquals(token.toString(), "[");
     }
 
     public void testArrayEnd() throws Throwable {
