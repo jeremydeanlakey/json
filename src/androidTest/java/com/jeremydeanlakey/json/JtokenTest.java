@@ -146,13 +146,6 @@ public class JtokenTest extends AndroidTestCase {
 
         Assert.assertTrue(Jtoken.isValidToken(','));
         Assert.assertEquals(token.toString(), ",");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
-    }
-
-    public void testJson() throws Throwable {
-        // TODO
     }
 
     public void testColon() throws Throwable {
