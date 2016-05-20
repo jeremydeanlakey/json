@@ -76,8 +76,8 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isNumber());
         Assert.assertFalse(token.isStringValue());
         Assert.assertFalse(token.isJsonValue());
-        Assert.assertTrue(token.isObjectStart());
-        Assert.assertFalse(token.isObjectEnd());
+        Assert.assertFalse(token.isObjectStart());
+        Assert.assertTrue(token.isObjectEnd());
         Assert.assertFalse(token.isColon());
         Assert.assertFalse(token.isArrayStart());
         Assert.assertFalse(token.isArrayEnd());
