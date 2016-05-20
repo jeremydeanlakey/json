@@ -124,12 +124,9 @@ public class JtokenTest extends AndroidTestCase {
 
         Assert.assertTrue(Jtoken.isValidToken(']'));
         Assert.assertEquals(token.toString(), "]");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
-    public void Comma() throws Throwable {
+    public void testComma() throws Throwable {
         Jtokenizer tokenizer = new Jtokenizer(" ,   ");
         Jtoken token = tokenizer.nextToken();
 
@@ -165,9 +162,6 @@ public class JtokenTest extends AndroidTestCase {
 
         Assert.assertTrue(Jtoken.isValidToken(':'));
         Assert.assertEquals(token.toString(), ":");
-        //Assert.assertEquals(token.getNumberValue(), 5.3);
-        //Assert.assertEquals(token.getStringValue(), "I'm a string!");
-        // Assert.assertEquals(token.getJsonValue(), whatever);
     }
 
     public void testEnd() throws Throwable {
