@@ -179,6 +179,6 @@ public class JtokenTest extends AndroidTestCase {
         Assert.assertFalse(token.isComma());
         Assert.assertTrue(token.isEnd());
 
-        Assert.assertEquals(token.toString(), Jtoken.END);
+        Assert.assertEquals(token.toString(), Jtoken.END.toString());
     }
 }
