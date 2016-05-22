@@ -11,10 +11,21 @@ import java.util.List;
  */
 public class Jtparser {
     private Jtokenizer tokenizer;
+    private Jtoken peek;
 
     public static Json stringToJson(String src) { return (new Jtparser(src)).getJson(); }
 
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
+
+    private Jtoken nextToken() {
+        if (peek==null) {
+            return tokenizer.nextToken();
+        } else {
+            Jtoken answer = peek;
+            peek = null;
+            return peek;
+        }
+    }
 
     private void requireDone() {  } // TODO
 
