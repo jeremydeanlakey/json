@@ -14,12 +14,15 @@ class Jtokenizer {
 
     String src;
     int i = 0;
+    boolean peeking = false;
+    Jtoken peekedItem;
 
     public class JparserException extends RuntimeException {
         JparserException(String message) { super(message); }
     }
 
     protected Jtoken nextToken() {
+        if (peeking) { peeking = false; return peekedItem; }
         allowWhiteSpaceAndComments();
         if (done()) return Jtoken.end();
         if (peekQuote()) return new Jtoken(getQuotedString());
