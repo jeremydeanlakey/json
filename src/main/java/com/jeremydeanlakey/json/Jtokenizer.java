@@ -21,6 +21,8 @@ class Jtokenizer {
         JparserException(String message) { super(message); }
     }
 
+    public int position() { return i; }
+
     protected Jtoken peekToken() {
         if (!peeking) {
             peeking = true;
@@ -43,6 +45,7 @@ class Jtokenizer {
 
     private String exceptionMessage(Object expected, Object actual) { return String.format(EXCEPTION, actual, expected, i); }
     private JparserException makeException(Object expected, Object actual) { return new JparserException(exceptionMessage(expected, actual)); }
+
 
     private char next() { return src.charAt(i++); }
 
