@@ -22,18 +22,25 @@ public class Jtparser {
     }
 
     // TODO should tokenizer do previous position?
-    private String exceptionMessage(Jtoken expected, Jtoken actual) { return String.format(EXCEPTION, actual, expected, tokenizer.position()); }
-    private JparserException makeException(Jtoken expected, Jtoken actual) { return new JparserException(exceptionMessage(expected, actual)); }
+    private String exceptionMessage(String expected, Jtoken actual) { return String.format(EXCEPTION, actual, expected, tokenizer.position()); }
+    private JparserException makeException(String expected, Jtoken actual) { return new JparserException(exceptionMessage(expected, actual)); }
 
 
     public static Json stringToJson(String src) { return (new Jtparser(src)).getJson(); }
 
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
 
-    private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END, t);}
+    private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
 
     protected Json getItem() {
-        return null; // TODO
+        Jtoken peek = tokenizer.peekToken();
+        if (peek.isEnd()) throw makeException("not-empty string", Jtoken.END);
+        if (peek.isObjectStart()) return null; // TODO  getJobject();
+        if (peek.isArrayStart()) return null; // TODO  getJarray();
+        if (peek.isStringValue()) return null; // TODO getJstring();
+        if (peek.isNumber()) return null; // TODO  getJnumber();
+        // if (peekAlphanumeric()) return getUnknownAlphanumeric();
+        throw makeException("json value", peek);
     }
 
     private Json getJson() {
