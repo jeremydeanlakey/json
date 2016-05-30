@@ -38,7 +38,7 @@ public class Jtparser {
         if (peek.isObjectStart()) return null; // TODO  getJobject();
         if (peek.isArrayStart()) return null; // TODO  getJarray();
         if (peek.isStringValue()) return null; // TODO getJstring();
-        if (peek.isNumber()) return null; // TODO  getJnumber();
+        if (peek.isNumber()) return new Jnumber(tokenizer.nextToken().getNumberValue());
         // if (peekAlphanumeric()) return getUnknownAlphanumeric();
         throw makeException("json value", peek);
     }
