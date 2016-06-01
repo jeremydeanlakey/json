@@ -32,6 +32,9 @@ public class Jtparser {
 
     private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
 
+    private Json getObject(){ return null; } // TODO
+    private Json getArray(){ return null; } // TODO
+
     protected Json getItem() {
         Jtoken peek = tokenizer.peekToken();
         if (peek.isEnd()) throw makeException("not-empty string", Jtoken.END);
