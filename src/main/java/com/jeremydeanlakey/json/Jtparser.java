@@ -38,8 +38,8 @@ public class Jtparser {
     protected Json getItem() {
         Jtoken peek = tokenizer.peekToken();
         if (peek.isEnd()) throw makeException("not-empty string", Jtoken.END);
-        if (peek.isObjectStart()) return null; // TODO  getJobject();
-        if (peek.isArrayStart()) return null; // TODO  getJarray();
+        if (peek.isObjectStart()) return getObject();
+        if (peek.isArrayStart()) return getArray();
         if (peek.isStringValue()) return new Jstring(tokenizer.nextToken().getStringValue());
         if (peek.isNumber()) return new Jnumber(tokenizer.nextToken().getNumberValue());
         // if (peekAlphanumeric()) return getUnknownAlphanumeric();
