@@ -30,6 +30,10 @@ public class Jtparser {
 
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
 
+    // TODO implement equals in Jtoken
+    private void require(Jtoken r) { Jtoken n = tokenizer.nextToken(); if (n != r) throw makeException(r.toString(), n); }
+    private void require(String s) { Jtoken n = tokenizer.nextToken(); if (n.toString() != s) throw makeException(s, n); }
+
     private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
 
     private Json getObject(){ return null; } // TODO
