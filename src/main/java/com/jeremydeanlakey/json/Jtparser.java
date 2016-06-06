@@ -39,7 +39,28 @@ public class Jtparser {
     private void requireArrayEnd() {} // TODO
     private void requireComma() {} // TODO
 
-    private Json getObject(){ return null; } // TODO
+    private Json getObject() {
+        /*
+        requireObjectStart();
+        Jobject object = new Jobject();
+        if (tokenizer.peekToken().isObjectEnd()) {
+            requireObjectEnd();
+            return object;
+        }
+        Pair<String, Json> keyValue = getKeyValue();
+        while (keyValue != null) {
+            object.put(keyValue.first, keyValue.second);
+            if (tokenizer.peekToken().isObjectEnd()) break;
+            requireComma();
+            if (tokenizer.peekToken().isObjectEnd()) break;
+            //requireNotDone();
+            keyValue = getKeyValue();
+        }
+        requireObjectEnd();
+        return object;
+        */
+    }
+
     private Json getArray(){
         Jarray array = new Jarray();
         requireArrayStart();
