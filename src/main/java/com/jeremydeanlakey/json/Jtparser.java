@@ -35,18 +35,21 @@ public class Jtparser {
     private void require(String s) { Jtoken n = tokenizer.nextToken(); if (n.toString() != s) throw makeException(s, n); }
 
     private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
+    private void requireArrayStart() {} // TODO
+    private void requireArrayEnd() {} // TODO
+    private void requireComma() {} // TODO
 
     private Json getObject(){ return null; } // TODO
     private Json getArray(){
         Jarray array = new Jarray();
-        //requireArrayStart();
+        requireArrayStart();
         while (!tokenizer.peekToken().isArrayEnd()) {
             array.add(getItem());
             if (tokenizer.peekToken().isArrayEnd())
                 break;
-            //requireComma();
+            requireComma();
         }
-        //requireArrayEnd();
+        requireArrayEnd();
         return array;
     }
 
