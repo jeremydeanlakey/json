@@ -40,7 +40,15 @@ public class Jtparser {
     private void requireObjectStart() {} // TODO
     private void requireObjectEnd() {} // TODO
     private void requireComma() {} // TODO
-    private Pair<String, Json> getKeyValue() { return null; } // TODO
+    private void requireColon() {} // TODO
+
+    private Pair<String, Json> getKeyValue() {
+        // TODO check type
+        String key = tokenizer.nextToken().getStringValue();
+        requireColon();
+        Json value = getItem();
+        return new Pair(key, value);
+    }
 
     private Json getObject() {
         requireObjectStart();
