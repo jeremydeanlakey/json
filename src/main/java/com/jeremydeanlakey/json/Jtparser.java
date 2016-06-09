@@ -30,21 +30,23 @@ public class Jtparser {
 
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
 
-    // TODO implement equals in Jtoken
-    private void require(Jtoken r) { Jtoken n = tokenizer.nextToken(); if (n != r) throw makeException(r.toString(), n); }
-    private void require(String s) { Jtoken n = tokenizer.nextToken(); if (n.toString() != s) throw makeException(s, n); }
+    private Jtoken next() { return tokenizer.nextToken(); }
 
-    private void requireDone() { Jtoken t = tokenizer.nextToken(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
+    // TODO implement equals in Jtoken
+    private void require(Jtoken r) { Jtoken n = next(); if (n != r) throw makeException(r.toString(), n); }
+    private void require(String s) { Jtoken n = next(); if (n.toString() != s) throw makeException(s, n); }
+
+    private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
     private void requireArrayStart() {} // TODO
     private void requireArrayEnd() {} // TODO
     private void requireObjectStart() {} // TODO
     private void requireObjectEnd() {} // TODO
     private void requireComma() {} // TODO
     private void requireColon() {} // TODO
+    private String requireString() { return null; } // TODO
 
     private Pair<String, Json> getKeyValue() {
-        // TODO check type
-        String key = tokenizer.nextToken().getStringValue();
+        String key = requireString();
         requireColon();
         Json value = getItem();
         return new Pair(key, value);
@@ -88,8 +90,8 @@ public class Jtparser {
         if (peek.isEnd()) throw makeException("not-empty string", Jtoken.END);
         if (peek.isObjectStart()) return getObject();
         if (peek.isArrayStart()) return getArray();
-        if (peek.isStringValue()) return new Jstring(tokenizer.nextToken().getStringValue());
-        if (peek.isNumber()) return new Jnumber(tokenizer.nextToken().getNumberValue());
+        if (peek.isStringValue()) return new Jstring(next().getStringValue());
+        if (peek.isNumber()) return new Jnumber(next().getNumberValue());
         // if (peekAlphanumeric()) return getUnknownAlphanumeric();
         throw makeException("json value", peek);
     }
