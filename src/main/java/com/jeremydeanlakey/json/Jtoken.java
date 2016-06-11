@@ -36,12 +36,18 @@ class Jtoken {
     public static Jtoken end() { return END; }
     public static boolean isValidToken(char c) { return tokenChars.contains(c); }
 
-    public boolean equals(Jtoken other){
-        return  (isEnd() && other.isEnd())
-                || (other.isStringValue() && other.getStringValue() == s)
-                || (other.isNumber() && other.getNumberValue() == d)
-                || (other.c == c);
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof Jtoken)) return false;
+        Jtoken otherToken = (Jtoken) other;
+        return  (isEnd() && otherToken.isEnd())
+                || (otherToken.isStringValue() && otherToken.getStringValue() == s)
+                || (otherToken.isNumber() && otherToken.getNumberValue() == d)
+                || (otherToken.c == c);
     }
+
+    @Override
+    public int hashCode() { return 0; } // TODO
 
     @Override
     public String toString() {
