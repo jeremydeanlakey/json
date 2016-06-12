@@ -181,4 +181,20 @@ public class JtokenTest extends AndroidTestCase {
 
         Assert.assertEquals(token.toString(), Jtoken.END.toString());
     }
+
+    public void testEquals() throws Throwable {
+        Assert.assertTrue(new Jtoken(5d).equals(new Jtoken(5d)));
+        Assert.assertFalse(new Jtoken(5d).equals(new Jtoken(5.1d)));
+        Assert.assertFalse(new Jtoken(5d).equals(new Jtoken('{')));
+
+        Assert.assertTrue(new Jtoken('{').equals(new Jtoken('{')));
+        Assert.assertFalse(new Jtoken('{').equals(new Jtoken('}')));
+        Assert.assertFalse(new Jtoken('{').equals(Jtoken.end()));
+
+        Assert.assertTrue(new Jtoken("test").equals(new Jtoken("test")));
+        Assert.assertFalse(new Jtoken("test").equals(new Jtoken("something else")));
+        Assert.assertFalse(new Jtoken("test").equals(new Jtoken('[')));
+
+        Assert.assertTrue(Jtoken.end().equals(Jtoken.end()));
+    }
 }
