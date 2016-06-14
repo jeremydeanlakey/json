@@ -37,7 +37,7 @@ public class Jtparser {
     private void require(String s) { Jtoken n = next(); if (n.toString() != s) throw makeException(s, n); }
 
     private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
-    private void requireArrayStart() {} // TODO
+    private void requireArrayStart() { require("["); }
     private void requireArrayEnd() {} // TODO
     private void requireObjectStart() {} // TODO
     private void requireObjectEnd() {} // TODO
