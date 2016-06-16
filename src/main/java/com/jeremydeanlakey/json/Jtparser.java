@@ -39,7 +39,7 @@ public class Jtparser {
     private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
     private void requireArrayStart() { require("["); }
     private void requireArrayEnd() { require("]"); }
-    private void requireObjectStart() {} // TODO
+    private void requireObjectStart() { require("{"); }
     private void requireObjectEnd() {} // TODO
     private void requireComma() {} // TODO
     private void requireColon() {} // TODO
