@@ -40,7 +40,7 @@ public class Jtparser {
     private void requireArrayStart() { require("["); }
     private void requireArrayEnd() { require("]"); }
     private void requireObjectStart() { require("{"); }
-    private void requireObjectEnd() {} // TODO
+    private void requireObjectEnd() { require("}"); }
     private void requireComma() {} // TODO
     private void requireColon() {} // TODO
     private String requireString() { return null; } // TODO
