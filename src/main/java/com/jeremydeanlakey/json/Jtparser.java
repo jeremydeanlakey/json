@@ -32,7 +32,6 @@ public class Jtparser {
 
     private Jtoken next() { return tokenizer.nextToken(); }
 
-    // TODO implement equals in Jtoken
     private void require(Jtoken r) { Jtoken n = next(); if (!n.equals(r)) throw makeException(r.toString(), n); }
     private void require(String s) { Jtoken n = next(); if (n.toString() != s) throw makeException(s, n); }
 
