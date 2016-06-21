@@ -42,7 +42,7 @@ public class Jtparser {
     private void requireObjectEnd() { require("}"); }
     private void requireComma() { require(","); }
     private void requireColon() { require(":"); }
-    private String requireString() { return null; } // TODO
+    private String requireString() { Jtoken t = next(); if (!t.isStringValue()) throw makeException("string", t); return t.getStringValue(); }
 
     private Pair<String, Json> getKeyValue() {
         String key = requireString();
