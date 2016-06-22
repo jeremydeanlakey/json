@@ -21,9 +21,8 @@ public class Jtparser {
         JparserException(String message) { super(message); }
     }
 
-    // TODO should tokenizer do previous position?
     private String exceptionMessage(String expected, Jtoken actual) { return String.format(EXCEPTION, actual, expected, tokenizer.position()); }
-    private JparserException makeException(String expected, Jtoken actual) { return new JparserException(exceptionMessage(expected, actual)); }
+    private JparserException makeException(String expected) { return new JparserException(exceptionMessage(expected, peek())); }
 
 
     public static Json stringToJson(String src) { return (new Jtparser(src)).getJson(); }
@@ -31,18 +30,19 @@ public class Jtparser {
     public Jtparser(String src) { tokenizer = new Jtokenizer(src); }
 
     private Jtoken next() { return tokenizer.nextToken(); }
+    private Jtoken peek() { return tokenizer.peekToken(); }
 
-    private void require(Jtoken r) { Jtoken n = next(); if (!n.equals(r)) throw makeException(r.toString(), n); }
-    private void require(String s) { Jtoken n = next(); if (n.toString() != s) throw makeException(s, n); }
+    private void require(Jtoken r) { if (!peek().equals(r)) throw makeException(r.toString()); next();}
+    private void require(String s) { if (peek().toString() != s) throw makeException(s); }
 
-    private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString(), t);}
+    private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString());}
     private void requireArrayStart() { require("["); }
     private void requireArrayEnd() { require("]"); }
     private void requireObjectStart() { require("{"); }
     private void requireObjectEnd() { require("}"); }
     private void requireComma() { require(","); }
     private void requireColon() { require(":"); }
-    private String requireString() { Jtoken t = next(); if (!t.isStringValue()) throw makeException("string", t); return t.getStringValue(); }
+    private String requireString() { if (!peek().isStringValue()) throw makeException("string"); return next().getStringValue(); }
 
     private Pair<String, Json> getKeyValue() {
         String key = requireString();
@@ -86,13 +86,13 @@ public class Jtparser {
 
     protected Json getItem() {
         Jtoken peek = tokenizer.peekToken();
-        if (peek.isEnd()) throw makeException("not-empty string", Jtoken.END);
+        if (peek.isEnd()) throw makeException("not-empty string");
         if (peek.isObjectStart()) return getObject();
         if (peek.isArrayStart()) return getArray();
         if (peek.isStringValue()) return new Jstring(next().getStringValue());
         if (peek.isNumber()) return new Jnumber(next().getNumberValue());
         // if (peekAlphanumeric()) return getUnknownAlphanumeric();
-        throw makeException("json value", peek);
+        throw makeException("json value");
     }
 
     private Json getJson() {
