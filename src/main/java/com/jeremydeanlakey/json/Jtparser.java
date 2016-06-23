@@ -91,7 +91,6 @@ public class Jtparser {
         if (peek.isArrayStart()) return getArray();
         if (peek.isStringValue()) return new Jstring(next().getStringValue());
         if (peek.isNumber()) return new Jnumber(next().getNumberValue());
-        // if (peekAlphanumeric()) return getUnknownAlphanumeric();
         throw makeException("json value");
     }
 
