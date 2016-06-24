@@ -64,7 +64,6 @@ public class Jtparser {
             if (tokenizer.peekToken().isObjectEnd()) break;
             requireComma();
             if (tokenizer.peekToken().isObjectEnd()) break;
-            //requireNotDone();
             keyValue = getKeyValue();
         }
         requireObjectEnd();
