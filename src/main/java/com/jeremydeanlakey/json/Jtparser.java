@@ -51,7 +51,7 @@ public class Jtparser {
         return new Pair(key, value);
     }
 
-    private Json getObject() {
+    protected Json getObject() {
         requireObjectStart();
         Jobject object = new Jobject();
         if (tokenizer.peekToken().isObjectEnd()) {
@@ -70,7 +70,7 @@ public class Jtparser {
         return object;
     }
 
-    private Json getArray(){
+    protected Json getArray(){
         Jarray array = new Jarray();
         requireArrayStart();
         while (!tokenizer.peekToken().isArrayEnd()) {
