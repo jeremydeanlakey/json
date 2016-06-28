@@ -7,8 +7,6 @@ import android.util.Pair;
  */
 public class Jtparser {
     private static final String TAG = "Jtparser";
-    private static final String END = "END";
-    private static final String NOT_END = "NOT END";
     private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
 
     private Jtokenizer tokenizer;
