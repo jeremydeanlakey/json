@@ -33,29 +33,29 @@ public class JtparserTest extends AndroidTestCase {
 
     public void testGetItem() throws Throwable {
         Jtparser parser = new Jtparser("{}");
-        Json emptyObject = parser.getObject();
+        Json emptyObject = parser.getJobject();
     }
 
     public void testGetJarray() throws Throwable {
         Jtparser parser = new Jtparser("[]");
-        Json emptyArray= parser.getArray();
+        Json emptyArray= parser.getJarray();
         parser = new Jtparser("[1,]");
-        Json nonEmptyArray= parser.getArray();
+        Json nonEmptyArray= parser.getJarray();
         parser = new Jtparser(nonEmptyArray.toString());
-        Json copy = parser.getArray();
+        Json copy = parser.getJarray();
         Assert.assertEquals(nonEmptyArray, copy);
     }
 
     public void testGetJobject() throws Throwable {
         Jtparser parser = new Jtparser("{}");
-        Json emptyObject = parser.getObject();
+        Json emptyObject = parser.getJobject();
 
         parser = new Jtparser("{'a': 1, \"b\":2,}");
-        Json simpleObject = parser.getObject();
+        Json simpleObject = parser.getJobject();
         Assert.assertNotNull(simpleObject);
         Assert.assertTrue(simpleObject.has("a"));
         parser = new Jtparser(simpleObject.toString());
-        Json copy = parser.getObject();
+        Json copy = parser.getJobject();
         Assert.assertEquals(simpleObject, copy);
     }
 

@@ -45,7 +45,7 @@ public class Jtparser {
         return new Pair(key, value);
     }
 
-    protected Json getObject() {
+    protected Json getJobject() {
         requireObjectStart();
         Jobject object = new Jobject();
         if (tokenizer.peekToken().isObjectEnd()) {
@@ -64,7 +64,7 @@ public class Jtparser {
         return object;
     }
 
-    protected Json getArray(){
+    protected Json getJarray(){
         Jarray array = new Jarray();
         requireArrayStart();
         while (!tokenizer.peekToken().isArrayEnd()) {
@@ -80,8 +80,8 @@ public class Jtparser {
     protected Json getItem() {
         Jtoken peek = tokenizer.peekToken();
         if (peek.isEnd()) throw makeException("not-empty string");
-        if (peek.isObjectStart()) return getObject();
-        if (peek.isArrayStart()) return getArray();
+        if (peek.isObjectStart()) return getJobject();
+        if (peek.isArrayStart()) return getJarray();
         if (peek.isStringValue()) return new Jstring(next().getStringValue());
         if (peek.isNumber()) return new Jnumber(next().getNumberValue());
         throw makeException("json value");
