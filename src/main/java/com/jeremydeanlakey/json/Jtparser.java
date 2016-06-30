@@ -26,7 +26,6 @@ public class Jtparser {
     private Jtoken next() { return tokenizer.nextToken(); }
     private Jtoken peek() { return tokenizer.peekToken(); }
 
-    private void require(Jtoken r) { if (!peek().equals(r)) throw makeException(r.toString()); next();}
     private void require(String s) { if (peek().toString() != s) throw makeException(s); }
 
     private void requireDone() { Jtoken t = next(); if (!t.isEnd()) throw makeException(Jtoken.END.toString());}
