@@ -25,10 +25,10 @@ class Jtokenizer {
 
     protected Jtoken peekToken() {
         if (!peeking) {
-            peeking = true;
             peekedToken = nextToken();
+            peeking = true;
         }
-        return peekToken();
+        return peekedToken;
     }
 
     protected Jtoken nextToken() {
