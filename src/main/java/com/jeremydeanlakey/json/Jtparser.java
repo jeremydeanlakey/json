@@ -6,7 +6,7 @@ import android.util.Pair;
  * Created by jeremydeanlakey on 5/01/16.
  */
 public class Jtparser {
-    private static final String TAG = "Jtparser";
+    protected static final String TAG = "Jtparser";
     private static final String EXCEPTION = "Unexpected character: '%s'.  Expected: '%s' at %d.";
 
     private Jtokenizer tokenizer;
