@@ -14,8 +14,8 @@ public class JtokenizerTest extends AndroidTestCase {
     public void testPeek() throws Throwable {
         Jtokenizer tokenizer = new Jtokenizer("{}");
         Jtoken peek = tokenizer.peekToken();
-        Jtoken first = tokenizer.peekToken();
-        Jtoken second = tokenizer.peekToken();
+        Jtoken first = tokenizer.nextToken();
+        Jtoken second = tokenizer.nextToken();
         Assert.assertTrue(peek.equals(first));
         Assert.assertFalse(peek.equals(second));
     }
