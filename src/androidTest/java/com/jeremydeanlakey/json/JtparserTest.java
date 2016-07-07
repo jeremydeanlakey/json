@@ -33,7 +33,9 @@ public class JtparserTest extends AndroidTestCase {
 
     public void testGetItem() throws Throwable {
         Jtparser parser = new Jtparser("{}");
-        Json emptyObject = parser.getJobject();
+        Json emptyObject = parser.getItem();
+        Assert.assertTrue(emptyObject.isObject());
+        Assert.assertTrue(emptyObject.isEmpty());
     }
 
     public void testGetJarray() throws Throwable {
