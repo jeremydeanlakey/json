@@ -43,6 +43,7 @@ public class JtparserTest extends AndroidTestCase {
         Json emptyArray= parser.getJarray();
         parser = new Jtparser("[1,]");
         Json nonEmptyArray= parser.getJarray();
+        Assert.assertFalse(nonEmptyArray.equals(emptyArray));
         parser = new Jtparser(nonEmptyArray.toString());
         Json copy = parser.getJarray();
         Assert.assertEquals(nonEmptyArray, copy);
