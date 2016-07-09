@@ -44,6 +44,7 @@ public class JtparserTest extends AndroidTestCase {
         parser = new Jtparser("[1,]");
         Json nonEmptyArray= parser.getJarray();
         Assert.assertFalse(nonEmptyArray.equals(emptyArray));
+
         parser = new Jtparser(nonEmptyArray.toString());
         Json copy = parser.getJarray();
         Assert.assertEquals(nonEmptyArray, copy);
@@ -52,10 +53,14 @@ public class JtparserTest extends AndroidTestCase {
     public void testGetJobject() throws Throwable {
         Jtparser parser = new Jtparser("{}");
         Json emptyObject = parser.getJobject();
+        Assert.assertNotNull(emptyObject);
+        Assert.assertTrue(emptyObject.isObject());
+        Assert.assertTrue(emptyObject.isEmpty());
 
         parser = new Jtparser("{'a': 1, \"b\":2,}");
         Json simpleObject = parser.getJobject();
         Assert.assertNotNull(simpleObject);
+        Assert.assertFalse(emptyObject.isEmpty());
         Assert.assertTrue(simpleObject.has("a"));
         parser = new Jtparser(simpleObject.toString());
         Json copy = parser.getJobject();
