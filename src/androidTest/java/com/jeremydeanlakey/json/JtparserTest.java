@@ -71,6 +71,7 @@ public class JtparserTest extends AndroidTestCase {
         Jtparser parser = new Jtparser("\"test\"");
         Json string = parser.getItem();
          Assert.assertEquals(string.getString(), "test"); // expected:<["test"]> but was:<[test]>
+        Assert.assertNotSame(string.getString(), "not test");
     }
 
     public void testStringToJson() throws Throwable {
