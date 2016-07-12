@@ -81,7 +81,14 @@ public class JtparserTest extends AndroidTestCase {
         Assert.assertEquals(test, copy);
         Assert.assertFalse(test.equals(emptyObject));
 
-        Json messyObject = Jtparser.stringToJson("{/*comment*/a:1 } // ");
+        Json commeentedObject = Jtparser.stringToJson("{/*comment*/a:1 } // ");
+        Assert.assertEquals(commeentedObject.getLong("a"), 1);
+
+        Json messyObject = Jtparser.stringToJson("{/*comment*/a:1, 'b':\"c\", 'd':[{z:1}, 5.5], } // ");
         Assert.assertEquals(messyObject.getLong("a"), 1);
+        Assert.assertEquals(messyObject.getString("b"), "c");
+        Json d = messyObject.get("d");
+        Assert.assertEquals(d.getLong(1), 5.5);
+        Assert.assertEquals(d.get(0).getLong("z"), 1);
     }
 }
