@@ -60,7 +60,7 @@ public class JtparserTest extends AndroidTestCase {
         parser = new Jtparser("{'a': 1, \"b\":2,}");
         Json simpleObject = parser.getJobject();
         Assert.assertNotNull(simpleObject);
-        Assert.assertFalse(emptyObject.isEmpty());
+        Assert.assertFalse(simpleObject.isEmpty());
         Assert.assertTrue(simpleObject.has("a"));
         parser = new Jtparser(simpleObject.toString());
         Json copy = parser.getJobject();
