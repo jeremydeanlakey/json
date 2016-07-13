@@ -88,7 +88,7 @@ public class JtparserTest extends AndroidTestCase {
         Assert.assertEquals(messyObject.getLong("a"), 1);
         Assert.assertEquals(messyObject.getString("b"), "c");
         Json d = messyObject.get("d");
-        Assert.assertEquals(d.getLong(1), 5.5);
+        Assert.assertEquals(d.getDouble(1), 5.5);
         Assert.assertEquals(d.get(0).getLong("z"), 1);
     }
 }
