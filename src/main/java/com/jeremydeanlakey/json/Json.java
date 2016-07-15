@@ -91,7 +91,7 @@ public abstract class Json implements Iterable<Json> {
 
     public static Json newObject() { return new Jobject(); }
     public static Json newArray() { return new Jarray(); }
-    public static Json fromString (String string){ return Jparser.stringToJson(string); }
+    public static Json fromString (String string){ return Jtparser.stringToJson(string); }
 
     @Override public Iterator<Json> iterator() { throw new RuntimeException(ITERATOR_ERROR); }
 
