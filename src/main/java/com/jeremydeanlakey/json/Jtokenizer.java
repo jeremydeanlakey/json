@@ -14,6 +14,8 @@ class Jtokenizer {
 
     String src;
     int i = 0;
+    // TODO add test of peeking location
+    int i_peek = 0;
     boolean peeking = false;
     Jtoken peekedToken;
 
@@ -21,13 +23,14 @@ class Jtokenizer {
         JparserException(String message) { super(message); }
     }
 
-    public int position() { return i; }
+    public int position() { if (peeking) return i_peek; else return i; }
 
     protected Jtoken peekToken() {
         if (!peeking) {
             peekedToken = nextToken();
             peeking = true;
         }
+        i_peek = i;
         return peekedToken;
     }
 
