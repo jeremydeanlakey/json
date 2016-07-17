@@ -81,7 +81,13 @@ public class Jtparser {
         if (peek.isEnd()) throw makeException("not-empty string");
         if (peek.isObjectStart()) return getJobject();
         if (peek.isArrayStart()) return getJarray();
-        if (peek.isStringValue()) return new Jstring(next().getStringValue());
+        if (peek.isStringValue()) {
+            Jtoken nextToken = next();
+            if (nextToken.getStringValue().equalsIgnoreCase("null")) return new Jnull();
+            if (nextToken.getStringValue().equalsIgnoreCase("true")) return new Jboolean(true);
+            if (nextToken.getStringValue().equalsIgnoreCase("false")) return new Jboolean(false);
+            return new Jstring(nextToken.getStringValue());
+        }
         if (peek.isNumber()) return new Jnumber(next().getNumberValue());
         throw makeException("json value");
     }
