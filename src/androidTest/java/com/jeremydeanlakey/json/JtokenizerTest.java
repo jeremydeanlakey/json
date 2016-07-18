@@ -20,6 +20,15 @@ public class JtokenizerTest extends AndroidTestCase {
         Assert.assertFalse(peek.equals(second));
     }
 
+    public void testPosition() throws Throwable {
+        Jtokenizer tokenizer = new Jtokenizer("{}");
+        Assert.assertEquals(tokenizer.position(), 0);
+        tokenizer.peekToken();
+        Assert.assertEquals(tokenizer.position(), 0);
+        tokenizer.nextToken();
+        Assert.assertEquals(tokenizer.position(), 1);
+    }
+
     public void testString() throws Throwable {
         Jtokenizer tokenizer = new Jtokenizer(" \"test\"   ");
         Jtoken token = tokenizer.nextToken();
