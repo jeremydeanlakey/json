@@ -37,7 +37,7 @@ class Jtokenizer {
         if (peeking) { peeking = false; return peekedToken; }
         allowWhiteSpaceAndComments();
         if (done()) return Jtoken.end();
-        if (peekQuote()) return new Jtoken(getQuotedString());
+        if (peekQuote()) return new Jtoken(getQuotedString(), true);
         if (peek('-') || peekDigit()) return new Jtoken(getNumber());
         if (peekAlphanumeric()) return new Jtoken(getUnquotedString());
         if (Jtoken.isValidToken(peek())) return new Jtoken(next());

@@ -13,16 +13,19 @@ class Jtoken {
     private Json json;
     private String s;
     private Double d;
+    private boolean quoted;
     private static List<Character> tokenChars = Arrays.asList('{', '}', ':', '[', ']', ',');
 
     private Jtoken() {}
     protected Jtoken(char c) { this.c = c; }
     protected Jtoken(String s) { this.s = s; }
+    protected Jtoken(String s, boolean quoted) { this.s = s; this.quoted = quoted; }
     protected Jtoken(Double d) { this.d = d; }
 
     protected boolean isNumber() { return d != null; }
     protected Double getNumberValue() { return d; }
     protected boolean isStringValue() { return s != null; }
+    protected boolean isQuoted() { return quoted; }
     protected String getStringValue() { return s; }
     protected boolean isJsonValue() { return json != null; }
     protected boolean isObjectStart() { return (c == '{'); }
