@@ -81,6 +81,7 @@ public class Jtparser {
         if (peek.isEnd()) throw makeException("not-empty string");
         if (peek.isObjectStart()) return getJobject();
         if (peek.isArrayStart()) return getJarray();
+        if (peek.isQuoted()) return new Jstring(next().getStringValue());
         if (peek.isStringValue()) {
             Jtoken nextToken = next();
             if (nextToken.getStringValue().equalsIgnoreCase("null")) return new Jnull();
