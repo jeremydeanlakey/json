@@ -74,7 +74,6 @@ class Jtokenizer {
     private void requireDigitsNotStartingZero() { require1to9(); allowDigits(); }
     private void requireZeroOrDigits() { if (peek('0')) next(); else requireDigitsNotStartingZero(); }
     private void requireNotDone() { if (done()) throw makeException("Anything but end of String", END); }
-    private void requireDone() { if (!done()) throw makeException(END, peek()); }
     private char requireQuote() { if (peekQuote()) return next(); else throw makeException("\" or \'",  peek()); }
     private void requireE() { char c = next(); if (c != 'E' && c != 'e') throw makeException('e', c); }
     private void requireStandardForm() { requireE(); allowSign(); requireDigit(); allowDigits(); }
