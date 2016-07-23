@@ -304,7 +304,7 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertEquals(testObject.getString("nothing", "nothing"), "nothing");
 
 
-        Json testBoolString = Jparser.stringToJson("true");
+        Json testBoolString = Jtparser.stringToJson("true");
         Assert.assertTrue(testBoolString.isBoolean());
 
         Assert.assertEquals(testObject.getString("bool"), "true");
