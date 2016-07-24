@@ -24,7 +24,7 @@ Here are some key differences in this library vs JSONObject:
 
 For example, this:
 
-```
+```	
 Double myDouble = null;
 try {
     myDouble = myJson.getDouble("key");
@@ -47,4 +47,3 @@ if (myJson.hasDouble("key")) {
 
 3 -  I find easier to handle JSON in a dynamically typed language.  I made Json objects resemble dynamically typed objects by making a main class (Json) and subclassed it with different types of values (Jnull, Jobject, Jstring, etc.).  This way, you can fetch a value from an object without knowing what type of value it is.  You can then test the object type with functions like isBoolean() and convert it to a regular value with functions like toBoolean().
 
-cd json
