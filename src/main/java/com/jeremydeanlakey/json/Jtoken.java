@@ -50,7 +50,17 @@ class Jtoken {
     }
 
     @Override
-    public int hashCode() { return 0; } // TODO
+    public int hashCode() {
+        int result = 42;
+        int f;
+        if (isStringValue()) { f = s.hashCode(); }
+        else if (isEnd()) { f = 1; }
+        else if (isNumber()) { Long l = Double.doubleToLongBits(d); f = (int)(l ^ (l >>> 32)); }
+        else if (isJsonValue()) { f = json.hashCode(); }
+        else { f = c; }
+        result = 37 * result + f;
+        return result;
+    }
 
     @Override
     public String toString() {
