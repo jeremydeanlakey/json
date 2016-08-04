@@ -1211,14 +1211,6 @@ public class JsonTest extends AndroidTestCase {
         Assert.assertFalse(TRUE.isNumber());
     }
 
-    public void testIsDouble() throws Throwable {
-        // TODO
-    }
-
-    public void testIsLong() throws Throwable {
-        // TODO
-    }
-
     public void testIsString() throws Throwable {
         Assert.assertFalse(Json.isString(EMPTY_ARRAY));
         Assert.assertFalse(Json.isString(EMPTY_OBJECT));
